@@ -1,8 +1,7 @@
 API
 ===
 
-Everything will be there!
--------------------------
+Everything will be there:
 
 .. autosummary::
 

@@ -3,10 +3,7 @@
 import sys
 from pathlib import Path
 
-root_path = str(Path(__file__).resolve().parents[2])
-specific_path = root_path + '\\pysource'
-
-sys.path.insert(0, specific_path)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'pysource'))
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -25,7 +22,6 @@ author = 'Aina'
 
 extensions = [
     'sphinx.ext.duration',
-    'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
 ]

@@ -12,9 +12,6 @@ Some implementations will be there. For example:
 
 .. autofunction:: maxsubseqsum.kadane
 
-.. literalinclude:: /../../pysource/maxsubseqsum.py
-   :language: python
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
