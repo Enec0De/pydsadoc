@@ -1,0 +1,2 @@
+# Created by Aina. Exclude the directories `build' that Sphinx builds.
+Sphinx/PyDSADoc/build
