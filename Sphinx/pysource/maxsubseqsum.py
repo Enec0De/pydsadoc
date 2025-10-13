@@ -3,13 +3,12 @@
 """ The script contains 4 algorithmses."""
 
 
-def algorithms1(arr: list) -> int:
+def algorithms1(arr: list[int]) -> int:
     """Algorithms1: T(n) = O(n^3), S(n) = O(1).
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
     """
-
     max_sum = arr[0]
     n = len(arr)
 
@@ -21,13 +20,12 @@ def algorithms1(arr: list) -> int:
     return max_sum
 
 
-def algorithms2(arr: list) -> int:
+def algorithms2(arr: list[int]) -> int:
     """Algorithms2: T(n) = O(n^2), S(n) = O(1).
     
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
     """
-
     max_sum = arr[0]
     n = len(arr)
 
@@ -41,13 +39,12 @@ def algorithms2(arr: list) -> int:
     return max_sum
 
 
-def algorithms3(arr: list) -> int:
+def algorithms3(arr: list[int]) -> int:
     """Algorithms3 (Divide and Conquer): T(n) = O(n log n), S(n) = O(log n).
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
     """
-
     n = len(arr)
 
     # Directly retrun the element.
@@ -78,13 +75,12 @@ def algorithms3(arr: list) -> int:
     return max_sum
 
 
-def kadane(arr: list) -> int:
+def kadane(arr: list[int]) -> int:
     """Kadane's Algorithm (Dynamic Programming): T(n) = O(n), S(n) = O(1).
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
     """
-
     max_sum = current_sum = arr[0]
 
     for num in arr[1:]:

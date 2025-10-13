@@ -10,14 +10,12 @@ Data Structures and Algorithms
 
 Some implementations will be there. For example:
 
-.. autofunction:: maxsubseqsum.algorithms1
-.. autofunction:: maxsubseqsum.algorithms2
-.. autofunction:: maxsubseqsum.algorithms3
-.. autofunction:: maxsubseqsum.kadane
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   maxsubseqsum
+   linearlist
    api
 
