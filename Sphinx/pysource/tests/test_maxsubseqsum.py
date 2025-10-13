@@ -11,9 +11,29 @@ import maxsubseqsum
 
 class TestMaxsubseqsum(unittest.TestCase):
 
+    def setUp(self):
+        self.normal_arr1 = [4, -3, 5, -2, -1, 2, 6, -2]
+        self.normal_arr2 = [-2, 11, -4, 13, -5, -2]
+        self.negetive_arr = [-1, -3, -7, -4]
+        self.positive_arr = [1, 2, 3, 4]
+
+    def test_algorithms1(self):
+        self.specific_function(maxsubseqsum.algorithms1)
+        
+    def test_algorithms2(self):
+        self.specific_function(maxsubseqsum.algorithms2)
+
+    def test_algorithms3(self):
+        self.specific_function(maxsubseqsum.algorithms3)
+        
     def test_kadane(self):
-        self.assertEqual(maxsubseqsum.kadane([-2, 11, -4, 13, -5, -2]), 20)
-        self.assertEqual(maxsubseqsum.kadane([-1, -3, -7, -4]), -1)
+        self.specific_function(maxsubseqsum.kadane)
+
+    def specific_function(self, func):
+        self.assertEqual(func(self.normal_arr1), 11)
+        self.assertEqual(func(self.normal_arr2), 20)
+        self.assertEqual(func(self.negetive_arr), -1)
+        self.assertEqual(func(self.positive_arr), 10)
     
 if __name__ == '__main__':
     unittest.main()
