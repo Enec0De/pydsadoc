@@ -3,6 +3,6 @@
 
 import maxsubseqsum
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     arr = list(map(int, input().split()))
     print(maxsubseqsum.kadane(arr))
