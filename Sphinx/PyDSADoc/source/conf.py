@@ -26,7 +26,11 @@ extensions = [
     'sphinx.ext.autosummary',
 ]
 
-templates_path = ['_templates']
+templates_path = [
+    '_templates', 
+    '_templates/furo',
+]
+
 exclude_patterns = []
 
 

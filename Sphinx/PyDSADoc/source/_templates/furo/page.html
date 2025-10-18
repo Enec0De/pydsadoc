@@ -1,0 +1,49 @@
+{% extends "!furo/page.html" %}
+
+{% set beian %}
+    <div style="display: flex; align-items: center;">
+      <a 
+        href="https://beian.mps.gov.cn/#/query/webSearch?code=44197202000131"
+        style="display: flex; align-items: center; margin-right: 0.5em;"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <img 
+          src="{{ pathto('_static/beian.png', 1) }}" 
+          style="height: 1em; margin-right: 0.5em"
+          alt=""
+        >
+        粤公网安备 44197202000131 号
+      </a>
+      <a 
+        href="https://beian.miit.gov.cn/"
+        style="display: flex; align-items: center; margin-right: 0.5em;"
+        rel="noreferrer"
+        target="_blank"
+      >
+        赣 ICP 备 2025069805 号
+      </a>
+    </div>
+{% endset %}
+
+{% block footer %}
+
+{# Initialize the variables. #}
+{% set insert_lines = beian.split('\n') %}
+{% set parent_lines = super().split('\n') %}
+{% set target = namespace(line = -1) %}
+
+{# Find the index for inserting. #}
+{% for line in parent_lines if target.line == -1 %}
+    {% if 'Made with' in line %}
+        {% set target.line = loop.index0 %}
+    {% endif %}
+{% endfor %}
+
+{# Join the lists. #}
+{% set new_lines = parent_lines[:target.line] + insert_lines + parent_lines[target.line:] %}
+
+{# Use the modified string. #}
+{{ new_lines | join('\n') }}
+
+{% endblock %}
