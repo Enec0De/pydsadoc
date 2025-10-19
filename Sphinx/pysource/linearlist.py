@@ -7,72 +7,121 @@ from typing import Optional
 
 class SequentialList:
 
-    def __init__(self, maxsize: int = 10) -> None:
-        """Make empty list."""
+    def __init__(self, MAXSIZE: int = 10) -> None:
+        """Initialize an empty sequential list.
+
+        :param MAXSIZE: Determines the max size of the squential list. Optional,
+                        defaults to 10 if not provided.
+        
+        :var data: Stores the all data of the list.
+        :var last: The position of the last value in the list.
+        """
         # Define MAXSIZE
-        self.size = maxsize
+        self._size = MAXSIZE
         
         # Define Data[MAXSIZE]
-        self.data: list[Optional[int]] = [None] * self.size 
+        self.data: list[Optional[int]] = [None] * self._size 
 
         # Define subscript, '-1' means empty
         self.last: int = -1
 
-    def length(self) -> int:
-        """Return length of the list."""
+    def len(self) -> int:
+        """Calculate the length of the list.
+        
+        Time complexity is :math:`O(1)`.
+
+        :return: Return the amount of the elements within the list.
+        """
         return self.last + 1
 
-    def find_kth(self, i: int) -> Optional[int]:
-        """Return the data at index ``i`` in the list."""
-        return self.data[i]
+    def index(self, index: int) -> int:
+        """Find the first encountered element by its index.
+        
+        Time complexity is :math:`O(1)`.
 
-    def find_element(self, element: int) -> int:
-        """Find the element in the list and return the index of it.
-
-        Time complexity is O(n).
+        :param index: The specified index of the target element.
+        :return: The elment of the given index.
         """
-        # Find the index of the element
-        i: int = 0
+        # Check the legality of the index
+        if 0 <= index < self.len():
+            value = self.data[index]
+
+            # Check the value type
+            if isinstance(value, int):
+                return value
+            else:
+                raise TypeError('data type is not int.')
+        
+        else:
+            raise IndexError('list index out of range.')
+
+    def element(self, element: int, start_index: int = 0) -> int:
+        """Find the index of the specified element encountered first time.
+
+        Time complexity is :math:`O(n)`.
+
+        :param element: The specified element you want to find.
+
+        :param start_index: The specified index from which you want to start 
+                            finding the element. Optional, defaults to 0 if not
+                            provided.
+
+        :return: The index of the given element. If the return value is -1 ,it 
+                 means the given element was not found.
+        """
+        # Begin the process of finding the index of the element within the list
+        i = start_index
         while i <= self.last and self.data[i] != element:
             i += 1
 
-        # Not found
+        # Not found, return -1
         if i > self.last: 
             return -1 
 
-        # Return the index of the element.
+        # Find it and return the index of the element
         else: 
             return i
 
-    def insert(self, i: int, element: int) -> None:
-        """Insert the element into the list of the index ``i``.
+    def insert(self, element: int, index: int) -> None:
+        """Insert the specified element into the list of the specified index.
         
-        Time complexity is O(n).
+        Time complexity is :math:`O(n)`.
+        
+        :param element: Specify the element to be inserted.
+        :param index: Specify the index to be inserted.
         """
-        # Is full
-        if self.last + 1 == self.size: 
+        # Judge whether the list is full
+        if self.last + 1 == self._size: 
             raise OverflowError('The list is full.')
 
-        # Illegal index
-        if i < 0 or i > self.last + 1: 
-            raise IndexError('Illegal index.')
+        # Check the legality of the index
+        if index < 0 or index > self.last + 1: 
+            raise IndexError('list index out of range.')
 
-        # Insert operation
-        for j in range(self.last, i - 1, -1):
+        # Shift the elements backward
+        for j in range(self.last, index - 1, -1):
             self.data[j + 1] = self.data[j]
-        self.data[i] = element
+            
+        # The process of insertion
+        self.data[index] = element
         self.last += 1
 
-    def delete(self, i: int) -> None:
-        """Delete the element from the list indexed ``i``. 
-        Time complexity is O(n)."""
-        # Illegal index
-        if i < 0 or i > self.last:
-            raise IndexError('Illegal index.')
+    def delete(self, index: int) -> None:
+        """Delete the element from the list . 
+        
+        Time complexity is :math:`O(n)`.
 
-        # Delete operation
-        for j in range(i, self.last):
+        :param index: Specify the index to be delete.
+        """
+        # Check the legality of the index
+        if index < 0 or index > self.last:
+            raise IndexError('list index out of range.')
+
+        # Shift the element forward
+        for j in range(index, self.last):
             self.data[j] = self.data[j + 1]
+
+        # Begin the process of deletion
         self.data[self.last] = None
         self.last -= 1
 
@@ -80,129 +129,173 @@ class SequentialList:
 class Node:
 
     def __init__(self, data: Optional[int] = None) -> None:
-        """Linked list node."""
-        # Define Data
+        """The automic element of the linked list.
+        
+           :var data: Stores the data of the :py:class:`Node`. It is None only
+                      when it is *Sentinel Node* or *Dummy Node*.
+
+           :var next: Stores the point of the next :py:class:`Node`.
+        """
+        # Define data
         self.data = data
 
-        # Define ptr of the next Node
+        # Define pointer to the next node
         self.next: Optional[Node] = None
 
 
 class LinkedList:
 
     def __init__(self) -> None:
-        """Initialize linked list with a None node."""
+        """Initialize an empty linked list begin with a sentinel node."""
         self.head: Node = Node(None)
 
-    def _length(self, node: Node) -> int:
-        """Return length of the `node', 
+    def len(self) -> int:
+        """Calculate the length of the given node. 
         
-        Time complexity is O(n).
+        Time complexity is :math:`O(n)`.
+
+        :return: Return the number of nodes int the linked list has, excluding 
+                 the sentinel node.
         """
-        # Define the variables of the length and the pointer
-        l: int = 0
-        ptr = node
+        # Define the variables for the length and the sentinel node
+        length: int = 0
+        ptr = self.head
 
         # Loop for counting the length
         while ptr.next is not None:
             ptr = ptr.next
-            l += 1
-        return l
+            length += 1
+        return length
             
-    def _find_kth_ptr(self, index: int) -> Node:
-        """Retrun ptr of Node. 
+    def index(self, index: int) -> int:
+        """Find the value of the node at the given index.
 
-        Time complexity is O(n).
+        Time complexity is :math:`O(n)`.
+
+        :param index: Specify the index of the node to be found.
+        :return: The value of the target node.
         """
-        # Define the varibales of the index and pointer
-        i: int = 0
+        # Index out of the left range of the list.
+        if index < 0:
+            raise IndexError('list index out of range.')
+        # Define the varibales for the given index and the sentinel node
+        i: int = -1
         ptr: Optional[Node] = self.head
 
-        # Going to the index ``index`` or the end of the linked list
-        # The pre is not the last None Node!
-        while ptr.next is not None and i < index + 1:
-            pre = ptr
+        # Traverse the list to reach the node at the given index step by step
+        while ptr.next is not None and i <= index - 1:
             ptr = ptr.next
             i += 1
 
-        # Judge the legality of the ptr
-        if i == index + 1 : 
-            return pre
+        # Now we are at the target node
+        if i == index: 
+            value = ptr.data
+
+            # Check the data type
+            if isinstance(value, int):
+                return value
+            else:
+                raise TypeError('data type is not int.')
+
+        # The given index out of the right range of the list.
         else:
-            raise IndexError('Illegal index.')
+            raise IndexError('list index out of range.')
 
-    def _find_element_ptr(self, element: int) -> Node:
-        """Return ptr of Node. 
-        
-        Time complexity is O(n).
+    def element(self, element: int, index: int = 0) -> int:
+        """Find the index of the node that has the specifed element.
+
+        Time complexity is :math:`O(n)`.
+
+        :param element: Specify the element to be found.
+
+        :param index: Specify the index from which you want to start finding the
+                      node. Optional, defaults to 0 if not provided.
+
+        :return: The index of the first encountered node will be returned.
         """
-        # Define the variable of the first Node
-        ptr: Optional[Node] = self.head
+        # Define the variable for counting the index and the sentinel node
+        i: int = -1
+        ptr = self.head
 
-        # Match the data of the Node
+        # Traverse to the node at the given index
+        while ptr.next is not None and i <= index - 1:
+            ptr = ptr.next
+            i += 1
+        
+        # Index out of the right range of the list
+        if i != index:
+            raise IndexError('list index out of range')
+
+        # The process of finding the node that has the given element
         while ptr.next is not None and ptr.data != element:
             ptr = ptr.next
+            i += 1
 
-        # Fianl check
+        # Find the element in the linked list
         if ptr.data == element: 
-            return ptr
+            return i
+
+        # The element is not found
         else:
             raise ValueError(f"'{element}' not found in the list.")
-
-    def length(self) -> int:
-        """Return the length of the whole list."""
-        return self._length(self.head)
-
-    def find_kth(self, index: int) -> Optional[int]:
-        """Return the element of the index `index'."""
-        return self._find_kth_ptr(index).data
-
-    def find_element(self, element: int) -> int:
-        """Find the element in list."""
-        ptr = self._find_element_ptr(element)
-        return self._length(self.head) - self._length(ptr) 
         
-    def insert(self, index: int, element: int) -> None:
-        """Insert the element into the list.
+    def insert(self, element: int, index: int) -> None:
+        """Insert the element into the linked list.
         
-        Time complexity is O(n).
+        Time complexity is :math:`O(n)`.
+
+        :param element: The element to be insert into the list.
+
+        :param index: The position to be insert at in the list. The element 
+                      would be inserted in the last of linked list if the given
+                      index out the right range of the list.
         """ 
-        # Illegal index
-        if index < 0 or index > self.length(): 
-            raise IndexError
+        # Index out of the left range of the list
+        if index < 0 : 
+            raise IndexError('list index out of range.')
 
-        # Initalize the node with data ``element``
+        # Initalize the node with the given element
         s = Node(element)
 
-        # Insert into the head node
-        if index == 0:
-            s.next = self.head
-            self.head = s
-            return 
+        # Define variables for counting the index and for the sentinel node
+        i: int = -1
+        ptr = self.head
 
-        # Insert into other node
-        p = self._find_kth_ptr(index - 1)
-        s.next = p.next
-        p.next = s
+        # Traverse to the node preceding the given index
+        while ptr.next is not None and i <= index -2:
+            ptr = ptr.next
+            i += 1
+
+        # The process of insertion
+        s.next = ptr.next
+        ptr.next = s
 
 
     def delete(self, index: int) -> None:
-        """Delete the elemenet from the list indexed ``i``
+        """Delete the elemenet from the list.
         
-        Time complexity is O().
+        Time complexity is :math:`O(n)`.
+
+        :param index: Specify the index at which the element is to be deleted.
         """
-        # Illegal index
-        if index < 0 or index > self.length() - 1: 
-            raise IndexError('Illegal index.')
+        # Index out of the left range of the list
+        if index < 0: 
+            raise IndexError('list index out of range')
 
-        # Define the variable of the target Node
-        s = self._find_kth_ptr(index)
+        # Define variables for counting the index and for the sentinel node
+        i: int = -1
+        ptr = self.head
 
-        # Delete the first Node
-        if index == 0 and self.head.next is not None:
-            self.head = self.head.next
+        # Traverse to the node preceding the given index
+        while ptr.next is not None and i <= index - 2:
+            ptr = ptr.next
+            i += 1
         
-        # Delete the other Node
+        # The process of the deletion
+        s = ptr.next
+        if isinstance(s, Node):
+            ptr.next = s.next
+
+        # Index out of the right range of the list
         else:
-            p = self._find_kth_ptr(index - 1)
-            p.next = s.next
+            raise IndexError('list index out of range.')    

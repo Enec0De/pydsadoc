@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-""" The script contains 4 algorithmses."""
 
-
-def algorithms1(arr: list[int]) -> int:
-    """Algorithms1: T(n) = O(n^3), S(n) = O(1).
+def brute_force_enumeration(arr: list[int]) -> int:
+    """The brute force enumeration method.
+    
+    Time complexity is :math:`O(n^3)`. Space complexity is :math:`O(1)`.
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
@@ -20,8 +20,10 @@ def algorithms1(arr: list[int]) -> int:
     return max_sum
 
 
-def algorithms2(arr: list[int]) -> int:
-    """Algorithms2: T(n) = O(n^2), S(n) = O(1).
+def optimized_enumeration(arr: list[int]) -> int:
+    """Optimizes the way of sum from brute force enumeration.
+    
+    Time complexity is :math:`O(n^2)`. Space complexity is :math:`O(1)`.
     
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
@@ -32,6 +34,7 @@ def algorithms2(arr: list[int]) -> int:
     for left_pos in range(0, n):
         current_sum = 0
         for right_pos in range(left_pos, n):
+
             # Substitute `sum' to add one item.
             current_sum += arr[right_pos]
             max_sum = max(max_sum, current_sum)
@@ -39,8 +42,11 @@ def algorithms2(arr: list[int]) -> int:
     return max_sum
 
 
-def algorithms3(arr: list[int]) -> int:
-    """Algorithms3 (Divide and Conquer): T(n) = O(n log n), S(n) = O(log n).
+def divide_and_conquer(arr: list[int]) -> int:
+    r"""The Divide and Conquer algorithm.
+     
+    Time complexity is :math:`O(n \log n)`. Space complexity is 
+    :math:`O(\log n)`.
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.
@@ -53,8 +59,8 @@ def algorithms3(arr: list[int]) -> int:
 
     # Left and right subsequence
     center = n // 2
-    left = algorithms3(arr[:center])
-    right = algorithms3(arr[center:])
+    left = divide_and_conquer(arr[:center])
+    right = divide_and_conquer(arr[center:])
 
     # Border subsequence
     left_current_sum = 0
@@ -75,8 +81,10 @@ def algorithms3(arr: list[int]) -> int:
     return max_sum
 
 
-def kadane(arr: list[int]) -> int:
-    """Kadane's Algorithm (Dynamic Programming): T(n) = O(n), S(n) = O(1).
+def dynamic_programming(arr: list[int]) -> int:
+    """The Kadane's Algorithm (Dynamic Programming).
+     
+    Time complexity is :math:`O(n)`. Space complexity is :math:`O(1)`.
 
     :param arr: The array need to be caculated.
     :return: The max subsequence sum.

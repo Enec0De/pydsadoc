@@ -17,5 +17,5 @@ Some implementations will be there. For example:
 
    maxsubseqsum
    linearlist
-   api
+   apilist
 

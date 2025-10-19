@@ -17,17 +17,17 @@ class TestMaxsubseqsum(unittest.TestCase):
         self.negetive_arr = [-1, -3, -7, -4]
         self.positive_arr = [1, 2, 3, 4]
 
-    def test_algorithms1(self):
-        self.specific_function(maxsubseqsum.algorithms1)
+    def test_bfe(self):
+        self.specific_function(maxsubseqsum.brute_force_enumeration)
         
-    def test_algorithms2(self):
-        self.specific_function(maxsubseqsum.algorithms2)
+    def test_oe(self):
+        self.specific_function(maxsubseqsum.optimized_enumeration)
 
-    def test_algorithms3(self):
-        self.specific_function(maxsubseqsum.algorithms3)
+    def test_dac(self):
+        self.specific_function(maxsubseqsum.divide_and_conquer)
         
-    def test_kadane(self):
-        self.specific_function(maxsubseqsum.kadane)
+    def test_dp(self):
+        self.specific_function(maxsubseqsum.dynamic_programming)
 
     def specific_function(self, func):
         self.assertEqual(func(self.normal_arr1), 11)

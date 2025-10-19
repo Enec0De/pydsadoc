@@ -33,7 +33,9 @@ templates_path = [
 
 exclude_patterns = []
 
+# -- Options for sphinx.ext.autodoc ------------------------------------------
 
+autoclass_content = 'both'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
