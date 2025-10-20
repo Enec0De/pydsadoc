@@ -1,0 +1,5 @@
+Polynomial
+==========
+
+.. automodule:: polynomial
+   :members:

@@ -6,6 +6,7 @@ from typing import Optional
 
 
 class SequentialList:
+    """Linear list implemented with sequential storage"""
 
     def __init__(self, MAXSIZE: int = 10) -> None:
         """Initialize an empty sequential list.
@@ -127,9 +128,10 @@ class SequentialList:
 
 
 class Node:
+    """The aotomic element of the :py:class:`LinkedList`."""
 
     def __init__(self, data: Optional[int] = None) -> None:
-        """The automic element of the linked list.
+        """Initialized the node of the linked list.
         
         :var data: Stores the data of the :py:class:`Node`. It is None only when
                    it is *Sentinel Node* or *Dummy Node*.
@@ -144,6 +146,7 @@ class Node:
 
 
 class LinkedList:
+    """Linear List implemented with linked list."""
 
     def __init__(self) -> None:
         """Initialize an empty linked list begin with a sentinel node.

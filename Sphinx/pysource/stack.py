@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+"""A linear list follows the Last-In-Fist-Out (LIFO) principle."""
 
 from __future__ import annotations
 from typing import Optional
@@ -155,7 +156,7 @@ class SequentialDualStack:
 
 
 class Node:
-    """Automic element of the :py:class:`LinkedStack` class."""
+    """The automic element of the :py:class:`LinkedStack`."""
 
     def __init__(self, data: Optional[int] = None):
         """Initialize the node of the linked stack.
@@ -189,8 +190,8 @@ class LinkedStack:
         :var item: The specified item to be pushd.
         """
         # The node to be inserted into linked stack 
-        s = Node(item)
         p = self.head
+        s = Node(item)
 
         # The process of the insertion
         s.next = p.next
@@ -208,9 +209,9 @@ class LinkedStack:
         # The node stores the item to be poped
         p = self.head
         s = self.head.next
-        item = s.data
 
         # Check the item type to be poped and delete the node s
+        item = s.data
         if isinstance(item, int):
             p.next = s.next
             return item

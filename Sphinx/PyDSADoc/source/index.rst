@@ -18,5 +18,7 @@ Some implementations will be there. For example:
    maxsubseqsum
    linearlist
    stack
+   myqueue
+   polynomial
    apilist
 
