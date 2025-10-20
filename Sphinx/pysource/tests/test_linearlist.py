@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+# Basic module
 import unittest
-import random
+
+# The module to manipulate the search path
 import sys
 from pathlib import Path
 
+# Insert path in which the module locates 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+# Other necessary module
+import random
 import linearlist
 
 
@@ -43,14 +48,17 @@ class TestLinearlist(unittest.TestCase):
         for i in range(0, self.list_len):
             self.assertEqual(self.sq.index(i), self.ll.index(i))
 
-    def test_element(self):
+    def test_len_and_element(self):
         # Take an element from the random list
         t = random.choice(self.random_list)
+
+        # Check the length of the two lists
+        self.assertEqual(self.sq.len(),self.ll.len())
 
         # Check the index returend by the element method
         self.assertEqual(self.sq.element(t), self.ll.element(t))
 
-    def test_delete(self):
+    def test_index_and_delete(self):
         # Take the random index from the random list. Note that the index of the
         # random list should be in range from 0 to list_len - 1.
         r = random.randint(0, self.list_len - 1)
@@ -60,6 +68,7 @@ class TestLinearlist(unittest.TestCase):
             self.assertEqual(self.sq.index(i), self.ll.index(i))
 
 
+# Main entry point
 if __name__ == '__main__':
     unittest.main()
 

@@ -17,5 +17,6 @@ Some implementations will be there. For example:
 
    maxsubseqsum
    linearlist
+   stack
    apilist
 

@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import maxsubseqsum
 
+
 class TestMaxsubseqsum(unittest.TestCase):
 
     def setUp(self):
@@ -34,6 +35,7 @@ class TestMaxsubseqsum(unittest.TestCase):
         self.assertEqual(func(self.normal_arr2), 20)
         self.assertEqual(func(self.negetive_arr), -1)
         self.assertEqual(func(self.positive_arr), 10)
+
     
 if __name__ == '__main__':
     unittest.main()

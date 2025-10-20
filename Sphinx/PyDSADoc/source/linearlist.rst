@@ -1,8 +1,8 @@
 :tocdepth: 4
 
 
-Chapter 1: Linear List
-======================
+Linear List
+===========
 
 Two ways to save (presistence):
 
@@ -65,4 +65,4 @@ Multilinked List
 
 Nodes in the linked list may point to more than one other node, which is not
 the circle reference(it may reference the doubly linked list.), considered as
-the *Multilinked List*. For example, the orthogonal list.
+the *Multilinked List*. For example, the *Orthogonal List*.

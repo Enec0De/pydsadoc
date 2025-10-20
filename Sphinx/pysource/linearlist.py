@@ -13,7 +13,7 @@ class SequentialList:
         :param MAXSIZE: Determines the max size of the squential list. Optional,
                         defaults to 10 if not provided.
         
-        :var data: Stores the all data of the list.
+        :var data: A list stores all of the data.
         :var last: The position of the last value in the list.
         """
         # Define MAXSIZE
@@ -92,7 +92,7 @@ class SequentialList:
         """
         # Judge whether the list is full
         if self.last + 1 == self._size: 
-            raise OverflowError('The list is full.')
+            raise IndexError('The list is full.')
 
         # Check the legality of the index
         if index < 0 or index > self.last + 1: 
@@ -131,10 +131,10 @@ class Node:
     def __init__(self, data: Optional[int] = None) -> None:
         """The automic element of the linked list.
         
-           :var data: Stores the data of the :py:class:`Node`. It is None only
-                      when it is *Sentinel Node* or *Dummy Node*.
+        :var data: Stores the data of the :py:class:`Node`. It is None only when
+                   it is *Sentinel Node* or *Dummy Node*.
 
-           :var next: Stores the point of the next :py:class:`Node`.
+        :var next: Stores the point of the next :py:class:`Node`.
         """
         # Define data
         self.data = data
@@ -146,7 +146,11 @@ class Node:
 class LinkedList:
 
     def __init__(self) -> None:
-        """Initialize an empty linked list begin with a sentinel node."""
+        """Initialize an empty linked list begin with a sentinel node.
+        
+        :var head: A pointer to the sentinel node of the linkd list.
+        """
+        # pointer to the sentinel node
         self.head: Node = Node(None)
 
     def len(self) -> int:
