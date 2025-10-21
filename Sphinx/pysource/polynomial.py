@@ -3,7 +3,7 @@
 """Implementation of the plus two polynomial."""
 
 from __future__ import annotations
-from typing import cast, Optional
+from typing import cast, Optional, Any
 
 
 class PolyNode:
@@ -25,18 +25,27 @@ class PolyNode:
 class Polynomial:
     """A linked list stores the coefficent and exponential of a polynomial."""
 
-    def __init__(self, item: Optional[tuple[int, int]] = None) -> None:
-        """Initialize an empty linked list.
+    def __init__(self, coef: Any, expon: Any) -> None:
+        """Initialize an linked list that contains only one single node.
+
+        A multi-terms polynomial can be created by adding some single 
+        polynomials.
         
-        :var head: The pointer to the sentinel node of linked list.
+        :var head: The pointer directly to the data node of the linked list that
+                   implements the polynomial. It's None when either of the 
+                   parameters is not an int.
         """
         # Pointer to the sentinel node of the linked list
-        if isinstance(item, tuple):
-            self.head = PolyNode(*item)
+        if all(isinstance(item, int) for item in (coef, expon)):
+            self.head = PolyNode(coef, expon)
         else:
             self.head = None
 
     def __add__(self, polynomial: Polynomial) -> Polynomial:
+        """Implementation of the ``+`` operators.
+        
+        :var polynomial: The polynomial to be added.
+        """
         # Define the variables for two polynomials to be added, p_1, p_2
         p_1: Optional[PolyNode] = self.head
         p_2: Optional[PolyNode] = polynomial.head
@@ -49,9 +58,9 @@ class Polynomial:
         while p_1 is not None and p_2 is not None:
 
             # Type annotation
-            p_1, p_2 = cast(PolyNode, p_1), cast(PolyNode, p_2)
-            p_1.expon, p_2.expon = cast(int, p_1.expon), cast(int, p_2.expon)
-            p_1.coef, p_2.coef = cast(int, p_1.coef), cast(int, p_2.coef)
+            p_1, p_2 = (cast(PolyNode, x) for x in (p_1, p_2))
+            p_1.coef, p_1.expon = (cast(int, x) for x in (p_1.coef, p_1.expon))
+            p_2.coef, p_2.expon = (cast(int, x) for x in (p_2.coef, p_2.expon))
 
             if p_1.expon == p_2.expon:
 
@@ -76,7 +85,7 @@ class Polynomial:
             elif p_1.expon > p_2.expon:
 
                 # Insert the p_1 node to the end of the s
-                temp.next = PolyNode(p_1.coef, p_2.expon)
+                temp.next = PolyNode(p_1.coef, p_1.expon)
                 temp = temp.next
 
                 # Treaverse to the next node
@@ -94,20 +103,59 @@ class Polynomial:
             temp = temp.next
             p_2 = p_2.next
 
-        # Delete the sentinel node
-        polynomial_result = Polynomial(None)
+        # Delete the sentinel node and store the linked list as the Polynomial
+        polynomial_result = Polynomial(None, None)
         polynomial_result.head = s.next
         return polynomial_result
+
+    def __str__(self) -> str:
+        """Implementation of the built-in function ``print()``.
+        
+        
+        :return: The string object need to be print.
+        """
+        # Define the string variable to store the data
+        p_str = ''
+
+        # Type annotations
+        p_poly = cast(PolyNode, self.head)
+        
+        # Stores the coefficient and exponential of non-empty node
+        while p_poly is not None:
+
+            # Type annotations
+            p_poly.coef = cast(int, p_poly.coef)
+            p_poly.expon = cast(int, p_poly.expon)
+
+            # Form the string like '+ax^b'
+            if p_poly.coef == 0:
+                pass
+
+            elif p_poly.coef > 0 and p_poly.expon == 0:
+                p_str += f'+{p_poly.coef}'
+
+            elif p_poly.coef > 0 and p_poly.expon > 0:
+                p_str += f'+{p_poly.coef}x^{p_poly.expon}'
+            
+            elif p_poly.coef > 0 and p_poly.expon < 0:
+                p_str += f'+{p_poly.coef}x^({p_poly.expon})'
+
+            elif p_poly.coef < 0 and p_poly.expon == 0:
+                p_str += f'{p_poly.coef}'
+                
+            elif p_poly.coef < 0 and p_poly.expon > 0:
+                p_str += f'{p_poly.coef}x^{p_poly.expon}'
+                
+            elif p_poly.coef < 0 and p_poly.expon < 0:
+                p_str += f'{p_poly.coef}x^({p_poly.expon})'
+
+            # Treaverse to the next node
+            p_poly = p_poly.next
+        
+        return p_str
+
+
 
                 
 
         
-        
-
-
-
-
-        ...
-
-
-   
