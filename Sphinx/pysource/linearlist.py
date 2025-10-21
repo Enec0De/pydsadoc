@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+"""There are two ways to stroe a linear list: sequentially and linkedly."""
 
 from __future__ import annotations
 from typing import Optional
@@ -271,15 +272,15 @@ class SequentialQueue:
 
 
 class Node:
-    """The aotomic element of the :py:class:`linearlist.LinkedList`."""
+    """The aotomic element of the linked list."""
 
     def __init__(self, data: Optional[int] = None) -> None:
         """Initialized the node of the linked list.
         
-        :var data: Stores the data of the :py:class:`linearlist.Node`. It is 
-                   None only when it is *Sentinel Node* or *Dummy Node*.
+        :var data: Stores the data of the node. It is None only when it is 
+                   *Sentinel Node* or *Dummy Node*.
 
-        :var next: Stores the point of the next :py:class:`linearlist.Node`.
+        :var next: Stores the point of the next node.
         """
         # Define data
         self.data = data

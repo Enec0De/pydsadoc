@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-"""Implementation of the plus two polynomial."""
+"""Implementation of some operators for two polynomial in a linked list."""
 
 from __future__ import annotations
 from typing import cast, Optional, Any

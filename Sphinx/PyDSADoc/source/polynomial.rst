@@ -9,4 +9,4 @@ Implementation
 
 .. automodule:: polynomial
    :members:
-   :special-members: +__add__
+   :special-members: +__add__, __str__

@@ -20,6 +20,7 @@ API List
 .. autosummary::
    :nosignatures:
 
+   linearlist
    linearlist.SequentialList
    linearlist.SequentialDualStack
    linearlist.SequentialQueue
@@ -27,4 +28,14 @@ API List
    linearlist.LinkedList
    linearlist.LinkedStack
    linearlist.LinkedQueue
+
+
+``polynomial``
+--------------
    
+.. autosummary::
+   :nosignatures:
+
+   polynomial
+   polynomial.PolyNode
+   polynomial.Polynomial

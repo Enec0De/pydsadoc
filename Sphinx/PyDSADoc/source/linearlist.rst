@@ -5,66 +5,73 @@ Linear List
 ===========
 
 Linear list is a data structure that stores data elements in a linear order.
-Basiclly, there are two ways to stroe a linear list: sequentially and linkedly.
+
+Fundamental 
+-----------
+
+.. automodule:: linearlist
+
+   .. rubric:: Sequential List 
+
+   A sequential list has a basic structure similar to the built-in ``List`` 
+   type.
+
+   .. autoclass:: SequentialList
+      :members:
+      :special-members: __init__
 
 
-Sequential Structures
----------------------
+   .. rubric:: Sequential Stack
+   
+   Stack is a linear list that follows the Last-In-Fist-Out (LIFO) principle.
+   Implementing a single stack with a sequential list can be done in the same 
+   way. So I will just present the dual stack.
+   
+   .. autoclass:: SequentialDualStack
+      :members:
+      :special-members: __init__
+   
+   
+   .. rubric:: Sequential Queue
+   
+   Queue is the linear list follows the First-In-First-Out (FIFO) principle.
+   
+   .. autoclass:: SequentialQueue
+      :members:
+      :special-members: __init__
+   
 
-.. rubric:: Sequential List
+   .. rubric:: Node
 
-A sequential list has a basic structure similar to the built-in ``List`` type.
-
-.. autoclass:: linearlist.SequentialList
-   :members:
-
-
-.. rubric:: Sequential Stack
-
-Stack is a linear list that follows the Last-In-Fist-Out (LIFO) principle.
-Implementing a single stack with a sequential list can be done in the same way.
-So I will just present the dual stack.
-
-.. autoclass:: linearlist.SequentialDualStack
-   :members:
-
-
-.. rubric:: Sequential Queue
-
-Queue is the linear list follows the First-In-First-Out (FIFO) principle.
-
-.. autoclass:: linearlist.SequentialQueue
-   :members:
-
-
-Linked Structures
------------------
-
-All of the linked lists are comprised of :py:class:`linearlist.Node`.
-
-.. autoclass:: linearlist.Node
-
-
-.. rubric:: Linked List
-
-The linked list initialized with a *Sentinel Node* (or *Dummy Node*), whose data 
-is None, will always begin with this *Sentinel Node* (or *Dummy Node*). And the 
-head always reference to this *Sentinel Node*.
-
-.. autoclass:: linearlist.LinkedList
-   :members:
-
-
-.. rubric:: Linked Stack
-
-.. autoclass:: linearlist.LinkedStack
-   :members:
-
-
-.. rubric:: Linked Queue
-
-.. autoclass:: linearlist.LinkedQueue
-   :members:
+   All of the linked lists are comprised of :py:class:`linearlist.Node`.
+   
+   .. autoclass:: Node
+      :special-members: __init__
+   
+   
+   .. rubric:: Linked List
+   
+   The linked list initialized with a *Sentinel Node* (or *Dummy Node*), whose 
+   data is None, will always begin with this *Sentinel Node* (or *Dummy Node*). 
+   And the head always reference to this *Sentinel Node*.
+   
+   .. autoclass:: LinkedList
+      :members:
+      :special-members: __init__
+   
+   
+   .. rubric:: Linked Stack
+   
+   .. autoclass:: LinkedStack
+      :members:
+      :special-members: __init__
+   
+   
+   .. rubric:: Linked Queue
+   
+   .. autoclass:: LinkedQueue
+      :members:
+      :special-members: __init__
 
 
 Generalization
