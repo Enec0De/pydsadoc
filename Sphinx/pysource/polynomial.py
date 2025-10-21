@@ -36,7 +36,7 @@ class Polynomial:
                    parameters is not an int.
         """
         # Pointer to the sentinel node of the linked list
-        if all(isinstance(item, int) for item in (coef, expon)):
+        if all(isinstance(item, int) for item in (coef, expon)) and coef != 0:
             self.head = PolyNode(coef, expon)
         else:
             self.head = None
@@ -112,7 +112,7 @@ class Polynomial:
         """Implementation of the built-in function ``print()``.
         
         
-        :return: The string object need to be print.
+        :return: The string object need to be printed.
         """
         # Define the string variable to store the data
         p_str = ''
@@ -151,8 +151,45 @@ class Polynomial:
 
             # Treaverse to the next node
             p_poly = p_poly.next
-        
+
+        # Return the final string 
         return p_str
+
+    def __mul__(self, polynomial: Polynomial) -> Polynomial:
+        """Implementation of the multiplication operator.
+        
+        :var polynomial: The polynomial to be multiplied.
+        """
+        # Define the variables point to the polynomial to be manipulated
+        p_1 = cast(PolyNode, self.head)
+
+        result = Polynomial(1, 0)
+
+        while p_1 is not None:
+
+            p_2 = cast(PolyNode, polynomial.head)
+            
+            while p_2 is not None:
+                
+                p_1.coef, p_1.expon = (
+                    cast(int, x) for x in (p_1.coef, p_1.expon)
+                )
+
+                p_2.coef, p_2.expon = (
+                    cast(int, x) for x in (p_2.coef, p_2.expon)
+                )
+                
+                s = Polynomial(p_1.coef * p_2.coef, p_1.expon + p_2.expon)
+                result += s
+
+                p_2 = p_2.next
+
+            p_1 = p_1.next
+        
+        return result + Polynomial(-1, 0)
+
+
+
 
 
 
