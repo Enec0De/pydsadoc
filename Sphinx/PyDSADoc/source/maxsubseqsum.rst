@@ -11,12 +11,9 @@ function
 
    f(i,j) = \max{\left\{\sum_{k=i}^{j} A_{k}\right\}}.
 
+
 Some Simple Complementation
 ---------------------------
 
-There are four classic algorithms, and you may also want to read the source
-code:
-
 .. automodule:: maxsubseqsum
    :members:
-   :member-order: bysource

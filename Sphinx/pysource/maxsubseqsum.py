@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+"""Some algorithms for maximum sunbsequence sum question."""
+
 
 def brute_force_enumeration(arr: list[int]) -> int:
     """The brute force enumeration method.

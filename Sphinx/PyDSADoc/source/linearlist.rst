@@ -1,35 +1,51 @@
-:tocdepth: 4
+:tocdepth: 3
 
 
 Linear List
 ===========
 
-Two ways to save (presistence):
-
-* Directly.
-* Non-zero item.
-* Linked list.
+Linear list is a data structure that stores data elements in a linear order.
+Basiclly, there are two ways to stroe a linear list: sequentially and linkedly.
 
 
-Basic Definition
-----------------
+Sequential Structures
+---------------------
 
-The class and the method defined in python follows below:
+.. rubric:: Sequential List
 
-
-Sequential List
-'''''''''''''''
+A sequential list has a basic structure similar to the built-in ``List`` type.
 
 .. autoclass:: linearlist.SequentialList
    :members:
 
 
-Linked List
-'''''''''''
+.. rubric:: Sequential Stack
 
-In this chapter, the linked list is comprised with :py:class:`linearlist.Node`:
+Stack is a linear list that follows the Last-In-Fist-Out (LIFO) principle.
+Implementing a single stack with a sequential list can be done in the same way.
+So I will just present the dual stack.
+
+.. autoclass:: linearlist.SequentialDualStack
+   :members:
+
+
+.. rubric:: Sequential Queue
+
+Queue is the linear list follows the First-In-First-Out (FIFO) principle.
+
+.. autoclass:: linearlist.SequentialQueue
+   :members:
+
+
+Linked Structures
+-----------------
+
+All of the linked lists are comprised of :py:class:`linearlist.Node`.
 
 .. autoclass:: linearlist.Node
+
+
+.. rubric:: Linked List
 
 The linked list initialized with a *Sentinel Node* (or *Dummy Node*), whose data 
 is None, will always begin with this *Sentinel Node* (or *Dummy Node*). And the 
@@ -39,8 +55,23 @@ head always reference to this *Sentinel Node*.
    :members:
 
 
+.. rubric:: Linked Stack
+
+.. autoclass:: linearlist.LinkedStack
+   :members:
+
+
+.. rubric:: Linked Queue
+
+.. autoclass:: linearlist.LinkedQueue
+   :members:
+
+
+Generalization
+--------------
+
 Generalized List
-----------------
+''''''''''''''''
 
 The generalized list is the generalization of the linear list. It means that one
 the elements of generalized list may be either single element or other
@@ -61,7 +92,7 @@ linkedlist. But it will be moer eleborate in C. It's just like:
 
 
 Multilinked List
-----------------
+''''''''''''''''
 
 Nodes in the linked list may point to more than one other node, which is not
 the circle reference(it may reference the doubly linked list.), considered as

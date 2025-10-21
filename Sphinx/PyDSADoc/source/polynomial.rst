@@ -3,4 +3,4 @@ Polynomial
 
 .. automodule:: polynomial
    :members:
-   :member-order: bysource
+   :special-members: +__add__

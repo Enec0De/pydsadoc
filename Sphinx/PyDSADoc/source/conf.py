@@ -40,7 +40,12 @@ exclude_patterns = []
 
 # -- Options for sphinx.ext.autodoc ------------------------------------------
 
-autoclass_content = 'both'
+autodoc_default_options = {
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'exclude-members': '__weakref__',
+    'undoc-members': True,
+}
 
 
 # -- Options for HTML output -------------------------------------------------

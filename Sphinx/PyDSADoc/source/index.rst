@@ -12,13 +12,11 @@ Some implementations will be there. For example:
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    maxsubseqsum
    linearlist
-   stack
-   myqueue
    polynomial
    apilist
 
