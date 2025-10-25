@@ -8,7 +8,7 @@
     // },
     "terminal.integrated.profiles.windows": {
         "Custom Init": {
-          "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+          "path": "C:\\Users\\lis_l\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe",
           "args": [
              "-noexit",
              "-file",

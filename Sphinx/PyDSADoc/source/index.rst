@@ -8,15 +8,15 @@
 Data Structures and Algorithms 
 ==============================
 
-Some implementations will be there. For example:
-
+Full table of Contents
+----------------------
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
 
-   maxsubseqsum
-   linearlist
-   polynomial
+   chapter-1/index
+   chapter-2/index
+   chapter-3/index
+   note
    apilist
 

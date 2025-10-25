@@ -1,8 +1,7 @@
 API List
 ========
 
-``maxsubseqsum``
-----------------
+.. rubric:: Prelusion
 
 .. autosummary::
    :nosignatures:
@@ -13,28 +12,21 @@ API List
    maxsubseqsum.divide_and_conquer
    maxsubseqsum.dynamic_programming
 
-
-``linearlist``
---------------
+.. rubric:: Linear List
 
 .. autosummary::
    :nosignatures:
 
-   linearlist
-   linearlist.SequentialList
-   linearlist.SequentialDualStack
-   linearlist.SequentialQueue
-   linearlist.Node
-   linearlist.LinkedList
-   linearlist.LinkedStack
-   linearlist.LinkedQueue
+   sequentiallist
+   sequentiallist.SeqList
+   sequentiallist.SeqDualStack
+   sequentiallist.SeqQueue
 
-
-``polynomial``
---------------
-   
-.. autosummary::
-   :nosignatures:
+   linkedlist
+   linkedlist.Node
+   linkedlist.LinkedList
+   linkedlist.LinkedStack
+   linkedlist.LinkedQueue
 
    polynomial
    polynomial.PolyNode

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-"""Some algorithms for maximum sunbsequence sum question."""
+"""Some algorithms to solve Maximum Subsequence Sum."""
 
 
 def brute_force_enumeration(arr: list[int]) -> int:
@@ -23,7 +23,7 @@ def brute_force_enumeration(arr: list[int]) -> int:
 
 
 def optimized_enumeration(arr: list[int]) -> int:
-    """Optimizes the way of sum from brute force enumeration.
+    """Optimizes the summation method from brute force enumeration.
     
     Time complexity is :math:`O(n^2)`. Space complexity is :math:`O(1)`.
     

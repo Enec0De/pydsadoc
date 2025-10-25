@@ -3,7 +3,22 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'pysource'))
+# Define list stores the paths to add.
+paths_to_add= [
+    'chapter_3',
+    'chapter_2',
+    'chapter_1',
+]
+
+# Define new root of source files.
+src_root = Path(__file__).resolve().parents[1] / 'pysource'
+
+# Define the variable used by jinja2
+pysrc = str(src_root)
+
+# Insertion of the paths.
+for paths in paths_to_add:
+    sys.path.insert(0, str(src_root/paths))
 
 
 # Configuration file for the Sphinx documentation builder.
@@ -36,6 +51,9 @@ templates_path = [
 ]
 
 exclude_patterns = []
+
+# -- Options for the Python domain -------------------------------------------
+add_module_names = False
 
 
 # -- Options for sphinx.ext.autodoc ------------------------------------------
@@ -70,8 +88,8 @@ html_static_path = ['_static']
 #     "source_directory": "sphinx/pydsadoc/source",
 # }
 
-# html_logo = "_static/python-logo.svg"
-# html_favicon = "_static/favicon.png"
+# html_logo = "_static/hammer.svg"
+html_favicon = "_static/hammer.svg"
 
 # Set to '' to prevent appending "documentation" to the site title
 html_title = ""
