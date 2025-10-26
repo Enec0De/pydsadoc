@@ -1,5 +1,10 @@
+.. _sequential-list:
+
 Sequential List
 ===============
+
+Interface
+---------
 
 .. automodule:: sequentiallist
    :members:

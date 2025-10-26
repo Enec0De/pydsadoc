@@ -17,6 +17,7 @@ Full table of Contents
    chapter-1/index
    chapter-2/index
    chapter-3/index
-   note
+   chapter-4/index
+   miscellaneous
    apilist
 

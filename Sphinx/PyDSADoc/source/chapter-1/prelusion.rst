@@ -9,8 +9,8 @@ to solve: For a given sequence :math:`A_k`, evaluate the function
    f(i,j) = \max{\left\{\sum_{k=i}^{j} A_{k}\right\}}.
 
 
-Implementation
---------------
+Interface
+---------
 
 .. automodule:: maxsubseqsum
    :members:

@@ -4,8 +4,8 @@ Ex. Polynomial
 The main question is to solve: how to add two polynomials?
 
 
-Implementation
---------------
+Interface
+---------
 
 .. automodule:: polynomial
    :members:

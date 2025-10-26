@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import annotations
-from typing import Any, Optional
 
 
 def binary_search(list: list[int], data: int) -> int:

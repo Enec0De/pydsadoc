@@ -1,5 +1,5 @@
-Note
-====
+Miscellaneous Notes (draft)
+===========================
 
 
 ::
@@ -36,12 +36,32 @@ Note
         elif status == 1:
             ...
 
-.. literalinclude:: ../pysource/chapter_2/sequentiallist.py
+::
+
+    class Sentinel:
+    """Unique sentinel value."""
+    _registry = None
+
+    def __new__(cls):
+        if cls._registry is None:
+            cls._registry = super().__new__(cls)
+        return cls._registry
+
+    def __repr__(self):
+        return 'Sentinel'
+
+
+.. literalinclude:: /../pysource/chapter_2/sequentiallist.py
    :pyobject: SeqList.len
    :dedent: 4
    :lines: 1,8-
    
-        
+.. rubric:: To do list:
 
+* Simplify the :ref:`sequential-list`.
 
+* Fix :py:meth:`pre_order_traversal() <tree.BinaryTree.pre_order_traversal>` 
+  in the Prelusion of Tree.
+
+* Test :ref:`tree`. It must be wrong.
     

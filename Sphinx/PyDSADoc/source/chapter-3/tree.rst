@@ -1,12 +1,6 @@
 Prelusion
 =========
 
-The conception is arise from the algorithm: the binary search algorithm:
-
-.. automodule:: search
-   :members:
-
-
 Conception
 ----------
 
@@ -58,7 +52,7 @@ Depth
 Binary Tree
 -----------
 
-Inspired by :py:func:`binary_search`, we have some new conception as follows:
+Inspired by :py:func:`binary_search() <search.binary_search>`, we have some new conception as follows:
 
 * *Skewed Binary Tree*
 * *Perfect Binary Tree* (*Full Binary Tree*)
@@ -71,8 +65,11 @@ Inspired by :py:func:`binary_search`, we have some new conception as follows:
    n_0 + n_1 + n_2 - 1 &= 0 \times n_0 \times n_1 \times 2n_2 \\
    n_0 &= n_2 + 1
 
-Implementation
---------------
 
-.. automodule:: tree
+Interface
+---------
+
+.. automodule:: binarysearch
    :members:
+
+
