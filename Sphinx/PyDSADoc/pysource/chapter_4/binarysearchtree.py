@@ -115,8 +115,8 @@ class BST:
         """Insert the element into the bst and ensure it remains a bst.
         
         :param element: The element to insert.
-        :param bst: The bst to be inserted. Optional, defaults to self.head if 
-                    not proviede.
+        :param bst: The bst to be inserted. Optional, defaults to ``self.head``
+                    if not proviede.
         """
         # Create the new node stores the data
         node: TreeNode = TreeNode(element)
@@ -149,5 +149,62 @@ class BST:
             else:
                 self.insert(element, temp.right)
 
-    def delete(self):
-        ...
+    def delete(self, element: int, bst: T = _sentinel) -> Optional[TreeNode]: 
+        """Delete the element from the bst.
+        
+        :param element: The element to be deleted.
+        :param bst: The bst to be delteted. Optional, defaults to ``self.head``
+                    if not proviede.
+        :return: The root node of the parameter ``bst``. 
+        """
+        # Default bst
+        if bst is _sentinel:
+            if self.head is None:
+                raise IndexError('empty bst.')
+            else:
+                self.head = self.delete(element, self.head)
+                return self.head
+
+        # The bst must be TreeNode
+        else:
+            temp = cast(TreeNode, bst)
+        
+        # Step into left subtree
+        if element < temp.data:
+            if temp.left is not None:
+                temp.left = self.delete(element, temp.left)
+            else:
+                raise IndexError('element not found.')
+
+        # Step into right subtree
+        elif element > temp.data:
+            if temp.right is not None:
+                temp.right = self.delete(element, temp.right)
+            else:
+                raise IndexError('element nof found.')
+        
+        # Find the element
+        else:
+            # Two child
+            if temp.left is not None and temp.right is not None:
+
+                # Find the minimum element node in the right subtree
+                r_min = temp.right
+                while r_min.left is not None:
+                    r_min= r_min.left
+                
+                # Now r_min point to the minimux element node 
+                temp.data = r_min.data
+                temp.right = self.delete(r_min.data, temp.right)
+            
+            # Only one child
+            elif temp.left is not None:
+                return temp.left
+            elif temp.right is not None:
+                return temp.right
+
+            # No child
+            else:
+                return None
+        
+        return temp
