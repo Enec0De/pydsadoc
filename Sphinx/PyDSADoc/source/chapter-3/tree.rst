@@ -8,7 +8,7 @@ Tree
     A finite set comprised of :math:`n` nodes. It's *Empty Tree* only when 
     :math:`n = 0`, otherwise *Non-empty Tree*.
     For *Non-empty Tree*, There is a special node called *Root*. All nodes can
-    be separated to :math:`m (m > 0)` disjoint sets, namely 
+    be separated to :math:`m\ (m > 0)` disjoint sets, namely 
     :math:`T_1, T_2, ...`, every set is also a *Tree* which is called
     *Sub Tree*.
 

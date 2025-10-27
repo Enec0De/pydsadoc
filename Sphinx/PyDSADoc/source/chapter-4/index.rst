@@ -7,3 +7,5 @@ Binary Tree
    :maxdepth: 5
 
    binary-search-tree
+   avl-tree
+   same-bst

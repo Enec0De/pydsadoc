@@ -31,3 +31,18 @@ API List
    polynomial
    polynomial.PolyNode
    polynomial.Polynomial
+
+.. rubric:: Tree and Binary Tree
+
+.. autosummary::
+   :nosignatures:
+
+   tree
+   tree.TreeNode
+   tree.BinaryTree
+   binarysearch.binary_search
+   isomorphictree
+   
+   binarysearchtree
+   binarysearchtree.TreeNode
+   binarysearchtree.BST

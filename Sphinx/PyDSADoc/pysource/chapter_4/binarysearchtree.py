@@ -4,7 +4,7 @@
 
 # Import necessary module
 from __future__ import annotations
-from typing import Any, Union, Optional, cast
+from typing import Union, Optional, cast
 
 # Define Sentinel class
 class Sentinel:
@@ -155,7 +155,7 @@ class BST:
         :param element: The element to be deleted.
         :param bst: The bst to be delteted. Optional, defaults to ``self.head``
                     if not proviede.
-        :return: The root node of the parameter ``bst``. 
+        :return: The new root node of the tree ``bst``. 
         """
         # Default bst
         if bst is _sentinel:
