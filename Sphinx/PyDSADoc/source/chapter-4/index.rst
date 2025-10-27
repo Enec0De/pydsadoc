@@ -9,3 +9,4 @@ Binary Tree
    binary-search-tree
    avl-tree
    same-bst
+   reverse
