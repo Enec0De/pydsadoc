@@ -5,6 +5,7 @@ from pathlib import Path
 
 # Define list stores the paths to add.
 paths_to_add= [
+    'chapter_6',
     'chapter_5',
     'chapter_4',
     'chapter_3',
