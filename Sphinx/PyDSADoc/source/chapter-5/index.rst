@@ -8,3 +8,6 @@ Heap and Huffman Tree
 
    heap
    huffman
+   dsu
+   heap-path
+   file-transfer

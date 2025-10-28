@@ -46,3 +46,25 @@ API List
    binarysearchtree
    binarysearchtree.TreeNode
    binarysearchtree.BST
+
+   samebst
+   samebst.BST
+
+.. rubric:: Heap and Huffman Tree
+
+.. autosummary::
+   :nosignatures:
+
+   heap
+
+   huffman
+   huffman.MinHeap
+   huffman.TreeNode
+
+   disjointsetunion
+   disjointsetunion.SetNode
+   disjointsetunion.UnionFind
+
+   heappath
+
+   filetransfer

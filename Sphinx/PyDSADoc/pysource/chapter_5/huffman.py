@@ -117,7 +117,7 @@ def main():
 
     # Result is the root node of the huffman tree
     result = TreeNode.huffman(minh)
-    print(result.weight)
+    print(vars(result))
 
 
 

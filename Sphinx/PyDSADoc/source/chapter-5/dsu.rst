@@ -1,10 +1,10 @@
-Huffman Tree
-============
+Disjoint Set Union
+==================
 
 Interface
 ---------
 
-.. automodule:: huffman
+.. automodule:: disjointsetunion
    :members:
    :special-members: __init__
    :exclude-members: main
