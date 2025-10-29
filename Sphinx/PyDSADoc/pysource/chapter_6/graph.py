@@ -43,7 +43,7 @@ class MGraph:
         # Data of the vertex
         self.data: list[Optional[DataType]] = [None] * vertex_num
 
-        # Weight of the edges
+        # Weight of the edges, or adjacency matrix.
         self.edge: list[list[WeightType]] = [
             ([0]*vertex_num) for i in range(0, vertex_num)
         ]
@@ -106,7 +106,7 @@ class MGraph:
         """Build the graph in an interactive way."""
         user_input =  int(input("Input 'ne': "))
 
-        for i in range(0, user_input):
+        for _ in range(0, user_input):
             edge_input = input("Input 'V W': ").split(' ')
             v = int(edge_input[0])
             w = int(edge_input[1])
@@ -115,21 +115,121 @@ class MGraph:
 
     def __str__(self) -> str:
 
-        output = ''
+        output = '   '
+        for k in range(0, self.nv):
+            output += f'[{k}]'
+        output += '\n'
+
         for j in range(0, self.nv):
+            output += f'[{j}]'
             for i in range(0, self.nv):
-                output = output + str(self.edge[i][j]) + ' '
+                output = output + ' ' + str(self.edge[i][j]) + ' '
             output += '\n'
 
         return output
 
 
+
+class EdgeNode:
+    """The head of the Adjacency List."""
+
+    def __init__(self, vertex: int, weight: int = 1) -> None:
+        # The index of the vertex which is the adjacency point of the sentinel
+        self.vertex = vertex
+
+        # Weight of the edge
+        self.weight = weight
+
+        # The next node
+        self.next: Optional[EdgeNode] = None 
+
+class AdjItem:
+    """The node of the Adjacency List, or the sentinel node of linked list."""
+
+    def __init__(self) -> None:
+        # The Adjacency point of the vertex represented by sentinel node
+        self.next: Optional[EdgeNode] = None
+
+        # Data of the vertex
+        self.data: Optional[DataType] = None
+
+
 class LGraph:
-    ...
+    """Implement with Adjacency List."""
+
+    def __init__(self, vertex_num: int) -> None:
+        """Create and return an empty Graph with given number of the vertices.
+        
+        :param vertex_num: The number of the vertices in the graph.
+        """
+        # Adjacency list, comprised of linked list
+        # Data of the vertex is stored in the sentinel node of the linked list
+        # Weight of the edege is stored in the data node of the linked list
+        self.adjlist: list[AdjItem] = [AdjItem() for _ in range(0, vertex_num)]
+
+        # Number of vertices 
+        self.nv: int = vertex_num
+        
+        # Number of edges
+        self.ne: int = 0
+    
+
+    def insert_edge(self, edge: Edge) -> None:
+        """Insert edge :math:`e` in to the LGraph."""
+        # Create the EdgeNode
+        temp_v = EdgeNode(edge.v, edge.weight)
+        temp_w = EdgeNode(edge.w, edge.weight)
+        vertex_v = self.adjlist[edge.v]
+        vertex_w = self.adjlist[edge.w]
+
+        # Insert the temp right after the corresponding vertex
+        temp_w.next = vertex_v.next 
+        vertex_v.next = temp_w
+
+        # Vice versa
+        temp_v.next = vertex_w.next
+        vertex_w.next = temp_v
+
+        # Insert the number count of the edges
+        self.ne += 1
+
+    def build_graph(self) -> None:
+        """Build the graph in an interactive way."""
+        # Input the number of edges you want to add
+        user_input = int(input("Input 'ne': "))
+
+        # Insert all edges
+        for _ in range(0, user_input):
+            edge_input = input("input 'V M': ").split(' ')
+            v, w = int(edge_input[0]), int(edge_input[1])
+            self.insert_edge(Edge(v, w))
+        
+    def __str__(self) -> str:
+
+        output = ''
+        index = 0
+        for i in self.adjlist:
+            # Create pointer to the AdjItem
+            ptr = i
+            output += f'[{index}] '
+            while ptr.next is not None:
+
+                # Treaverse to the next node
+                ptr = ptr.next
+                
+                # Stores the node of the index
+                output = output + '-> '+ str(ptr.vertex) + ' '
+
+            # New line
+            index += 1
+            output += '\n'
+        
+        return output
+
 
 
 def main():
-    g = MGraph(10)
+    g = LGraph(10)
     g.build_graph()
     print(g)
 
