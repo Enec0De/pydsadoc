@@ -8,3 +8,4 @@ Examples
 
    tta
    cbst
+   hc
