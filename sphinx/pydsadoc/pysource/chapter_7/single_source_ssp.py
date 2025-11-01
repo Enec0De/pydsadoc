@@ -168,7 +168,7 @@ class LGraph:
             node._dist = inf
 
         return result
-    
+
 
 def main() -> None:
     # Initial lize the unweight graph
