@@ -1,5 +1,5 @@
-Huffman Codes
-=============
+Ex. Huffman Codes
+=================
 
 Interface
 ---------

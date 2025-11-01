@@ -1,5 +1,5 @@
-Complete Binary Search Tree
-===========================
+Ex. Complete Binary Search Tree
+===============================
 
 For n nodes, for :math:`k` meet the condition :math:`2^k \leq n \leq 2^{k+1}`.
 :math:`n - 2^k` (last layers of the tree) sperates to two parts: Precedes

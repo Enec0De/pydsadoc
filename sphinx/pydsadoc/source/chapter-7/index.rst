@@ -1,11 +1,10 @@
-.. _examples:
+.. _shortest:
 
-Examples
-========
+Shortest Path Algorithms
+========================
 
 .. toctree::
    :maxdepth: 5
 
-   tta
-   cbst
-   hc
+   single_source_ssp
+   multi_source_ssp
