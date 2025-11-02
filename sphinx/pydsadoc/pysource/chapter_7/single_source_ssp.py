@@ -149,10 +149,9 @@ class LGraph:
                 w = w.next
                 # Map the vertex to the index of the node
                 w_index = w.vertex - 1
-                if all([
-                    self.adjlist[w_index] in S,
-                    result[w_index]['dist'] > result[v_index]['dist'] + w.weight
-                ]):
+                if (self.adjlist[w_index] in S,
+                    result[w_index]['dist']
+                    > result[v_index]['dist'] + w.weight):
                     # Handel the result
                     result[w_index]['dist'] = result[v_index]['dist'] + w.weight 
                     result[w_index]['path'] = v.vertex
