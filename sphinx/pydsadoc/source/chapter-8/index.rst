@@ -5,3 +5,5 @@ Minimum Spanning Tree
    :maxdepth: 5
 
    prim
+   toposort
+   travel-planning

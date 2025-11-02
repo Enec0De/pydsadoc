@@ -131,6 +131,17 @@ class MinHeap:
 
         return output
 
+class Edge:
+    """For kruskal."""
+
+    def __init__(self, v: int, w: int, weight: W) -> None:
+        self.v = v
+        self.w = w
+        self.weight = weight
+
+    def __lt__(self, other: Edge) -> bool:
+        return self.weight < other.weight
+
 
 class AdjVNode:
 
@@ -206,6 +217,33 @@ class LGraph:
             node.weight = INF
 
         return mst
+    
+    def kruskal(self): 
+        # Select the smallest edge
+        mst = [] 
+        heap = []
+        dsu = UnionFind(self.nv+1)
+
+        for node in self.adjlist:
+            cur = node
+            while cur.next is not None:
+                cur = cur.next
+                if node.vertex < cur.vertex:
+                    heap.append(Edge(node.vertex, cur.vertex, cur.weight))
+
+        heapify(heap)
+        while len(mst) < self.nv - 1 and heap:
+            edge = heappop(heap)
+            if dsu.find(edge.v) != dsu.find(edge.w):
+                mst.append(edge)
+                dsu.union(edge.v, edge.w)
+        
+        if len(mst) != self.nv - 1:
+            raise IndexError('no such mst')
+
+        for item in mst:
+            print(f'v: {item.v} w: {item.w}, weight: {item.weight}')
+
 
 
 def test_union_find() -> None:
@@ -239,6 +277,7 @@ def test_graph() -> None:
     print('# -- PRINT THE GRAPH ---------------------------------------------')
     print(graph)
     print(graph.prim())
+    graph.kruskal()
 
 
 def test_heap() -> None:
