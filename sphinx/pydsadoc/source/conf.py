@@ -5,6 +5,7 @@ from pathlib import Path
 
 # Define list stores the paths to add.
 paths_to_add= [
+    'chapter_9_sort',
     'chapter_8',
     'chapter_7',
     'chapter_7_ex',
@@ -48,7 +49,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx_copybutton',
-    "sphinx_inline_tabs",
+    'sphinx_inline_tabs',
 ]
 
 templates_path = [

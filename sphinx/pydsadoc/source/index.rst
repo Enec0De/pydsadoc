@@ -23,6 +23,7 @@ Full table of Contents
    chapter-7-ex/index
    chapter-7/index
    chapter-8/index
+   chapter-9-sort/index
    miscellaneous
    apilist
 
