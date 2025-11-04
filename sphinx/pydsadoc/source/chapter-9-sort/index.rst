@@ -5,3 +5,4 @@ Algorithms
    :maxdepth: 5
 
    sort
+   othersort
