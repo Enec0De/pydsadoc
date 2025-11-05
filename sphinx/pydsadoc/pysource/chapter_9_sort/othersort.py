@@ -44,6 +44,9 @@ def quick_sort_inner(arr: list[ElementType], left: int, right: int) -> None:
         arr[i], arr[right-1] = arr[right-1], arr[i]
         quick_sort_inner(arr, left, i-1)
         quick_sort_inner(arr, i+1, right)
+    if right - left == 1 and arr[right] < arr[left]:
+        arr[left], arr[right] = arr[right], arr[left]
+
 
 def quick_sort(arr: list[ElementType]) -> None:
     length = len(arr)
@@ -54,9 +57,16 @@ def quick_sort(arr: list[ElementType]) -> None:
 # The content of Table Sorting and Physical Sorting is omitted               |
 # ----------------------------------------------------------------------------
 
+def table_sort(arr) -> None:
+    ...
+
+def physcial_sort(arr)-> None:
+    ...
+
 
 # ----------------------------------------------------------------------------
 # Bucket Sort 
+# Radix Sort
 
 def bucket_sort(arr: list) -> None:
     ...
@@ -68,10 +78,14 @@ def most_significant_digitl(arr) -> None:
     ...
 
 def main():
-    arr = [6, 5, 4, 3, 1, 2, 7, 8, 9, 0, -1, -4, 100, -99, 0]
-    arr_quick = copy.copy(arr)
-    quick_sort(arr_quick)
-    print(arr_quick)
+    # arr = [6, 5, 4, 3, 1, 2, 7, 8, 9, 0, -1, -4, 100, -99, 0]
+    # arr_quick = copy.copy(arr)
+    # quick_sort(arr_quick)
+    # print(arr_quick)
+
+    arr_test = [7, 1, 2, 8, 0]
+    quick_sort(arr_test)
+    print(arr_test)
 
 
 if __name__ == '__main__':
