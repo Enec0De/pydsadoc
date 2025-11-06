@@ -5,3 +5,4 @@ Search
    :maxdepth: 5
 
    hashtable
+   callme
