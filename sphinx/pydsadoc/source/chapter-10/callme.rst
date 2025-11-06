@@ -6,3 +6,4 @@ Interface
 
 .. automodule:: callme
    :members:
+   :exclude-members: main
