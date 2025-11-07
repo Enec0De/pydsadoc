@@ -25,6 +25,10 @@ Full table of Contents
    chapter-8/index
    chapter-9-sort/index
    chapter-10/index
+   linear/index
+   tree/index
+   graph/index
+   hash/index
    miscellaneous
    apilist
 

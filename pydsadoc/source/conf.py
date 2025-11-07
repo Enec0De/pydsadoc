@@ -19,10 +19,7 @@ paths_to_add= [
 ]
 
 # Define new root of source files.
-src_root = Path(__file__).resolve().parents[1] / 'pysource'
-
-# Define the variable used by jinja2
-pysrc = str(src_root)
+src_root = Path(__file__).resolve().parents[2] / 'src'
 
 # Insertion of the paths.
 for paths in paths_to_add:

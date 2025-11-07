@@ -51,7 +51,7 @@ Miscellaneous Notes (draft)
         return 'Sentinel'
 
 
-.. literalinclude:: /../pysource/chapter_2/sequentiallist.py
+.. literalinclude:: /../../src/chapter_2/sequentiallist.py
    :pyobject: SeqList.len
    :dedent: 4
    :lines: 1,8-
