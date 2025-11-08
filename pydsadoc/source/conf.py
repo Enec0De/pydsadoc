@@ -16,6 +16,7 @@ paths_to_add= [
     'chapter_3',
     'chapter_2',
     'chapter_1',
+    '',
 ]
 
 # Define new root of source files.
