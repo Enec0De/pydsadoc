@@ -12,11 +12,11 @@ MAXSIZE = 2**63 - 1
 class Node:
     """The atomic element of the linked list."""
 
-    def __init__(self, object: ElementType = None, /,
+    def __init__(self, obj: ElementType = None, /,
                  *args, **kwargs) -> None:
         """Initialize self."""
         # Stores the data of the node
-        self.object = object 
+        self.obj = obj 
 
         # Stores the pointer to the next node
         self.next: Optional[Node] = None
@@ -46,7 +46,7 @@ class LinkedList:
 
         # Find the element or not found 
         if i == index and isinstance(ptr, Node):
-            return ptr.object
+            return ptr.obj
         else:
             raise IndexError('index out of range.')
 
@@ -65,19 +65,19 @@ class LinkedList:
 
         # Treaverse the linked list
         while ptr is not None:
-            arr.append(ptr.object) 
+            arr.append(ptr.obj) 
             ptr = ptr.next
 
         # Format the output
         return '[' + ', '.join(map(str, arr)) + ']'
 
-    def append(self, object: ElementType, /) -> None:
+    def append(self, obj: ElementType, /) -> None:
         """Append object to the end of the list.
         
         Time complexity is :math:`O(n).` 
         """
         # Define the variables
-        temp = Node(object)
+        temp = Node(obj)
         ptr = self.head
 
         # Treaverse to the end of the linked list
@@ -103,7 +103,7 @@ class LinkedList:
 
         # The variables represent the node ptr[i]
         while ptr is not None and i < stop:
-            if i >= start and ptr.object == value:
+            if i >= start and ptr.obj == value:
                 return i
             i += 1
             ptr = ptr.next
@@ -111,7 +111,7 @@ class LinkedList:
         # Not found
         return -1
 
-    def insert(self, index: int, objcet: ElementType, /) -> None:
+    def insert(self, index: int, obj: ElementType, /) -> None:
         """Insert object before index.
         
         Time complexity is :math:`O(n)`.
@@ -119,7 +119,7 @@ class LinkedList:
         # Define the variables
         i: int = -1
         ptr: Optional[Node] = self.head
-        temp = Node(objcet)
+        temp = Node(obj)
 
         # Treaverse to the node before the given index
         while ptr.next is not None and i < index - 1:
@@ -171,7 +171,7 @@ class LinkedList:
 
         # Finde the node have the value
         while ptr.next is not None:
-            if ptr.next.object == value:
+            if ptr.next.obj == value:
                 ptr.next = ptr.next.next
                 self.size -= 1
                 return
@@ -216,8 +216,8 @@ def test_pop(arr: list[int], other: LinkedList) -> None:
     print('Begin Pop ...')
     random_loop = random.randint(1, len(arr)//2)
     for _ in range(random_loop):
-        assert arr.pop() == other.pop().object, \
-               f'Pop failed: {arr.pop()} == {other.pop().object}'
+        assert arr.pop() == other.pop().obj, \
+               f'Pop failed: {arr.pop()} == {other.pop().obj}'
 
     # Check wether the two lists are equal
     check_equal(arr, other)

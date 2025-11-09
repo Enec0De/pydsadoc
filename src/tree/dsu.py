@@ -6,7 +6,11 @@ import random
 
 
 class UnionFind:
-    """Implementation of the DSU with a sequential list."""
+    """Implementation of the DSU with a sequential list.
+    
+    It's notably that the amortized time complexity of DSU is
+    :math:`O(\\alpha(n))`.
+    """
 
     def __init__(self, num_vert: int, /, *args, **kwargs) -> None:
         """Initialize self."""
@@ -15,7 +19,7 @@ class UnionFind:
     def __str__(self, /) -> str:
         """Implement built-in function ``print()``."""
         # Define variables
-        string =''
+        string ='# -- Union Find: --\n'
         length = len(self.parent)
         count = [[] for _ in range(length)]
 
@@ -34,7 +38,10 @@ class UnionFind:
         return string
 
     def find(self, x: int, /) -> int:
-        """The find operation with path compression."""
+        """The find operation with path compression.
+        
+        The worst-case time complexity is :math:`O(\\log n)`. 
+        """
         # The boundary condition for recursion
         if self.parent[x] < 0:
             return x
@@ -45,7 +52,10 @@ class UnionFind:
             return self.parent[x]
 
     def union(self, x: int, y: int, /) -> None:
-        """The union operation by rank."""
+        """The union operation by rank.
+        
+        The worst-case time complexity is :math:`O(\\log n)`.
+        """
         # Find the root of the two nodes
         r_x = self.find(x) 
         r_y = self.find(y)
@@ -65,15 +75,17 @@ class UnionFind:
 # - Test module --------------------------------------------------------
 def main() -> None:
     # Create a new DSU
-    dsu = UnionFind(10)
+    random_lenght = random.randint(4, 32)
+    dsu = UnionFind(random_lenght)
 
     # Randomly union elements
-    for _ in range(5):
-        x = random.randint(0, 9)
-        y = random.randint(0, 9)
+    for _ in range(random_lenght//2):
+        x = random.randint(0, random_lenght-1)
+        y = random.randint(0, random_lenght-1)
         dsu.union(x, y)
 
     # Print the result
+    print(dsu.parent)
     print(dsu)
 
 if __name__ == '__main__':

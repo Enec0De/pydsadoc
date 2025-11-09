@@ -43,13 +43,13 @@ class SeqList:
         # Format the output
         return '[' + ', '.join(map(str, self.data[:self.size])) + ']'
     
-    def append(self, object: ElementType, /) -> None:
+    def append(self, obj: ElementType, /) -> None:
         """Append object to the end of the list.
         
         Time complexity is :math:`O(1)`.
         """
         # Appending
-        self.data[self.size] = object
+        self.data[self.size] = obj
         self.size += 1
 
         # Atuo extend
@@ -78,20 +78,20 @@ class SeqList:
         # Not found
         return -1
 
-    def insert(self, index: int, object: ElementType, /) -> None:
+    def insert(self, index: int, obj: ElementType, /) -> None:
         """Insert object before index.
         
         Time complexity is :math:`O(n)`.
         """
         # Adjust range of inde, delegatea to the append method
         if index > self.size -1:
-            self.append(object)
+            self.append(obj)
             return
 
         # Insertion
         for i in range(self.size, index, -1):
             self.data[i] = self.data[i-1]
-        self.data[index] = object
+        self.data[index] = obj
         self.size += 1
 
         # Auto extend
