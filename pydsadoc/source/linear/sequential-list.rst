@@ -4,7 +4,9 @@ Sequential List
 .. automodule:: linear.seque
    :members:
    :special-members: __str__
-   :exclude-members: main, check_equal
+   :exclude-members: main, check_equal,
+                     test_append, test_index,
+                     test_insert_remove, test_pop
 
 .. rubric:: Stack
 

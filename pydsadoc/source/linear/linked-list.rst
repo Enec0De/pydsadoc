@@ -4,7 +4,9 @@ Linked List
 .. automodule:: linear.linked
    :members:
    :special-members: __str__
-   :exclude-members: main
+   :exclude-members: main, check_equal,
+                     test_append, test_index,
+                     test_insert_remove, test_pop
 
 .. rubric:: Stack
 

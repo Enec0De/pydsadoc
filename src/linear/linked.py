@@ -8,6 +8,7 @@ import random
 ElementType = Union[int, None]
 MAXSIZE = 2**63 - 1
 
+
 class Node:
     """The atomic element of the linked list."""
 

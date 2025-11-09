@@ -8,6 +8,7 @@ import random
 ElementType = Union[None, int]
 MAXSIZE = 2**63 - 1
 
+
 class SeqList:
     """Implement a linear list sequentially."""
 
@@ -23,7 +24,7 @@ class SeqList:
         self.data: list[ElementType] = [None] * self.maxsize
 
     def __getitem__(self, index: int, /) -> ElementType:
-        """Return self[key]"""
+        """Return self[key]."""
         # Chcek the legitimate of the index
         if index < 0 or self.size - 1 < index:
             raise IndexError('index out of range.')
@@ -210,7 +211,7 @@ def test_insert_remove(arr: list[int], other: SeqList) -> None:
     # Check wether the two lists are equal
     print('Insert and Remove OK!')
 
-# - Main emtry point of module -----------------------------------------
+# - Main entry point of module -----------------------------------------
 def main() -> None:
     # Initialize the test data 
     sample = [
