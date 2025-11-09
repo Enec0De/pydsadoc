@@ -65,7 +65,7 @@ add_module_names = False
 # -- Options for sphinx.ext.autodoc ------------------------------------------
 
 autodoc_default_options = {
-    'member-order': 'bysource',
+    # 'member-order': 'bysource',
     'undoc-members': True,
 }
 

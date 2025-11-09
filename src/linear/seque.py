@@ -11,12 +11,6 @@ MAXSIZE = 2**63 - 1
 class SeqList:
     """Implement a linear list sequentially."""
 
-    def __getitem__(self, key: int, /) -> ElementType:
-        """Return self[key]"""
-        if key < 0 or key > self.size - 1:
-            raise IndexError('index out of range.')
-        return self.data[key]
-
     def __init__(self, maxsize: int = 16, /, *args, **kwargs) -> None:
         """Initialize self."""
         # Maxsize of the SeqList
@@ -28,8 +22,24 @@ class SeqList:
         # The list stores the data
         self.data: list[ElementType] = [None] * self.maxsize
 
+    def __getitem__(self, index: int, /) -> ElementType:
+        """Return self[key]"""
+        # Chcek the legitimate of the index
+        if index < 0 or self.size - 1 < index:
+            raise IndexError('index out of range.')
+        return self.data[index]
+
+    def __len__(self, /) -> int:
+        """Implement built-in function ``len()``."""
+        # Return the attribute size
+        return self.size
+
     def __str__(self, /) -> str:
-        """Implement print method."""
+        """Implement built-in function ``print()``.
+        
+        Treaverse the linked list. The time complexity is :math:`O(n)`. 
+        """
+        # Format the output
         return '[' + ', '.join(map(str, self.data[:self.size])) + ']'
     
     def append(self, object: ElementType, /) -> None:
@@ -42,7 +52,7 @@ class SeqList:
         self.size += 1
 
         # Atuo extend
-        if self.size > self.maxsize -1:
+        if self.size > self.maxsize - 1:
             self.data += [None] * self.maxsize
             self.maxsize *= 2
 
@@ -50,9 +60,10 @@ class SeqList:
               value: ElementType, 
               start: int = 0, 
               stop: int = MAXSIZE, /) -> int:
-        """Retrun first index of the value.
+        """Return first index of the value.
         
-        Time complexity is :math:`O(n)`.
+        At or after index start and before index stop. Time complexity 
+        is :math:`O(n)`.
         """
         # Adjust range of index
         if stop > self.size:
@@ -67,8 +78,25 @@ class SeqList:
         return -1
 
     def insert(self, index: int, object: ElementType, /) -> None:
-        """Insert object before index."""
-        ...
+        """Insert object before index.
+        
+        Time complexity is :math:`O(n)`.
+        """
+        # Adjust range of inde, delegatea to the append method
+        if index > self.size -1:
+            self.append(object)
+            return
+
+        # Insertion
+        for i in range(self.size, index, -1):
+            self.data[i] = self.data[i-1]
+        self.data[index] = object
+        self.size += 1
+
+        # Auto extend
+        if self.size > self.maxsize - 1:
+            self.data += [None] * self.maxsize
+            self.maxsize *= 2
     
     def pop(self, index: int = -1, /) -> ElementType:
         """Remove and return item at index (deafult last).
@@ -79,8 +107,10 @@ class SeqList:
         if self.size < 1:
             raise IndexError('empty list.')
 
-        # Default value of index
-        if index == -1:
+        # Check the index range, and set default value of index
+        if index < -1 or self.size-1 < index:
+            raise IndexError('index out of range.')
+        elif index == -1:
             index += self.size
 
         # Firstly, the item to be poped
@@ -113,49 +143,97 @@ class SeqList:
                 self.data[j] = self.data[j+1]
             self.size -= 1
             self.data[self.size] = None
+        # Or not found
         else:
             raise IndexError('not found.')
     
 
-        
-
-# - Test module -----------------------------------------------------------
+# - Test module --------------------------------------------------------
 def check_equal(arr: list[int], other: SeqList) -> None:
-    assert len(arr) == other.size
+    # Check the size of the sequential list
+    assert len(arr) == other.size, 'len(sample) != seqlist.size'
+
+    # Check the element of the sequential list
     for i in range(len(arr)):
-        assert arr[i] == other[i]
+        assert arr[i] == other[i], f'arr[{i}] != other[{i}]'
 
-def main() -> None:
-    # - Initialize the test data ------------------------------------------ 
-    arr = [1, 5, 8, 4, 0, 33, 2, 5, 3, 7, 9, 6, 11, 13, 17, 22, 17]
-    seqlist = SeqList()
-    sample = list()
-
-    # - Test append method ------------------------------------------------
+def test_append(arr: list[int], other: SeqList) -> None:
+    # Fill the sequential list by using append method
+    print('Begin Append ...')
     for item in arr:
-        seqlist.append(item)
-        sample.append(item)
-    check_equal(sample, seqlist)
+        other.append(item)
 
-    # - Test auto extend --------------------------------------------------
-    assert seqlist.maxsize <= seqlist.size * 2
+    assert other.maxsize <= other.size * 2, \
+           f'\nseqlist: {other}\nsize: {other.size}\nmaxsize: {other.maxsize}'
 
-    # - Test index method -------------------------------------------------
-    index_sample = random.choice(sample)
-    assert seqlist.index(index_sample) == sample.index(index_sample)
+    # Check wether the two lists are equal
+    check_equal(arr, other)
+    print('Append OK!')
 
-    # - Test pop method ---------------------------------------------------
-    random_loops = random.randint(1, len(sample)//2)
-    for _ in range(random_loops):
-        assert seqlist.pop() == sample.pop()
+def test_index(arr: list[int], other: SeqList) -> None:
+    # Select a random element in arr
+    print('Begin Index ...')
+    for _ in range(100):
+        random_item= random.choice(arr)
+        assert arr.index(random_item) == other.index(random_item), \
+               'Index failed'
 
-    # - Test remove method ------------------------------------------------
-    remove_sample = random.choice(sample)
-    seqlist.remove(remove_sample)
-    sample.remove(remove_sample)
-    check_equal(sample, seqlist)
+    # Test OK!
+    print('Index OK!')
 
+def test_pop(arr: list[int], other: SeqList) -> None:
+    # Pop some item from two list
+    print('Begin Pop ...')
+    random_loop = random.randint(1, len(arr)//2)
+    for _ in range(random_loop):
+        assert arr.pop() == other.pop(), 'Pop failed'
+
+    # Check wether the two lists are equal
+    check_equal(arr, other)
+    print('Pop OK!')
+
+def test_insert_remove(arr: list[int], other: SeqList) -> None:
+    print('Begin Insert and Remove ...')
+    # Test Insert
+    for i in range(100):
+        random_index = random.randint(1, len(arr)-1)
+        arr.insert(random_index, random_index)
+        other.insert(random_index, random_index)
+        check_equal(arr, other)
+
+        # Test Remove
+        random_item = random.choice(arr)
+        arr.remove(random_item)
+        other.remove(random_item)
+        check_equal(arr, other)
+
+    # Check wether the two lists are equal
+    print('Insert and Remove OK!')
+
+# - Main emtry point of module -----------------------------------------
+def main() -> None:
+    # Initialize the test data 
+    sample = [
+        1, 5, 8, 4, 0, 33, 2, 5, 3, 7, 9, 6, 11, 13, 17, 22, 17
+    ]
+    seqlist = SeqList()
+
+    # Test append method
+    test_append(sample, seqlist)
+
+    # Test index method 
+    test_index(sample, seqlist)
+
+    # Test pop method
+    test_pop(sample, seqlist)
+
+    # Test insert and remove method 
+    test_insert_remove(sample,seqlist)
+
+    # All test finish
     print('All test OK!')
+    output = f'sample: {sample}\nseqlist: {seqlist}'
+    print(output)
 
 if __name__ == '__main__':
     main()

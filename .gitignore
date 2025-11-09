@@ -4,3 +4,6 @@ pydsadoc/build
 
 # Exclude the directories `__pycache__' that Python builds.
 __pycache__
+
+# Exclude the directory
+src/_test
