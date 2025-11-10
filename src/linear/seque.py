@@ -151,7 +151,7 @@ class SeqList:
             raise IndexError('not found.')
     
 
-# - Test module --------------------------------------------------------
+# -- Test module -------------------------------------------------------
 #
 def check_equal(arr: list[int], other: SeqList) -> None:
     # Check the size of the sequential list.
@@ -214,7 +214,7 @@ def test_insert_remove(arr: list[int], other: SeqList) -> None:
     # Check wether the two lists are equal.
     print('Insert and Remove OK!')
 
-# - Main entry point of module -----------------------------------------
+# -- Main entry point of module ----------------------------------------
 #
 def main() -> None:
     # Initialize the test data.

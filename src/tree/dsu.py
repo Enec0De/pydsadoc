@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
 
 from __future__ import annotations
 
@@ -7,10 +6,10 @@ import random
 
 
 class UnionFind:
-    """Implementation of the DSU with a sequential list.
+    r"""Implementation of the DSU with a sequential list.
     
     It's notably that the amortized time complexity of DSU is
-    :math:`O(\\alpha(n))`.
+    :math:`O(\alpha(n))`.
     """
 
     def __init__(self, num_vert: int, /, *args, **kwargs) -> None:
@@ -39,9 +38,9 @@ class UnionFind:
         return string
 
     def find(self, x: int, /) -> int:
-        """The find operation with path compression.
+        r"""The find operation with path compression.
         
-        The worst-case time complexity is :math:`O(\\log n)`. 
+        The worst-case time complexity is :math:`O(\log n)`. 
         """
         # The boundary condition for recursion.
         if self.parent[x] < 0:
@@ -53,9 +52,9 @@ class UnionFind:
             return self.parent[x]
 
     def union(self, x: int, y: int, /) -> None:
-        """The union operation by rank.
+        r"""The union operation by rank.
         
-        The worst-case time complexity is :math:`O(\\log n)`.
+        The worst-case time complexity is :math:`O(\log n)`.
         """
         # Find the root of the two nodes.
         r_x = self.find(x) 
@@ -73,7 +72,7 @@ class UnionFind:
             self.parent[r_y] += self.parent[r_x]
             self.parent[r_x] = r_y
 
-# - Test module --------------------------------------------------------
+# -- Test module -------------------------------------------------------
 #
 def main() -> None:
     # Create a new DSU.
