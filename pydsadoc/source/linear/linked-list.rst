@@ -12,7 +12,7 @@ Linked List
 
 A stack can be implemented with a linked list :py:class:`LinkedList` and its
 methods :py:meth:`LinkedList.insert` and :py:meth:`LinkedList.pop` as described
-above. Specifically, the ``stack.insert(0, objcet)`` and ``stack.pop(0)``
+above.  Specifically, the ``stack.insert(0, objcet)`` and ``stack.pop(0)``
 operations.
 
 Notably, in this case, the time complexity of these two methods is
@@ -22,7 +22,7 @@ Notably, in this case, the time complexity of these two methods is
 
 A queue can be implemented with a linked list :py:class:`LinkedList` and its
 methods :py:meth:`LinkedList.append` and :py:meth:`LinkedList.pop` as described
-above. Specifically, the ``queue.append(object)`` and ``queue.pop(0)``
+above.  Specifically, the ``queue.append(object)`` and ``queue.pop(0)``
 operations.
 
 Notably, in this case, the time complexity of the method

@@ -12,7 +12,7 @@ Sequential List
 
 A stack can be implemented with a sequential list :py:class:`SeqList` and its
 methods :py:meth:`SeqList.append` and :py:meth:`SeqList.pop` as described
-above. Specifically, the ``stack.append(object)`` and ``stack.pop()``
+above.  Specifically, the ``stack.append(object)`` and ``stack.pop()``
 operations.
 
 Notably, in this case, the time complexity of these two methods is
@@ -22,7 +22,7 @@ Notably, in this case, the time complexity of these two methods is
 
 A queue can be implemented with a sequential list :py:class:`SeqList` and its
 methods :py:meth:`SeqList.append` and :py:meth:`SeqList.pop` as described
-above. Specifically, the ``queue.append(object)`` and ``queue.pop(0)``
+above.  Specifically, the ``queue.append(object)`` and ``queue.pop(0)``
 operations.
 
 Notably, in this case, the time complexity of the method

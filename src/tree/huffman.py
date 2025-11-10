@@ -2,8 +2,11 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import annotations
+
 from typing import Union, Optional
 
+
+# Define the constant
 ElementType = Union[int]
 
 
@@ -18,7 +21,7 @@ class MinHeap:
     def heapify(self, arr: list) -> None:
         """Make heap from list in a more efficient way. 
         
-        It's quicker than pushing items one by one. Time complexity is
+        It's quicker than pushing items one by one.  Time complexity is
         :math:`O()`.
         """
         ...

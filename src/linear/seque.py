@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
 
 from __future__ import annotations
-from typing import Union
-import random
 
+import random
+from typing import Union
+
+
+# Define the constant
 ElementType = Union[None, int]
 MAXSIZE = 2**63 - 1
 
@@ -14,33 +16,33 @@ class SeqList:
 
     def __init__(self, maxsize: int = 16, /, *args, **kwargs) -> None:
         """Initialize self."""
-        # Maxsize of the SeqList
+        # Maxsize of the SeqList.
         self.maxsize = maxsize
 
-        # The number of element
+        # The number of element.
         self.size = 0
 
-        # The list stores the data
+        # The list stores the data.
         self.data: list[ElementType] = [None] * self.maxsize
 
     def __getitem__(self, index: int, /) -> ElementType:
         """Return self[key]."""
-        # Chcek the legitimate of the index
+        # Chcek the legitimate of the index.
         if index < 0 or self.size - 1 < index:
             raise IndexError('index out of range.')
         return self.data[index]
 
     def __len__(self, /) -> int:
         """Implement built-in function ``len()``."""
-        # Return the attribute size
+        # Return the size.
         return self.size
 
     def __str__(self, /) -> str:
         """Implement built-in function ``print()``.
         
-        Treaverse the linked list. The time complexity is :math:`O(n)`. 
+        Treaverse the linked list.  The time complexity is :math:`O(n)`. 
         """
-        # Format the output
+        # Format the output.
         return '[' + ', '.join(map(str, self.data[:self.size])) + ']'
     
     def append(self, obj: ElementType, /) -> None:
@@ -48,11 +50,11 @@ class SeqList:
         
         Time complexity is :math:`O(1)`.
         """
-        # Appending
+        # Append.
         self.data[self.size] = obj
         self.size += 1
 
-        # Atuo extend
+        # Atuo extend.
         if self.size > self.maxsize - 1:
             self.data += [None] * self.maxsize
             self.maxsize *= 2
@@ -63,19 +65,19 @@ class SeqList:
               stop: int = MAXSIZE, /) -> int:
         """Return first index of the value.
         
-        At or after index start and before index stop. Time complexity 
+        At or after index start and before index stop.  Time complexity 
         is :math:`O(n)`.
         """
-        # Adjust range of index
+        # Adjust range of index.
         if stop > self.size:
             stop = self.size
             
-        # Retrieve for value
+        # Retrieve for value.
         for i in range(start, stop):
             if self.data[i] == value:
                 return i
 
-        # Not found
+        # Not found.
         return -1
 
     def insert(self, index: int, obj: ElementType, /) -> None:
@@ -83,18 +85,18 @@ class SeqList:
         
         Time complexity is :math:`O(n)`.
         """
-        # Adjust range of inde, delegatea to the append method
+        # Adjust range of inde, delegatea to the append method.
         if index > self.size -1:
             self.append(obj)
             return
 
-        # Insertion
+        # Insertion.
         for i in range(self.size, index, -1):
             self.data[i] = self.data[i-1]
         self.data[index] = obj
         self.size += 1
 
-        # Auto extend
+        # Auto extend.
         if self.size > self.maxsize - 1:
             self.data += [None] * self.maxsize
             self.maxsize *= 2
@@ -104,28 +106,28 @@ class SeqList:
         
         Time complexity is :math:`O(n)`.
         """
-        # Raise empty list error
+        # Raise empty list error.
         if self.size < 1:
             raise IndexError('empty list.')
 
-        # Check the index range, and set default value of index
+        # Check the index range, and set default value of index.
         if index < -1 or self.size-1 < index:
             raise IndexError('index out of range.')
         elif index == -1:
             index += self.size
 
-        # Firstly, the item to be poped
+        # Firstly, the item to be poped.
         item, self.data[index] = self.data[index], None
 
-        # Secondly, move backward all elements after index
+        # Secondly, move backward all elements after index.
         for i in range(index, self.size-1):
             self.data[i] = self.data[i+1]
 
-        # Thirdly, size minus 1 and delete the last element
+        # Thirdly, size minus 1 and delete the last element.
         self.size -= 1
         self.data[self.size] = None
         
-        # Finally, Return the item
+        # Finally, Return the item.
         return item
 
     def remove(self, value: ElementType, /) -> None:
@@ -133,33 +135,34 @@ class SeqList:
         
         Time complexity is :math:`O(n)`.
         """
-        # Find the value
+        # Find the value.
         i = 0
         while self.data[i] != value and i <= self.size-1:
             i += 1
 
-        # Delete the value
+        # Delete the value.
         if i <= self.size-1:
             for j in range(i, self.size-1):
                 self.data[j] = self.data[j+1]
             self.size -= 1
             self.data[self.size] = None
-        # Or not found
+        # Or not found.
         else:
             raise IndexError('not found.')
     
 
 # - Test module --------------------------------------------------------
+#
 def check_equal(arr: list[int], other: SeqList) -> None:
-    # Check the size of the sequential list
+    # Check the size of the sequential list.
     assert len(arr) == other.size, 'len(sample) != seqlist.size'
 
-    # Check the element of the sequential list
+    # Check the element of the sequential list.
     for i in range(len(arr)):
         assert arr[i] == other[i], f'arr[{i}] != other[{i}]'
 
 def test_append(arr: list[int], other: SeqList) -> None:
-    # Fill the sequential list by using append method
+    # Fill the sequential list by using append method.
     print('Begin Append ...')
     for item in arr:
         other.append(item)
@@ -167,12 +170,12 @@ def test_append(arr: list[int], other: SeqList) -> None:
     assert other.maxsize <= other.size * 2, \
            f'\nseqlist: {other}\nsize: {other.size}\nmaxsize: {other.maxsize}'
 
-    # Check wether the two lists are equal
+    # Check wether the two lists are equal.
     check_equal(arr, other)
     print('Append OK!')
 
 def test_index(arr: list[int], other: SeqList) -> None:
-    # Select a random element in arr
+    # Select a random element in arr.
     print('Begin Index ...')
     for _ in range(100):
         random_item= random.choice(arr)
@@ -183,19 +186,19 @@ def test_index(arr: list[int], other: SeqList) -> None:
     print('Index OK!')
 
 def test_pop(arr: list[int], other: SeqList) -> None:
-    # Pop some item from two list
+    # Pop some item from two list.
     print('Begin Pop ...')
     random_loop = random.randint(1, len(arr)//2)
     for _ in range(random_loop):
         assert arr.pop() == other.pop(), 'Pop failed'
 
-    # Check wether the two lists are equal
+    # Check wether the two lists are equal.
     check_equal(arr, other)
     print('Pop OK!')
 
 def test_insert_remove(arr: list[int], other: SeqList) -> None:
     print('Begin Insert and Remove ...')
-    # Test Insert
+    # Test Insert.
     for i in range(100):
         random_index = random.randint(1, len(arr)-1)
         arr.insert(random_index, random_index)
@@ -208,30 +211,31 @@ def test_insert_remove(arr: list[int], other: SeqList) -> None:
         other.remove(random_item)
         check_equal(arr, other)
 
-    # Check wether the two lists are equal
+    # Check wether the two lists are equal.
     print('Insert and Remove OK!')
 
 # - Main entry point of module -----------------------------------------
+#
 def main() -> None:
-    # Initialize the test data 
+    # Initialize the test data.
     sample = [
         1, 5, 8, 4, 0, 33, 2, 5, 3, 7, 9, 6, 11, 13, 17, 22, 17
     ]
     seqlist = SeqList()
 
-    # Test append method
+    # Test append method.
     test_append(sample, seqlist)
 
-    # Test index method 
+    # Test index method.
     test_index(sample, seqlist)
 
-    # Test pop method
+    # Test pop method.
     test_pop(sample, seqlist)
 
-    # Test insert and remove method 
+    # Test insert and remove method.
     test_insert_remove(sample,seqlist)
 
-    # All test finish
+    # All test finish.
     print('All test OK!')
     output = f'sample: {sample}\nseqlist: {seqlist}'
     print(output)

@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import annotations
+
 import random
 
 
@@ -18,23 +19,23 @@ class UnionFind:
 
     def __str__(self, /) -> str:
         """Implement built-in function ``print()``."""
-        # Define variables
+        # Define variables.
         string ='# -- Union Find: --\n'
         length = len(self.parent)
         count = [[] for _ in range(length)]
 
-        # Count the child of the root
+        # Count the child of the root.
         for i in range(length):
             if self.find(i) >= 0:
                 count[self.find(i)].append(i)
 
-        # Constrct the string
+        # Constrct the string.
         for j in range(length):
             if count[j]:
                 string += f'[{j}]: ' + ', '.join(map(str, count[j]))
                 string += '\n'
 
-        # Return the string
+        # Return the string.
         return string
 
     def find(self, x: int, /) -> int:
@@ -42,11 +43,11 @@ class UnionFind:
         
         The worst-case time complexity is :math:`O(\\log n)`. 
         """
-        # The boundary condition for recursion
+        # The boundary condition for recursion.
         if self.parent[x] < 0:
             return x
 
-        # Recursively find root
+        # Recursively find root.
         else:
             self.parent[x] = self.find(self.parent[x])
             return self.parent[x]
@@ -56,15 +57,15 @@ class UnionFind:
         
         The worst-case time complexity is :math:`O(\\log n)`.
         """
-        # Find the root of the two nodes
+        # Find the root of the two nodes.
         r_x = self.find(x) 
         r_y = self.find(y)
 
-        # Do nothing
+        # Do nothing.
         if r_x == r_y:
             return
         
-        # Union by rank
+        # Union by rank.
         if self.parent[r_x] >= self.parent[r_y]:
             self.parent[r_x] += self.parent[r_y]
             self.parent[r_y] = r_x
@@ -73,18 +74,19 @@ class UnionFind:
             self.parent[r_x] = r_y
 
 # - Test module --------------------------------------------------------
+#
 def main() -> None:
-    # Create a new DSU
+    # Create a new DSU.
     random_lenght = random.randint(4, 32)
     dsu = UnionFind(random_lenght)
 
-    # Randomly union elements
+    # Union elements randomly.
     for _ in range(random_lenght//2):
         x = random.randint(0, random_lenght-1)
         y = random.randint(0, random_lenght-1)
         dsu.union(x, y)
 
-    # Print the result
+    # Print the result.
     print(dsu.parent)
     print(dsu)
 
