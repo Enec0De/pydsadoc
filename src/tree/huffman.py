@@ -175,9 +175,21 @@ class Huffman:
         # Returen the root node of the Huffman Tree.
         return heap.heappop()
 
-    def encode(self) -> dict[str,bytes]:
+    def encode(self, /) -> dict[str, str]:
         """Encode the input freq."""
-        ...
+        huffman_code = {}
+
+        def string_code(huffman: HNode, string: str, /) -> None:
+            if huffman.char is not None:
+                nonlocal huffman_code
+                huffman_code[huffman.char] = string
+            else:
+                string_code(huffman.left, string+'0')    # type: ignore
+                string_code(huffman.right, string+'1')   # type: ignore
+
+        string_code(self.head,'')
+            
+        return huffman_code
 
     @property
     def wpl(self):
@@ -222,9 +234,18 @@ def test_heap() -> None:
     # print(', '.join(result_b))
 
 def test_huffman() -> None:
-    freq = {'a':4, 'b':2, 'c':0}
+        
+    # Creat a random frequence dictionary
+    freq = {}
+    for _ in range(random.randint(2,10)):
+        freq[chr(random.randint(65,90))] = random.randint(0,20)
+    print('Frequence dictionary: ', end='')
+    print(freq)
+
+    # Buil huffman tree and print encode dictionary
     huffman = Huffman(freq)
-    ...
+    print('Encode dictionary: ', end='')
+    print(huffman.encode())
 
 def main() -> None:
     # Test MinHeap
