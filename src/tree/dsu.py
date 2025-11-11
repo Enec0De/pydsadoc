@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+__all__ = ['UnionFind']
+__version__ = '0.1'
+__author__ = 'Aina'
+
 import random
 
 

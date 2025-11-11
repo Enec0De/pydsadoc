@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+__all__ = ['LinkedList']
+__version__ = '0.1'
+__author__ = 'Aina'
+
 import random
 from typing import Union, Optional, cast
-
 
 # Define the constant
 ElementType = Union[int, None]

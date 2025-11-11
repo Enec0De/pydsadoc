@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+__all__ = ['AVL']
+__version__ = '0.1'
+__author__ = 'Aina'
 
+from typing import Union, Optional
 
 # Define the constant
 ElementType = Union[None, int]
