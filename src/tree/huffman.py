@@ -22,6 +22,10 @@ class MinHeap:
         self.obj: list[ElementType] = []
         self.size: int = 0
 
+    def __len__(self, /) -> int:
+        """Return len(self)."""
+        return self.size
+
     def heapify(self, arr: list[ElementType], /) -> None:
         """Make heap from list in a more efficient way. 
         
@@ -130,12 +134,12 @@ class MinHeap:
 class HNode:
     """The atomic element of the Huffman Tree."""
 
-    def __init__(self, weight: int, char: str = '', /):
+    def __init__(self, weight: int, char: Optional[str] = None, /):
         """Initialize self."""
         self.weight = weight
         self.char = char
-        self.left = None
-        self.right = None
+        self.left: Optional[HNode] = None
+        self.right: Optional[HNode] = None
 
     def __eq__(self, other: HNode, /) -> bool:
         """Return self == other"""
@@ -155,11 +159,24 @@ class Huffman:
 
     def _build(self, freq: dict[str, int], /) -> HNode:
         """Build Huffman Tree by using minmum heap."""
+        # Create heap from the dict freq.
+        arr = [HNode(freq[char], char) for char in freq]
+        heap = MinHeap()
+        heap.heapify(arr)
 
+        # Build Huffman Tree.
+        for _ in range(len(heap)-1):
+            left = heap.heappop()
+            right = heap.heappop()
+            temp = HNode(left.weight+right.weight)
+            temp.left, temp.right = left, right
+            heap.heappush(temp)
         
-        ...
+        # Returen the root node of the Huffman Tree.
+        return heap.heappop()
 
     def encode(self) -> dict[str,bytes]:
+        """Encode the input freq."""
         ...
 
     @property
@@ -204,9 +221,17 @@ def test_heap() -> None:
     # print(', '.join(result_a))
     # print(', '.join(result_b))
 
+def test_huffman() -> None:
+    freq = {'a':4, 'b':2, 'c':0}
+    huffman = Huffman(freq)
+    ...
+
 def main() -> None:
     # Test MinHeap
     test_heap()
+
+    # Test Huffman Tree
+    test_huffman()
 
 
 if __name__ == '__main__':
