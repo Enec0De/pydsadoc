@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union, Optional, cast
 from functools import total_ordering
 
 # Define the constant
@@ -177,18 +177,22 @@ class Huffman:
 
     def encode(self, /) -> dict[str, str]:
         """Encode the input freq."""
+        # Creat empty dictionary stores the encode result.
         huffman_code = {}
 
+        # Define the function taht yield huffman code.
         def string_code(huffman: HNode, string: str, /) -> None:
             if huffman.char is not None:
                 nonlocal huffman_code
                 huffman_code[huffman.char] = string
             else:
-                string_code(huffman.left, string+'0')    # type: ignore
-                string_code(huffman.right, string+'1')   # type: ignore
+                string_code(cast(HNode, huffman.left), string+'0')
+                string_code(cast(HNode, huffman.right), string+'1')
 
+        # Excute the recursion function.
         string_code(self.head,'')
             
+        # Return the rusult code maping.
         return huffman_code
 
     @property
@@ -234,7 +238,6 @@ def test_heap() -> None:
     # print(', '.join(result_b))
 
 def test_huffman() -> None:
-        
     # Creat a random frequence dictionary
     freq = {}
     for _ in range(random.randint(2,10)):
