@@ -192,12 +192,30 @@ class Huffman:
         # Excute the recursion function.
         string_code(self.head,'')
             
-        # Return the rusult code maping.
+        # Return the rusult code map.
         return huffman_code
 
     @property
-    def wpl(self):
-        ...
+    def wpl(self) -> int:
+        """Return attribute self.wpl."""
+        # Define variable wpl.
+        wpl = 0
+
+        # Define function to calculate wpl recursively.
+        def calculate_wpl(huffman: HNode, depth:int, /) -> None:
+            nonlocal wpl
+            depth += 1
+            if huffman.char is not None:
+                wpl += huffman.weight * depth
+            else:
+                calculate_wpl(cast(HNode, huffman.left), depth)
+                calculate_wpl(cast(HNode, huffman.right), depth)
+
+        # Excute the function.
+        calculate_wpl(self.head, -1)
+
+        # Return the wpl
+        return wpl
 
 
 # -- Test Module ------------------------------------------------------- 
@@ -239,16 +257,31 @@ def test_heap() -> None:
 
 def test_huffman() -> None:
     # Creat a random frequence dictionary
-    freq = {}
+    freq: dict[str, int] = {}
     for _ in range(random.randint(2,10)):
-        freq[chr(random.randint(65,90))] = random.randint(0,20)
-    print('Frequence dictionary: ', end='')
-    print(freq)
+        freq[chr(random.randint(65,90))] = random.randint(1,20)
+    # print('Frequence dictionary: ', end='')
+    # print(freq)
 
-    # Buil huffman tree and print encode dictionary
+    # Buil huffman tree, then print encode dictionary and wpl.
     huffman = Huffman(freq)
-    print('Encode dictionary: ', end='')
-    print(huffman.encode())
+
+    # print('Encode dictionary: ', end='')
+    code_map = huffman.encode()
+    # print(code_map)
+
+    # print('The WPL of the Huffman Tree: ', end='')
+    wpl_calculate = huffman.wpl
+    # print(wpl_calculate)
+
+    # Calculate wpl_sum from dictionary.
+    wpl_manually = 0
+    for key in code_map:
+        wpl_manually += freq[key] * len(code_map[key])
+
+    # wpl and wpl_sum should be the same value.
+    assert wpl_manually== wpl_calculate
+
 
 def main() -> None:
     # Test MinHeap
