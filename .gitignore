@@ -1,6 +1,6 @@
 # Created by Aina. 
 # Exclude the directories `build' that Sphinx builds.
-pydsadoc/build
+docs/build
 
 # Exclude the directories `__pycache__' that Python builds.
 __pycache__
