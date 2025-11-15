@@ -11,7 +11,7 @@ from collections import deque
 import random
 
 # Define the constant
-ElementType = Union[int, float]
+ElementType = Union[int]
 
 
 class AVLNode:
@@ -34,17 +34,18 @@ class AVL:
 
     def __init__(self, /, *args, **kwargs) -> None:
         """Initialize self."""
-        self.head: AVLNode = AVLNode(float('inf'))
-        self.height: int = 0
+        self.root: Optional[AVLNode] = None
+        self.height: int = 1
 
     def __getitem__(self, key: ElementType) -> AVLNode:
         """Return self[key].  Implementation of the search operation."""
         ...
 
     def __str__(self, /) -> str:
+        """Print the AVL in a visual way."""
         # Level order traversal
-        if self.head.left:
-            queue: deque[Union[AVLNode, None]] = deque([self.head.left])
+        if self.root:
+            queue: deque[Union[AVLNode, None]] = deque([self.root])
         else:
             raise IndexError('empty tree.')
         
@@ -88,38 +89,54 @@ class AVL:
     def insert(self, value: int, /) -> None:
         """Insert value to the AVL Tree."""
         # The pointer to the head node.
-        current = self.head
+        if self.root:
+            current: AVLNode = self.root
+        else:
+            self.root = AVLNode(value)
+            return
 
         while True:
-            # Value exist.
-            if value == current.data:
-                raise ValueError('value exist.')
-
             # Store small value to the left.
-            elif value < current.data:
-                if current.left is not None:
+            if value < current.data:
+                if current.left:
                     current = current.left
                 else:
                     current.left = AVLNode(value)
                     current.left.height = current.height + 1
-                    self.height = max(self.height, current.left.height) 
+                    self.height = max(self.height, current.left.height)
                     break
             
             # Store large value to the right.
             elif value > current.data:
-                if current.right is not None:
+                if current.right:
                     current = current.right
                 else:
                     current.right = AVLNode(value)
                     current.right.height = current.height + 1
-                    self.height = max(self.height, current.right.height) 
+                    self.height = max(self.height, current.right.height)
                     break
-        
-        # Insert successfully.
+
+            # Value exist.
+            else: 
+                raise ValueError('value exist.')
 
     def remove(self, value: int, /) -> None:
         """Remove value in the AVL Tree."""
-        ...
+        if self.root:
+            current = self.root
+        else:
+            raise IndexError('empty tree.')
+
+        # Find the value.
+        while current:
+            if value < current.data:
+                current = current.left
+            elif value > current.data:
+                current = current.right
+            else:
+                break
+
+        raise IndexError('value nof found.')
 
     def get_max(self):
         ...
@@ -144,6 +161,7 @@ def main() -> None:
     arr = [random.randint(-9, 20) for _ in range(random.randint(4, 7))]
     print(set(arr))
     test = AVL()
+
     for item in set(arr):
         test.insert(item)
     print(test)
