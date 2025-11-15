@@ -43,63 +43,43 @@ class AVL:
 
     def __str__(self, /) -> str:
         # Level order traversal
-        if self.head.left is not None:
+        if self.head.left:
             queue: deque[Union[AVLNode, None]] = deque([self.head.left])
         else:
             raise IndexError('empty tree.')
-
-        # Prepare for the basic variables
-        string = ''
-        height = self.height
-        fill = ' ' * (2**height-2)
         
-        # The generator function of the level traversal.
+        # Define the generator function for traveling and create it.
         def traversal():
             nonlocal queue
             while True:
-                avl_node = queue.popleft()
-                if avl_node is not None:
-                    if avl_node.left is not None:
-                        queue.append(avl_node.left)
-                    else:
-                        queue.append(None)
-                    if avl_node.right is not None:
-                        queue.append(avl_node.right)
-                    else:
-                        queue.append(None)
-                    yield str(avl_node.data)
-                else: 
-                    queue.append(None)
-                    queue.append(None)
-                    yield '  '
-            
-        # Create the generator
+                node = queue.popleft()
+                queue.extend(
+                    [node.left, node.right] if node else [None, None]
+                    )
+                yield str(node.data) if node else '  '
         level = traversal()
+            
+        # Prepare for the basic variables
+        h = self.height
+        string = ''
+        fill = ' ' * (2**h-2)
 
         # Generate the string.
-        for i in range(height):
+        for i in range(h):
             # The first item in this depth.
-            avl_data = next(level)
-            string += ' ' * (2**(height-i)-1) + avl_data.zfill(2)
+            string += ' ' * (2**(h-i)-1) + next(level).zfill(2)
             
             # The rest item in this depth.
             for _ in range(2**i-1):
-                # Get he next item.
-                avl_data = next(level)
-
                 # Continue append item.
-                string += fill
-                string += avl_data.zfill(2)
+                string += fill + next(level).zfill(2)
             
-            # Break this for loop.
-            if i == height - 1:
-                break
+            # Do not prcess the rest code.
+            if i == h - 1: break
 
-            # The fill space for the next depth.
-            fill = ' ' * (2**(height-i)-2)
-
-            # End this line.
+            # The fill space for the next depth and end this line.
             string += '\n'
+            fill = ' ' * (2**(h-i)-2)
         
         # Return the string.
         return string
