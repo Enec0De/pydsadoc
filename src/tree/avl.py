@@ -51,7 +51,7 @@ class AVL:
                 node = queue.popleft()
                 queue.extend(
                     [node.left, node.right] if node else [None, None]
-                    )
+                )
                 yield str(node.data) if node else '  '
         level = traversal()
             
@@ -162,13 +162,56 @@ class AVL:
         self.root = rm_recursion(self.root, value)
 
     def pre_order(self) -> None:
-        ...
+        # Empty tree.
+        if self.root is None: return
+
+        # Define the stack and the buffer.
+        stack: list[AVLNode] = [self.root]
+        buffer: list[ElementType] = []
+
+        # Traverse all of the nodes.
+        while stack:
+            current = stack.pop()
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
+            buffer.append(current.data) 
+
+        # Print the result.
+        print(buffer)
 
     def in_order(self) -> None:
-        ...
+        # Empty tree.
+        if self.root is None: return
 
-    def post_order(self) -> None:
-        ...
+        # Define the stack and the buffer.
+        stack: list[AVLNode] = []
+        buffer: list[ElementType] = []
+
+        current = self.root
+        while current or stack:
+            # Push node if it has left node.
+            while current:
+                stack.append(current)
+                buffer.append(current.data)
+                current = current.left
+            
+            # Pop node which has no left node, and push its right node.
+            current = stack.pop()
+            current = current.right
+
+        # Print the result.
+        print(buffer)
+
+    def post_order(self, node: Optional[AVLNode], /):
+        # Empty tree.
+        if node is None: return
+
+        # Visit child nodes recursively.
+        self.post_order(node.left)
+        self.post_order(node.right)
+        print(f'-> {node.data} ', end = '')
 
 
 def main() -> None:
@@ -178,6 +221,7 @@ def main() -> None:
     random.shuffle(arr_shuffle)
 
     # Temp 
+    # arr_shuffle = [-7, 3, 0, -4]
     ...
 
     # Prepare for insert.
@@ -194,11 +238,21 @@ def main() -> None:
     random_item = random.choice(arr)
 
     # Temp
+    # random_item = 0
     ...
 
     print(f'# -- Remove: [{random_item}] '.ljust(40, '-'))
     test.remove(random_item)
     print(test)
+
+    print(f'# -- Post Order Traversal. '.ljust(40, '-'))
+    test.post_order(test.root)
+    print()
+
+    print(f'# -- Test Order Traversal. '.ljust(40, '-'))
+    test.pre_order()
+
+    test.in_order()
 
 
 if __name__ == '__main__':
