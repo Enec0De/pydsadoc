@@ -35,11 +35,6 @@ class AVL:
     def __init__(self, /, *args, **kwargs) -> None:
         """Initialize self."""
         self.root: Optional[AVLNode] = None
-        self.height: int = 0
-
-    def __getitem__(self, key: ElementType) -> AVLNode:
-        """Return self[key].  Implementation of the search operation."""
-        ...
 
     def __str__(self, /) -> str:
         """Print the AVL in a visual way."""
@@ -62,29 +57,46 @@ class AVL:
             
         # Prepare for the basic variables
         h = self.height
-        string = ''
-        fill = ' ' * (2**h-2)
+        string, space = '', ' '
+        fill = space * (2**h-2)
 
         # Generate the string.
         for i in range(h):
-            # The first item in this depth.
-            string += ' ' * (2**(h-i)-1) + next(level).zfill(2)
-            
-            # The rest item in this depth.
+            # The item in this depth.
+            string += space * (2**(h-i)-1) + next(level).zfill(2)
             for _ in range(2**i-1):
-                # Continue append item.
                 string += fill + next(level).zfill(2)
             
-            # Do not prcess the rest code.
+            # Prepare for next loop.
             if i == h - 1: break
-
-            # The fill space for the next depth and end this line.
             string += '\n'
-            fill = ' ' * (2**(h-i)-2)
+            fill = space * (2**(h-i)-2)
         
         # Return the string.
         return string
 
+    def _get_height(self, node: AVLNode, /) -> int:
+        """Return the height of the node."""
+        left_height = self._get_height(node.left) if node.left else 0
+        right_height = self._get_height(node.right) if node.right else 0
+        node.height = 1 + max(left_height, right_height)
+        return node.height
+
+    def _get_min(self, node: AVLNode, /) -> AVLNode:
+        r"""Return the minimum element in the tree.
+
+        Time complexity is :math:`O(\log n)`.
+        """
+        # Traverse the left node.
+        current = node
+        while current.left:
+            current = current.left
+        return current
+
+    @property
+    def height(self, /) -> int:
+        """Return the height of the tree."""
+        return self._get_height(self.root) if self.root else 0
 
     def insert(self, value: int, /) -> None:
         """Insert value to the AVL Tree."""
@@ -103,9 +115,7 @@ class AVL:
                 else:
                     current.left = AVLNode(value)
                     current.left.height = current.height + 1
-                    self.height = max(self.height, current.left.height)
                     break
-            
             # Store large value to the right.
             elif value > current.data:
                 if current.right:
@@ -113,7 +123,6 @@ class AVL:
                 else:
                     current.right = AVLNode(value)
                     current.right.height = current.height + 1
-                    self.height = max(self.height, current.right.height)
                     break
 
             # Value exist.
@@ -122,66 +131,35 @@ class AVL:
 
     def remove(self, value: int, /) -> None:
         """Remove value in the AVL Tree."""
-        def rm_recursion(node: AVLNode, /) -> Optional[AVLNode]:
-            if node.left and node.right:
-                # Find the left leaf of the right sub tree and remove it
-                # recursively.
-                if node.right.left is None:
-                    node.data = node.right.data
-                    node.right = rm_recursion(node.right)
+        # Define the function of removing. Return the node of the
+        # sub tree after removing the value.
+        def rm_recursion(node: Optional[AVLNode],
+                         value: int, /) -> Optional[AVLNode]:
+            # Empty sub tree.
+            if node is None: return None
+
+            # Remove in the left sub tree recursively.
+            if value < node.data:
+                node.left = rm_recursion(node.left, value)
+            # Remove in the right sub tree recursively.
+            elif value > node.data:
+                node.right = rm_recursion(node.right, value)
+            # Process the current node in two cases.
+            else: 
+                # The node has two children.
+                if node.left and node.right:
+                    temp = self._get_min(node.right)
+                    node.data = temp.data
+                    node.right = rm_recursion(node.right, temp.data)
+                # The node has at most one child.
                 else:
-                    # current point to the left node of the right tree.
-                    current = node.right
-                    while current.left:
-                        cur_pre = current
-                        current = current.left
+                    return node.left if node.left else node.right
 
-                    # Change the node data and delete the current node.
-                    node.data = current.data
-                    cur_pre.left = rm_recursion(current)
+            # After the recursion, return the current node.
+            return node
 
-                # Current node has two childs.  Do not remove it. 
-                return node
-            else:
-                # Remove the current node.
-                return node.left if node.left else node.right
-
-        # Check the bondary.
-        if self.root:
-            current = self.root
-        else:
-            raise IndexError('empty tree.')
-        
-        # Delete the root without childs.
-        if value == self.root.data:
-            self.root = rm_recursion(self.root)
-            return
-
-        while current:
-            if value < current.data:
-                if current.left and value == current.left.data:
-                    current.left = rm_recursion(current.left)
-                    return
-                else:
-                    current = current.left
-
-            elif value > current.data:
-                if current.right and value == current.right.data:
-                    current.right = rm_recursion(current.right)
-                    return
-                else:
-                    current = current.right
-        else:
-            raise IndexError('value nof found.')
-
-    def get_max(self):
-        ...
-
-    def get_min(self):
-        ...
-
-    def get_height(self):
-        ...
+        # Process the removing from root node.
+        self.root = rm_recursion(self.root, value)
 
     def pre_order(self) -> None:
         ...
@@ -194,19 +172,32 @@ class AVL:
 
 
 def main() -> None:
+    # Test array with no reapet elemtn.
     arr = [random.randint(-9, 20) for _ in range(random.randint(4, 7))]
     arr_shuffle = list(set(arr))
     random.shuffle(arr_shuffle)
-    print(f'# -- set: {set(arr)} '.ljust(40, '-'))
+
+    # Temp 
+    ...
+
+    # Prepare for insert.
+    print(f'# -- Array: {arr_shuffle} '.ljust(40, '-'))
     test = AVL()
 
+
+    # Insert element one by one.
     for item in arr_shuffle:
         test.insert(item)
     print(test)
 
-    a = random.choice(arr)
-    print(f'# -- remove {a}: '.ljust(40, '-'))
-    test.remove(a)
+    # Remove a random item in the arr.
+    random_item = random.choice(arr)
+
+    # Temp
+    ...
+
+    print(f'# -- Remove: [{random_item}] '.ljust(40, '-'))
+    test.remove(random_item)
     print(test)
 
 
