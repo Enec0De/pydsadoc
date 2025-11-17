@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = ['MinHeap', 'Huffman']
+__all__ = ['MinHeap', 'HNode', 'Huffman']
 __version__ = '0.1'
 __author__ = 'Aina'
 

@@ -12,3 +12,7 @@ API List
    tree.huffman.MinHeap
    tree.huffman.HNode
    tree.dsu.UnionFind
+   graph.adjlist
+   graph.adjmat
+   graph.mst
+   graph.toposort

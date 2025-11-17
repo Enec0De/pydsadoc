@@ -4,7 +4,6 @@ Disjoint Set Union
 .. automodule:: tree.dsu
    :members:
    :special-members: __str__
-   :exclude-members: main
 
 .. rubric:: The Amortized Time
 

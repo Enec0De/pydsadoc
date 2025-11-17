@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-__all__ = ['AVL']
+__all__ = ['AVLNode', 'AVL']
 __version__ = '0.1'
 __author__ = 'Aina'
 
+import random
 from typing import Union, Optional, cast
 from collections import deque
 from collections.abc import Iterator
-import random
 
 # Define the constant
 ElementType = Union[int]
@@ -125,7 +125,10 @@ class AVL:
     
     def _insert_recursion(self, node: AVLNode, value: int,
                           /) -> Optional[AVLNode]:
-        """Define the function of inserting recursively.  """
+        """Define the function of inserting recursively.
+
+        Return the node of the sub tree after inserting the value. 
+        """
         # Insert in the left sub tree recursively.
         if value < node.data:
             if node.left:
@@ -148,7 +151,7 @@ class AVL:
         # Return the node after the rotation.
         return self._adjust(node)
         
-    def _rm_recursion(self, node: Optional[AVLNode], value: int,
+    def _remove_recursion(self, node: Optional[AVLNode], value: int,
                       /) -> Optional[AVLNode]:
         """Define the function of removing recursively.
 
@@ -159,17 +162,17 @@ class AVL:
 
         # Remove in the left sub tree recursively.
         if value < node.data:
-            node.left = self._rm_recursion(node.left, value)
+            node.left = self._remove_recursion(node.left, value)
         # Remove in the right sub tree recursively.
         elif value > node.data:
-            node.right = self._rm_recursion(node.right, value)
+            node.right = self._remove_recursion(node.right, value)
         # Process the current node in two cases.
         else: 
             # The node has two children.
             if node.left and node.right:
                 temp_node = self._get_min(node.right)
                 node.data = temp_node.data
-                node.right = self._rm_recursion(node.right, temp_node.data)
+                node.right = self._remove_recursion(node.right, temp_node.data)
             # The node has at most one child.
             else:
                 return node.left if node.left else node.right
@@ -228,7 +231,7 @@ class AVL:
     def remove(self, value: int, /) -> None:
         """Remove value in the AVL Tree."""
         # Process the removing from root node.
-        self.root = self._rm_recursion(self.root, value)
+        self.root = self._remove_recursion(self.root, value)
 
     def pre_order(self, /) -> None:
         """Implementation of pre-order traversal with stack."""
@@ -312,7 +315,7 @@ class AVL:
 
 def main() -> None:
     # Test array with no reapet elemtn.
-    arr = [random.randint(-9, 99) for _ in range(random.randint(40, 47))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(16, 47))]
     arr_shuffle = list(set(arr))
     random.shuffle(arr_shuffle)
 

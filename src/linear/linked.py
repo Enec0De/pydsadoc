@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = ['LinkedList']
+__all__ = ['Node', 'LinkedList']
 __version__ = '0.1'
 __author__ = 'Aina'
 
