@@ -172,11 +172,11 @@ class AVL:
         # Traverse all of the nodes.
         while stack:
             current = stack.pop()
+            buffer.append(current.data) 
             if current.right:
                 stack.append(current.right)
             if current.left:
                 stack.append(current.left)
-            buffer.append(current.data) 
 
         # Print the result.
         print(buffer)
@@ -191,27 +191,51 @@ class AVL:
 
         current = self.root
         while current or stack:
-            # Push node if it has left node.
+            # Push the node if it has left node.
             while current:
                 stack.append(current)
-                buffer.append(current.data)
                 current = current.left
             
             # Pop node which has no left node, and push its right node.
             current = stack.pop()
+            buffer.append(current.data)
             current = current.right
 
         # Print the result.
         print(buffer)
 
-    def post_order(self, node: Optional[AVLNode], /):
+    def post_order(self, /):
         # Empty tree.
-        if node is None: return
+        if self.root is None: return
 
-        # Visit child nodes recursively.
-        self.post_order(node.left)
-        self.post_order(node.right)
-        print(f'-> {node.data} ', end = '')
+        # stack: list[tuple[int, AVLNode]]
+        stack: list[AVLNode] = []
+        buffer: list[int] = []
+
+        current = self.root
+        while current or stack:
+            # Push the node if it has right node.
+            while current:
+                stack.append(current)
+                buffer.append(current.data)
+                current = current.right
+            
+            # Pop node which has no right node, and push its right node
+            current = stack.pop()
+            current = current.left
+
+        # stack.append(current)
+        # while stack:
+        #     current = stack.pop()
+        #     buffer.append(current.data)
+        #     if current.left:
+        #         stack.append(current.left)
+        #     if current.right:
+        #         stack.append(current.right)
+
+        buffer.reverse()
+        print(buffer)
+            
 
 
 def main() -> None:
@@ -221,7 +245,7 @@ def main() -> None:
     random.shuffle(arr_shuffle)
 
     # Temp 
-    # arr_shuffle = [-7, 3, 0, -4]
+    # arr_shuffle = [9, 6, -3, 4, 13, 2, 16]
     ...
 
     # Prepare for insert.
@@ -238,7 +262,7 @@ def main() -> None:
     random_item = random.choice(arr)
 
     # Temp
-    # random_item = 0
+    # random_item = 16
     ...
 
     print(f'# -- Remove: [{random_item}] '.ljust(40, '-'))
@@ -246,12 +270,12 @@ def main() -> None:
     print(test)
 
     print(f'# -- Post Order Traversal. '.ljust(40, '-'))
-    test.post_order(test.root)
-    print()
+    test.post_order()
 
-    print(f'# -- Test Order Traversal. '.ljust(40, '-'))
+    print(f'# -- Pre Order Traversal. '.ljust(40, '-'))
     test.pre_order()
 
+    print(f'# -- In Order Traversal. '.ljust(40, '-'))
     test.in_order()
 
 
