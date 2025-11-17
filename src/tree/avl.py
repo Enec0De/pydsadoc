@@ -6,8 +6,9 @@ __all__ = ['AVL']
 __version__ = '0.1'
 __author__ = 'Aina'
 
-from typing import Union, Optional
+from typing import Union, Optional, cast
 from collections import deque
+from collections.abc import Iterator
 import random
 
 # Define the constant
@@ -39,21 +40,10 @@ class AVL:
     def __str__(self, /) -> str:
         """Print the AVL in a visual way."""
         # Level order traversal
-        if self.root:
-            queue: deque[Union[AVLNode, None]] = deque([self.root])
-        else:
-            raise IndexError('empty tree.')
+        if self.root is None: raise IndexError('empty tree.')
         
-        # Define the generator function for traveling and create it.
-        def traversal():
-            nonlocal queue
-            while True:
-                node = queue.popleft()
-                queue.extend(
-                    [node.left, node.right] if node else [None, None]
-                )
-                yield str(node.data) if node else '  '
-        level = traversal()
+        # The Iterator of the tree.
+        level = self._level_order_traversal()
             
         # Prepare for the basic variables
         h = self.height
@@ -75,12 +65,52 @@ class AVL:
         # Return the string.
         return string
 
-    def _get_height(self, node: AVLNode, /) -> int:
+    def _adjust(self, node: AVLNode, /) -> AVLNode:
+        """Adjust the tree after removing or inserting."""
+        # Process the rotaiton.
+        if self._get_balance(node) > 1:
+            if self._get_balance(node.left) >= 0:
+                # Case LL.
+                return self._rotation_right(node)
+            else:
+                # Case LR.
+                node.left = self._rotation_left(cast(AVLNode, node.left))
+                return self._rotation_right(node)
+        elif self._get_balance(node) < -1:
+            if self._get_balance(node.left) <= 0:
+                # Case RR.
+                return self._rotation_left(node)
+            else:
+                # Case RL.
+                node.right = self._rotation_right(cast(AVLNode, node.right))
+                return self._rotation_left(node)
+        else:
+            return node
+    
+    def _level_order_traversal(self, /) -> Iterator[str]:
+        """Define the generator function for level traveling."""
+        queue: deque[Union[AVLNode, None]] = deque([self.root])
+        # Level traversal of all nodes, including None.
+        while True:
+            node = queue.popleft()
+            queue.extend([node.left, node.right] if node else [None, None])
+            yield str(node.data) if node else '  '
+
+    def _get_balance(self, node: Optional[AVLNode], /) -> int:
+        """Return the balance factor of the node."""
+        if node:
+            return self._get_height(node.left) - self._get_height(node.right)
+        else:
+            return 0
+
+    def _get_height(self, node: Optional[AVLNode], /) -> int:
         """Return the height of the node."""
-        left_height = self._get_height(node.left) if node.left else 0
-        right_height = self._get_height(node.right) if node.right else 0
-        node.height = 1 + max(left_height, right_height)
-        return node.height
+        if node:
+            left_height = node.left.height if node.left else 0
+            right_height = node.right.height if node.right else 0
+            return 1 + max(left_height, right_height)
+        else:
+            return 0
 
     def _get_min(self, node: AVLNode, /) -> AVLNode:
         r"""Return the minimum element in the tree.
@@ -92,76 +122,116 @@ class AVL:
         while current.left:
             current = current.left
         return current
+    
+    def _insert_recursion(self, node: AVLNode, value: int,
+                          /) -> Optional[AVLNode]:
+        """Define the function of inserting recursively.  """
+        # Insert in the left sub tree recursively.
+        if value < node.data:
+            if node.left:
+                node.left = self._insert_recursion(node.left, value)
+            else:
+                node.left = AVLNode(value)
+        # Insert in the right sub tree recursively.
+        elif value > node.data:
+            if node.right:
+                node.right = self._insert_recursion(node.right, value)
+            else:
+                node.right = AVLNode(value)
+        # Value exist.
+        else:
+            raise IndexError('value exist.')
+        
+        # Update the height.
+        node.height = self._get_height(node)
+
+        # Return the node after the rotation.
+        return self._adjust(node)
+        
+    def _rm_recursion(self, node: Optional[AVLNode], value: int,
+                      /) -> Optional[AVLNode]:
+        """Define the function of removing recursively.
+
+        Return the node of the sub tree after removing the value.
+        """
+        # Empty sub tree.
+        if node is None: return None
+
+        # Remove in the left sub tree recursively.
+        if value < node.data:
+            node.left = self._rm_recursion(node.left, value)
+        # Remove in the right sub tree recursively.
+        elif value > node.data:
+            node.right = self._rm_recursion(node.right, value)
+        # Process the current node in two cases.
+        else: 
+            # The node has two children.
+            if node.left and node.right:
+                temp_node = self._get_min(node.right)
+                node.data = temp_node.data
+                node.right = self._rm_recursion(node.right, temp_node.data)
+            # The node has at most one child.
+            else:
+                return node.left if node.left else node.right
+
+        # After the recursion, update node height and 
+        node.height = self._get_height(node)
+
+        # Return the node after the rotaion.
+        return self._adjust(node)
+
+    def _rotation_left(self, node: AVLNode, /) -> AVLNode:
+        """The left rotaion of the tree."""
+        # The new root to be return.  The right node must exist.
+        new_root = cast(AVLNode, node.right)
+
+        # Process the left rotation.
+        node.right = new_root.left
+        new_root.left = node
+
+        # Update the height.
+        node.height = self._get_height(node)
+        new_root.height = self._get_height(new_root)
+
+        # Return the new root after the rotation.
+        return new_root
+
+    def _rotation_right(self, node: AVLNode, /) -> AVLNode:
+        """The right rotaiton of the tree."""
+        # The new root to be return.  The left node must exist.
+        new_root = cast(AVLNode, node.left)
+
+        # Process the right rotation.
+        node.left = new_root.right
+        new_root.right = node
+
+        # Update the height.
+        node.height = self._get_height(node)
+        new_root.height = self._get_height(new_root)
+
+        # Return the new root after the rotation.
+        return new_root
 
     @property
     def height(self, /) -> int:
         """Return the height of the tree."""
-        return self._get_height(self.root) if self.root else 0
+        return self._get_height(self.root)
 
     def insert(self, value: int, /) -> None:
         """Insert value to the AVL Tree."""
         # The pointer to the head node.
         if self.root:
-            current: AVLNode = self.root
+            self.root = self._insert_recursion(self.root, value)
         else:
             self.root = AVLNode(value)
-            return
-
-        while True:
-            # Store small value to the left.
-            if value < current.data:
-                if current.left:
-                    current = current.left
-                else:
-                    current.left = AVLNode(value)
-                    current.left.height = current.height + 1
-                    break
-            # Store large value to the right.
-            elif value > current.data:
-                if current.right:
-                    current = current.right
-                else:
-                    current.right = AVLNode(value)
-                    current.right.height = current.height + 1
-                    break
-
-            # Value exist.
-            else: 
-                raise ValueError('value exist.')
 
     def remove(self, value: int, /) -> None:
         """Remove value in the AVL Tree."""
-        # Define the function of removing. Return the node of the
-        # sub tree after removing the value.
-        def rm_recursion(node: Optional[AVLNode],
-                         value: int, /) -> Optional[AVLNode]:
-            # Empty sub tree.
-            if node is None: return None
-
-            # Remove in the left sub tree recursively.
-            if value < node.data:
-                node.left = rm_recursion(node.left, value)
-            # Remove in the right sub tree recursively.
-            elif value > node.data:
-                node.right = rm_recursion(node.right, value)
-            # Process the current node in two cases.
-            else: 
-                # The node has two children.
-                if node.left and node.right:
-                    temp = self._get_min(node.right)
-                    node.data = temp.data
-                    node.right = rm_recursion(node.right, temp.data)
-                # The node has at most one child.
-                else:
-                    return node.left if node.left else node.right
-
-            # After the recursion, return the current node.
-            return node
-
         # Process the removing from root node.
-        self.root = rm_recursion(self.root, value)
+        self.root = self._rm_recursion(self.root, value)
 
-    def pre_order(self) -> None:
+    def pre_order(self, /) -> None:
+        """Implementation of pre-order traversal with stack."""
         # Empty tree.
         if self.root is None: return
 
@@ -181,7 +251,8 @@ class AVL:
         # Print the result.
         print(buffer)
 
-    def in_order(self) -> None:
+    def in_order(self, /) -> None:
+        """Implementation of in-order traversal with stack."""
         # Empty tree.
         if self.root is None: return
 
@@ -205,6 +276,7 @@ class AVL:
         print(buffer)
 
     def post_order(self, /):
+        """Implementation of post-order traversal with stacks."""
         # Empty tree.
         if self.root is None: return
 
@@ -220,7 +292,7 @@ class AVL:
                 buffer.append(current.data)
                 current = current.right
             
-            # Pop node which has no right node, and push its right node
+            # Pop node which has no right node, and push its right node.
             current = stack.pop()
             current = current.left
 
@@ -233,50 +305,43 @@ class AVL:
         #     if current.right:
         #         stack.append(current.right)
 
+        # Print the buffer.
         buffer.reverse()
         print(buffer)
-            
 
 
 def main() -> None:
     # Test array with no reapet elemtn.
-    arr = [random.randint(-9, 20) for _ in range(random.randint(4, 7))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(40, 47))]
     arr_shuffle = list(set(arr))
     random.shuffle(arr_shuffle)
 
-    # Temp 
-    # arr_shuffle = [9, 6, -3, 4, 13, 2, 16]
-    ...
-
     # Prepare for insert.
-    print(f'# -- Array: {arr_shuffle} '.ljust(40, '-'))
+    print(f'# -- Array: {arr_shuffle} '.ljust(170, '-'))
     test = AVL()
-
 
     # Insert element one by one.
     for item in arr_shuffle:
         test.insert(item)
     print(test)
+    print(f'[Height: {test.height}]')
 
     # Remove a random item in the arr.
     random_item = random.choice(arr)
 
-    # Temp
-    # random_item = 16
-    ...
-
-    print(f'# -- Remove: [{random_item}] '.ljust(40, '-'))
+    print(f'# -- Remove: [{random_item}] '.ljust(170, '-'))
     test.remove(random_item)
     print(test)
+    print(f'[Height: {test.height}]')
 
-    print(f'# -- Post Order Traversal. '.ljust(40, '-'))
-    test.post_order()
-
-    print(f'# -- Pre Order Traversal. '.ljust(40, '-'))
+    print(f'# -- Pre Order Traversal. '.ljust(170, '-'))
     test.pre_order()
 
-    print(f'# -- In Order Traversal. '.ljust(40, '-'))
+    print(f'# -- In Order Traversal. '.ljust(170, '-'))
     test.in_order()
+
+    print(f'# -- Post Order Traversal. '.ljust(170, '-'))
+    test.post_order()
 
 
 if __name__ == '__main__':
