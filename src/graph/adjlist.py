@@ -66,24 +66,100 @@ class LGraph:
 
             # Conbination of the elements of the line.
             buffer += begin + body + '\n'
-        return buffer.removesuffix('\n')
+        return buffer
     
-    def bfs(self, node: GNode, /):
+    def bfs(self, v:int , /) -> list[int]:
         """The Breadth First Search."""
+        # Define the variables.
+        node = self.adjlist[v]
         buffer: list[int] = []
         queue: deque[GNode] = deque([node])
         visit: list[bool] = [False] * self.nv
+        visit[node.vertex] = True
 
-        current = queue.popleft()
-        while node.next:
-            node = node.next
-            queue.append(node)
+        # Visit the node poped from the queue.
+        while queue:
+            current = queue.popleft()
 
-        ...
+            # Push the neighbour node of current into the queue.
+            node = current
+            while node.next:
+                node = node.next
+                if not visit[node.vertex]:
+                    queue.append(self.adjlist[node.vertex])
+                    visit[node.vertex] = True
+            
+            buffer.append(current.vertex)
+        
+        return buffer
 
-    def dfs(self, /):
+    def dfs(self, v: int, /) -> list[int]:
         """The Depth First Search."""
-        ...
+        # Define the variables.
+        node = self.adjlist[v]
+        buffer: list[int] = []
+        visit: list[bool] = [False] * self.nv
+
+        # Optimized way.  Pre order traversal.
+        stack: list[GNode] = []
+
+        current = node
+        while current or stack:
+            while current:
+                stack.append(self.adjlist[current.vertex])
+                visit[current.vertex] = True
+                buffer.append(current.vertex)
+                while current and visit[current.vertex]:
+                    current = current.next
+                if current:
+                    current = self.adjlist[current.vertex]
+
+            current = stack.pop()
+            while current and visit[current.vertex]:
+                current = current.next
+
+
+        # # Function stacks simulation.
+        # stack: list[tuple[GNode, GNode]] = [(node, node)]
+        # visit[node.vertex] = True
+
+        # while stack:
+        #     current, ptr = stack.pop()
+
+        #     if current is ptr:
+        #         buffer.append(current.vertex)
+
+        #     while ptr.next:
+        #         ptr = ptr.next
+        #         if not visit[ptr.vertex]:
+        #             visit[ptr.vertex] = True
+        #             stack.append((current, ptr))
+        #             tmp = self.adjlist[ptr.vertex]
+        #             stack.append((tmp, tmp))
+        #             break
+            
+        
+        # # Traverse children in a reverse way.
+        # stack: list[GNode] = [node]
+        # visit[node.vertex] = True
+
+        # # Visit the node poped from the stack.
+        # while stack:
+        #     current = stack.pop()
+        #     buffer.append(current.vertex)
+
+        #     # Push all the neighbour node of the current into the stack.
+        #     while current.next:
+        #         current = current.next
+        #         if not visit[current.vertex]:
+        #             # Stores the neighbour and visit the neighber.
+        #             stack.append(self.adjlist[current.vertex])
+        #             visit[current.vertex] = True
+        
+        return buffer
+                
+
+        
     
     def dijkstra(self, /):
         ...
@@ -114,6 +190,11 @@ class LGraph:
         self.ne += 1
 
 def main() -> None:
+    # Create two LGraphs.
+    test = LGraph(8)
+    test_weighted = LGraph(8)
+
+    # Connect the vertices of the two Lgraphs.
     edges_list = [
         (1, 4), (1, 2), (2, 4), (2, 5), (3, 1), (3, 6),
         (4, 3), (4, 5), (4, 6), (4, 7), (5, 7), (7, 6)
@@ -124,15 +205,16 @@ def main() -> None:
         (4, 3, 2), (4, 5, 2), (4, 6, 8), (4, 7, 4), (5, 7, 6), (7, 6, 1)
     ]
 
-    test = LGraph(8)
     for v, w in edges_list:
         test.insert_edge(v, w)
-    print(test)
 
-    test_weighted = LGraph(8)
     for v, w, weight in weighted_edges_list:
         test_weighted.insert_edge(v, w, weight)
-    print(test_weighted)
+
+    print(test, test_weighted)
+
+    print(test.bfs(2), test.dfs(2))
+    print(test_weighted.bfs(2), test_weighted.dfs(3))
 
 if __name__ == '__main__':
     main()
