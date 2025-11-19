@@ -100,42 +100,45 @@ class LGraph:
         buffer: list[int] = []
         visit: list[bool] = [False] * self.nv
 
-        # Optimized way.  Pre order traversal.
+        # Interesting.
         stack: list[GNode] = []
 
         current = node
         while current or stack:
             while current:
-                stack.append(self.adjlist[current.vertex])
+                current = self.adjlist[current.vertex]
+                stack.append(current)
                 visit[current.vertex] = True
                 buffer.append(current.vertex)
                 while current and visit[current.vertex]:
                     current = current.next
-                if current:
-                    current = self.adjlist[current.vertex]
 
             current = stack.pop()
+            temp = current
             while current and visit[current.vertex]:
                 current = current.next
+            if current is not None:
+                stack.append(temp)
+
 
 
         # # Function stacks simulation.
         # stack: list[tuple[GNode, GNode]] = [(node, node)]
         # visit[node.vertex] = True
+        # buffer.append(node.vertex)
 
         # while stack:
         #     current, ptr = stack.pop()
-
-        #     if current is ptr:
-        #         buffer.append(current.vertex)
 
         #     while ptr.next:
         #         ptr = ptr.next
         #         if not visit[ptr.vertex]:
         #             visit[ptr.vertex] = True
+        #             buffer.append(ptr.vertex)
         #             stack.append((current, ptr))
-        #             tmp = self.adjlist[ptr.vertex]
-        #             stack.append((tmp, tmp))
+        #             stack.append(
+        #                 (self.adjlist[ptr.vertex], self.adjlist[ptr.vertex])
+        #             )
         #             break
             
         
@@ -196,8 +199,9 @@ def main() -> None:
 
     # Connect the vertices of the two Lgraphs.
     edges_list = [
-        (1, 4), (1, 2), (2, 4), (2, 5), (3, 1), (3, 6),
-        (4, 3), (4, 5), (4, 6), (4, 7), (5, 7), (7, 6)
+        # (1, 4), (1, 2), (2, 4), (2, 5), (3, 1), (3, 6),
+        # (4, 3), (4, 5), (4, 6), (4, 7), (5, 7), (7, 6)
+        (4, 1), (4, 2), (4, 3), (4, 5), (4, 6), (4, 7), 
     ]
 
     weighted_edges_list = [
@@ -213,7 +217,7 @@ def main() -> None:
 
     print(test, test_weighted)
 
-    print(test.bfs(2), test.dfs(2))
+    print(test.bfs(2), test.dfs(4))
     print(test_weighted.bfs(2), test_weighted.dfs(3))
 
 if __name__ == '__main__':
