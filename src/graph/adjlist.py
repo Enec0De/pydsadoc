@@ -16,7 +16,7 @@ from functools import total_ordering
 class GNode:
     """Atomic element of the adjacency list."""
 
-    def __init__(self, vertex: int, data: Union[int, float] = 1,
+    def __init__(self, vertex: int, data: float = 1,
                  next: Optional[GNode] = None, /) -> None:
         """Initialize self."""
         # The index of the vertex.
@@ -76,6 +76,7 @@ class LGraph:
         queue: deque[GNode] = deque([node])
         visit: list[bool] = [False] * self.nv
         visit[node.vertex] = True
+        buffer.append(node.vertex)
 
         # Visit the node poped from the queue.
         while queue:
@@ -86,10 +87,9 @@ class LGraph:
             while node.next:
                 node = node.next
                 if not visit[node.vertex]:
-                    queue.append(self.adjlist[node.vertex])
                     visit[node.vertex] = True
-            
-            buffer.append(current.vertex)
+                    queue.append(self.adjlist[node.vertex])
+                    buffer.append(node.vertex)
         
         return buffer
 
@@ -119,7 +119,6 @@ class LGraph:
                 current = current.next
             if current is not None:
                 stack.append(temp)
-
 
 
         # # Function stacks simulation.
@@ -160,14 +159,11 @@ class LGraph:
         #             visit[current.vertex] = True
         
         return buffer
-                
-
-        
     
     def dijkstra(self, /):
         ...
     
-    def insert_edge(self, v: int, w: int, weight: int = 1, /) -> None:
+    def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:
         """Insert the edge connect v and w into the graph."""
         # Pointer to the current node.
         node = self.adjlist[v]
