@@ -12,6 +12,7 @@ from collections import deque
 
 
 class MGraph:
+    """Adjacency matrix graph."""
 
     def __init__(self, num_vert: int, /) -> None:
         """Initialize self."""
@@ -44,14 +45,14 @@ class MGraph:
 
         return buffer
 
-    def bfs(self, v: int, /) -> list[int]:
+    def bfs(self, start: int, /) -> list[int]:
         """The Breadth First Search."""
         # Define the variables.
         buffer: list[int] = []
-        queue: deque[int] = deque([v])
+        queue: deque[int] = deque([start])
         visit: list[bool] = [False] * self.nv
-        visit[v] = True
-        buffer.append(v)
+        visit[start] = True
+        buffer.append(start)
 
         # Traverse by using queue.
         while queue:
@@ -65,11 +66,11 @@ class MGraph:
         # Return the result.
         return buffer
     
-    def dfs(self, v: int, /) -> list[int]:
+    def dfs(self, start: int, /) -> list[int]:
         """The Depth First Search."""
         # Define the variables.
         buffer: list[int] = []
-        stack: list[int] = [v]
+        stack: list[int] = [start]
         visit: list[bool] = [False] * self.nv
 
         # Traverse by using stack.
@@ -86,7 +87,7 @@ class MGraph:
         # Return the result.
         return buffer
 
-    def floyd_warshall(self, /):
+    def floyd_warshall(self, start: int, /):
         ...
     
     def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:

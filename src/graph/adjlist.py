@@ -9,6 +9,7 @@ __author__ = 'Aina'
 import random
 from typing import Union, Optional
 from collections import deque
+from heapq import heappop, heappush
 from functools import total_ordering
 
 
@@ -68,10 +69,10 @@ class LGraph:
             buffer += begin + body + '\n'
         return buffer
     
-    def bfs(self, v:int , /) -> list[int]:
+    def bfs(self, start:int , /) -> list[int]:
         """The Breadth First Search."""
         # Define the variables.
-        node = self.adjlist[v]
+        node = self.adjlist[start]
         buffer: list[int] = []
         queue: deque[GNode] = deque([node])
         visit: list[bool] = [False] * self.nv
@@ -93,32 +94,33 @@ class LGraph:
         
         return buffer
 
-    def dfs(self, v: int, /) -> list[int]:
+    def dfs(self, start: int, /) -> list[int]:
         """The Depth First Search."""
         # Define the variables.
-        node = self.adjlist[v]
+        node = self.adjlist[start]
         buffer: list[int] = []
         visit: list[bool] = [False] * self.nv
 
-        # Interesting.
-        stack: list[GNode] = []
 
-        current = node
-        while current or stack:
-            while current:
-                current = self.adjlist[current.vertex]
-                stack.append(current)
-                visit[current.vertex] = True
-                buffer.append(current.vertex)
-                while current and visit[current.vertex]:
-                    current = current.next
+        # # Interesting.
+        # stack: list[GNode] = []
 
-            current = stack.pop()
-            temp = current
-            while current and visit[current.vertex]:
-                current = current.next
-            if current is not None:
-                stack.append(temp)
+        # current = node
+        # while current or stack:
+        #     while current:
+        #         current = self.adjlist[current.vertex]
+        #         stack.append(current)
+        #         visit[current.vertex] = True
+        #         buffer.append(current.vertex)
+        #         while current and visit[current.vertex]:
+        #             current = current.next
+
+        #     current = stack.pop()
+        #     temp = current
+        #     while current and visit[current.vertex]:
+        #         current = current.next
+        #     if current is not None:
+        #         stack.append(temp)
 
 
         # # Function stacks simulation.
@@ -141,27 +143,69 @@ class LGraph:
         #             break
             
         
-        # # Traverse children in a reverse way.
-        # stack: list[GNode] = [node]
-        # visit[node.vertex] = True
+        # Traverse children.
+        stack: list[GNode] = [node]
+        stack_reverse : list[GNode] = []
 
-        # # Visit the node poped from the stack.
-        # while stack:
-        #     current = stack.pop()
-        #     buffer.append(current.vertex)
+        # Visit the node poped from the stack.
+        while stack:
+            current = stack.pop()
+            if visit[current.vertex]:
+                continue
+            
+            visit[current.vertex] = True
+            buffer.append(current.vertex)
 
-        #     # Push all the neighbour node of the current into the stack.
-        #     while current.next:
-        #         current = current.next
-        #         if not visit[current.vertex]:
-        #             # Stores the neighbour and visit the neighber.
-        #             stack.append(self.adjlist[current.vertex])
-        #             visit[current.vertex] = True
+            # Push all the neighbour node of the current into the stack.
+            while current.next:
+                current = current.next
+                if not visit[current.vertex]:
+                    # Stores the neighbour and visit the neighber.
+                    stack_reverse.append(self.adjlist[current.vertex])
+            
+            # Reverse the element in the stack.
+            for _ in range(len(stack_reverse)):
+                stack.append(stack_reverse.pop())
+
         
         return buffer
     
-    def dijkstra(self, /):
-        ...
+    def dijkstra(self, start: int, /) -> list[list[float]]:
+        """The dijkstra's algorithm."""
+        # The result list stores the [path, dist] of the node.
+        result: list[list[float]] = [
+            [-1, float('Inf')] for _ in range(self.nv)
+        ]
+
+        # The ste stores the mark of the node that is not visited.
+        vert_set: set[int] = {i for i in range (self.nv)}
+
+        # Initialize the variables.
+        result[start][1] = 0
+        heap: list[GNode] = [GNode(start, 0)]
+
+
+        # Get minimum dist from heap.
+        # Add the vertex into the set of node visited.
+        for _ in range(self.nv):
+            node = heappop(heap)
+            vert_set -= {node.vertex}
+
+            # Traverse the neighbour of the node and update the dist.  
+            current = self.adjlist[node.vertex]
+            while current.next:
+                current = current.next
+                if current.vertex in vert_set:
+                    dist_sv = result[node.vertex][1]
+                    dist_vw = current.data
+                    dist_sw = result[current.vertex][1]
+                    if dist_sv + dist_vw < dist_sw:
+                        result[current.vertex][0] = node.vertex
+                        result[current.vertex][1] = dist_sv + dist_vw
+                        temp = GNode(current.vertex, result[current.vertex][1])
+                        heappush(heap, temp)
+
+        return result
     
     def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:
         """Insert the edge connect v and w into the graph."""
@@ -215,6 +259,12 @@ def main() -> None:
 
     print(test.bfs(2), test.dfs(4))
     print(test_weighted.bfs(2), test_weighted.dfs(3))
+
+    # Dijkstra
+    print('# -- Dijkstra --')
+    result = test_weighted.dijkstra(3)
+    for item in result:
+        print(item)
 
 if __name__ == '__main__':
     main()
