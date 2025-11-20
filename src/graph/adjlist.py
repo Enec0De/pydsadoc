@@ -167,7 +167,6 @@ class LGraph:
             for _ in range(len(stack_reverse)):
                 stack.append(stack_reverse.pop())
 
-        
         return buffer
     
     def dijkstra(self, start: int, /) -> list[list[float]]:

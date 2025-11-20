@@ -87,8 +87,20 @@ class MGraph:
         # Return the result.
         return buffer
 
-    def floyd_warshall(self, start: int, /):
-        ...
+    def floyd_warshall(self, /) -> tuple[list[list[float]], list[list[float]]]:
+        dist: list[list[float]] = self.adjmat.copy()
+        path: list[list[float]] = [[-1] * self.nv for _ in range(self.nv)]
+
+        # Add node k into path.
+        for k in range(self.nv):
+            # Operation between every nodes.
+            for i in range(self.nv):
+                for j in range(self.nv):
+                    if dist[i][k] + dist[k][j] < dist[i][j]:
+                        dist[i][j] = dist[i][k] + dist[k][j]
+                        path[i][j] = k
+
+        return dist, path
     
     def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:
         """Insert the edge that connect the node v and node w."""
@@ -114,6 +126,17 @@ def main() -> None:
     print(test) 
     print(test.bfs(4))
     print(test.dfs(5))
+
+    # Floyd Warshall
+    print('# -- Floyd Warshall --')
+    dist, path = test.floyd_warshall()
+    for line in dist: 
+        out = [item.rjust(3) for item in map(str, line)]
+        print(out)
+    print()
+    for line in path: 
+        out = [item.rjust(2) for item in map(str, line)]
+        print(out)
     
 
 if __name__ == '__main__':
