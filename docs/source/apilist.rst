@@ -10,7 +10,6 @@ API List
    tree.huffman.Huffman
    tree.huffman.MinHeap
    tree.dsu.UnionFind
-   graph.adjlist
-   graph.adjmat
-   graph.mst
+   graph.adjlist.LGraph
+   graph.adjmat.MGraph
    graph.toposort

@@ -7,3 +7,9 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 from typing import Union, Optional
+
+def prime_mst():
+    ...
+
+def kruscal_mst():
+    ...

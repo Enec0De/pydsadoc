@@ -170,7 +170,11 @@ class LGraph:
         return buffer
     
     def dijkstra(self, start: int, /) -> list[list[float]]:
-        """The Dijkstra's algorithm for finding the shortest paths."""
+        r"""The Dijkstra's algorithm for finding the shortest paths.
+        
+        Combining with the prioprity queue, the time complexity is
+        :math:`O(\vert E \vert \log \vert V \vert)`.
+        """
         # The result list stores the [path, dist] of the node.
         result: list[list[float]] = [
             [-1, float('Inf')] for _ in range(self.nv)
@@ -182,7 +186,6 @@ class LGraph:
         # Initialize the variables.
         result[start][1] = 0
         heap: list[GNode] = [GNode(start, 0)]
-
 
         # Get minimum dist from heap.
         # Add the vertex into the set of node visited.
@@ -230,6 +233,14 @@ class LGraph:
         
         # Number of edges increases.
         self.ne += 1
+    
+    def krskal(self):
+        r"""The Kruskal's algorithm that finds a minumum spanning tree.
+        
+        Time complexity is :math:`O(\vert E \vert).`
+        """
+        ...
+
 
 def main() -> None:
     # Create two LGraphs.

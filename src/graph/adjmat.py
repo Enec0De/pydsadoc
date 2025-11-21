@@ -9,6 +9,7 @@ __author__ = 'Aina'
 import random
 from typing import Union, Optional
 from collections import deque
+from heapq import heappop, heappush, heapify
 
 
 class MGraph:
@@ -88,7 +89,10 @@ class MGraph:
         return buffer
 
     def floyd_warshall(self, /) -> tuple[list[list[float]], list[list[float]]]:
-        """The Floyd-Warshall algorithm for finding shortest paths."""
+        r"""The Floyd-Warshall algorithm for finding shortest paths.
+        
+        Time complexity is :math:`O(\vert V \vert ^3)`.
+        """
         dist: list[list[float]] = self.adjmat.copy()
         path: list[list[float]] = [[-1] * self.nv for _ in range(self.nv)]
 
@@ -114,6 +118,37 @@ class MGraph:
         self.adjmat[w][v] = weight
         self.ne += 1
 
+    def prim(self, start: int = 1, /) -> MGraph:
+        r"""The Prim's algorithm that finds a minumum spanning tree.
+        
+        Time complexity is :math:`O(\vert V \vert ^2)`. 
+        """
+        result = MGraph(self.nv)
+        vert_set = {i for i in range(self.nv)}
+        # Special handling.
+        vert_set -= {0}
+        
+        # The minimun heap stores (dist, from, target).
+        heap: list[tuple[float, int, int]] = [(0, start, start)]
+        while vert_set:
+            # Get minimun edge.
+            current = heappop(heap)
+
+            # Insert the edge.
+            if current[2] in vert_set:
+                if current[1] != current[2]:
+                    result.insert_edge(current[1], current[2], current[0])
+            else:
+                continue
+            vert_set -= {current[2]}
+
+            # Update the dist heap.
+            for vertex in vert_set:
+                if (dist := self.adjmat[current[2]][vertex]) < float('Inf'):
+                    heappush(heap, (dist, current[2], vertex))
+
+        return result
+
 
 def main() -> None:
     data_list = [
@@ -138,6 +173,11 @@ def main() -> None:
     for line in path: 
         out = [item.rjust(2) for item in map(str, line)]
         print(out)
+
+    # Prim's Algorithm
+    print("# -- Prim's Algorithm --")
+    prim = test.prim()
+    print(prim)
     
 
 if __name__ == '__main__':

@@ -8,5 +8,4 @@ Graph Data Structures
 
    adjlist
    adjmat
-   mst
    toposort
