@@ -88,6 +88,7 @@ class MGraph:
         return buffer
 
     def floyd_warshall(self, /) -> tuple[list[list[float]], list[list[float]]]:
+        """The Floyd-Warshall algorithm for finding shortest paths."""
         dist: list[list[float]] = self.adjmat.copy()
         path: list[list[float]] = [[-1] * self.nv for _ in range(self.nv)]
 

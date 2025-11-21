@@ -1,3 +1,5 @@
+.. _tree-chapter:
+
 Tree Data Structures
 ====================
 

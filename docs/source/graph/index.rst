@@ -1,3 +1,5 @@
+.. _graph-chapter:
+
 Graph Data Structures
 =====================
 

@@ -1,3 +1,5 @@
+.. _hash-chapter:
+
 Hash Data Structures
 ====================
 

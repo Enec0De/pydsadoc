@@ -1,3 +1,5 @@
+.. _linear-chapter:
+
 Linear Data Structures
 ======================
 

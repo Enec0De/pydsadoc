@@ -170,7 +170,7 @@ class LGraph:
         return buffer
     
     def dijkstra(self, start: int, /) -> list[list[float]]:
-        """The dijkstra's algorithm."""
+        """The Dijkstra's algorithm for finding the shortest paths."""
         # The result list stores the [path, dist] of the node.
         result: list[list[float]] = [
             [-1, float('Inf')] for _ in range(self.nv)

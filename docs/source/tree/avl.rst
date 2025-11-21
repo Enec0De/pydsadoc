@@ -11,6 +11,8 @@ Implementation Details
 
 The AVL tree is somewhat more difficult than other data structures, so there
 are some implementation details to be shown.
+These methods mainly form the basics of the :py:meth:`AVL.insert` and
+:py:meth:`AVL.remove` operations described above.
 
 .. rubric:: Methods for Maintaining Balance 
 

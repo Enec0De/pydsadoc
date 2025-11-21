@@ -47,6 +47,7 @@ extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.intersphinx',
     'sphinx_copybutton',
     'sphinx_inline_tabs',
 ]
@@ -67,6 +68,13 @@ add_module_names = False
 autodoc_default_options = {
     # 'member-order': 'bysource',
     'undoc-members': True,
+}
+
+
+# -- Options for sphinx.ext.intersphinx --------------------------------------
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
 }
 
 
