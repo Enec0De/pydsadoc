@@ -28,7 +28,8 @@ Full table of Contents
    linear/index
    tree/index
    graph/index
-   hash/index
+   sort/index
+   search/index
    miscellaneous
    apilist
 

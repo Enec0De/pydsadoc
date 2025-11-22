@@ -1,6 +1,6 @@
-.. _hash-chapter:
+.. _search-chapter:
 
-Hash Data Structures
+Searching Algorithms
 ====================
 
 .. toctree::
