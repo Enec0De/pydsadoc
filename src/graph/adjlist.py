@@ -238,7 +238,7 @@ class LGraph:
     def kruskal(self) -> LGraph:
         r"""The Kruskal's algorithm that finds a minumum spanning tree.
         
-        Time complexity is :math:`O(\vert E \vert).`
+        Time complexity is :math:`O(\vert E \vert \log \vert E \vert).`
         """
         # Create a sorted list stores the edges of the graph.
         edges_list: list[tuple[float, int, int]] = []
@@ -292,8 +292,6 @@ class DSU:
         else:
             self.parent[r_y] += self.parent[r_x]
             self.parent[r_x] = r_y
-
-
 
 
 def main() -> None:
