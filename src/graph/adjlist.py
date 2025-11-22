@@ -37,6 +37,7 @@ class GNode:
         """Return self < other."""
         return self.data < other.data
 
+
 class LGraph:
     """Adjacency list graph."""
 
@@ -234,12 +235,65 @@ class LGraph:
         # Number of edges increases.
         self.ne += 1
     
-    def krskal(self):
+    def kruskal(self) -> LGraph:
         r"""The Kruskal's algorithm that finds a minumum spanning tree.
         
         Time complexity is :math:`O(\vert E \vert).`
         """
-        ...
+        # Create a sorted list stores the edges of the graph.
+        edges_list: list[tuple[float, int, int]] = []
+        for vertex in range(self.nv):
+            node = self.adjlist[vertex]
+            while node.next:
+                node = node.next
+                edges_list.append((node.data, vertex, node.vertex))
+        edges_list = sorted(edges_list, key=lambda x: x[0], reverse=True)
+
+        # Create the Dijoint Set Union and the Graph to be returned.
+        dsu = DSU(self.nv)
+        result = LGraph(self.nv)
+
+        # Insert the egde, except node 0.
+        i = 0
+        while i < self.nv - 1 - 1:
+            weight, v, w = edges_list.pop()
+            if dsu.find(v) != dsu.find(w):
+                dsu.union(v, w)
+                result.insert_edge(v, w, weight)
+                i += 1
+
+        return result
+
+
+class DSU:
+    """The Union-Find Data Structure used in LGraph.kruskal."""
+
+    def __init__(self, num_vert: int, /) -> None:
+        """Create a Disjoint Set Union."""
+        self.parent = [-1] * num_vert
+
+    def find(self, x: int) -> int:
+        if self.parent[x] < 0:
+            return x
+        else:
+            self.parent[x] = self.find(self.parent[x])
+            return self.parent[x]
+
+    def union(self, x: int, y: int, /) -> None:
+        r_x = self.find(x)
+        r_y = self.find(y)
+
+        if r_x == r_y:
+            return
+
+        if self.parent[r_x] <= self.parent[r_y]:
+            self.parent[r_x] += self.parent[r_y]
+            self.parent[r_y] = r_x
+        else:
+            self.parent[r_y] += self.parent[r_x]
+            self.parent[r_x] = r_y
+
+
 
 
 def main() -> None:
@@ -274,7 +328,13 @@ def main() -> None:
     print('# -- Dijkstra --')
     result = test_weighted.dijkstra(3)
     for item in result:
-        print(item)
+        print(item, end='')
+    print()
+
+    # Kruskal
+    print('# -- Kruskal --')
+    result = test_weighted.kruskal()
+    print(result)
 
 if __name__ == '__main__':
     main()

@@ -69,7 +69,7 @@ class UnionFind:
             return
         
         # Union by rank.
-        if self.parent[r_x] >= self.parent[r_y]:
+        if self.parent[r_x] <= self.parent[r_y]:
             self.parent[r_x] += self.parent[r_y]
             self.parent[r_y] = r_x
         else:

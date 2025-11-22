@@ -19,10 +19,8 @@ paths_to_add= [
     '',
 ]
 
-# Define new root of source files.
+# Define new root of source files.  And process the insertion of the paths.
 src_root = Path(__file__).resolve().parents[2] / 'src'
-
-# Insertion of the paths.
 for paths in paths_to_add:
     sys.path.insert(0, str(src_root/paths))
 
