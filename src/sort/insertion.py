@@ -14,4 +14,5 @@ ElementType = Union[int]
 
 def insertion_sort(arr: list[ElementType]) -> None:
     """The Selection Sort Algorithm."""
+    
     ...
