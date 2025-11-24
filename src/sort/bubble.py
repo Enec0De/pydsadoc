@@ -20,11 +20,15 @@ def bubble_sort(arr: list[ElementType]) -> None:
     """
     length = len(arr)
     for j in range(length-1, 0, -1):
+        swapped = False
         for i in range(j):
+
             # Swap the elements.
             if arr[i] > arr[i+1]:
                 arr[i], arr[i+1] = arr[i+1], arr[i]
-            
+                swapped = True
+        if not swapped:
+            break
 
 def main() -> None:
     # Create random list.
@@ -38,6 +42,7 @@ def main() -> None:
     # Assertion test.
     for i in range(len(arr)-1):
         assert arr[i] <= arr[i+1]
+
 
 if __name__ == '__main__':
     main()

@@ -14,11 +14,15 @@ ElementType = Union[int]
 
 
 def insertion_sort(arr: list[ElementType]) -> None:
-    """The Selection Sort Algorithm."""
+    """The Selection Sort Algorithm.
+    
+    Time complexity is :math:`O(n^2)`.
+    """
     length = len(arr)
     for i in range(1, length):
         temp = arr[i]
         j = 1
+
         # Insert the element into the list that has been sorted.
         while i - j >= 0 and arr[i-j] > temp:
             arr[i-j+1] = arr[i-j]
