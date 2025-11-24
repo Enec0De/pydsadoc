@@ -15,8 +15,8 @@ API List
    graph.toposort
    sort.bubble
    sort.insertion
-   sort.shell
    sort.selection
+   sort.shell
    sort.heap
    sort.merge
    sort.quick

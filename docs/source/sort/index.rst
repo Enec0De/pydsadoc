@@ -16,11 +16,18 @@ We compare the elements in a comparison-based sorting algorithm.
 .. automodule:: sort.insertion
    :members:
 
+.. automodule:: sort.selection
+   :members:
+
+.. rubric:: Advanced Sorting Algorithms
+
 .. automodule:: sort.shell
    :members:
 
-.. automodule:: sort.selection
-   :members:
+.. seealso::
+
+   The `Sedgewick sequence <https://oeis.org/A033622>`__ of increments for
+   Shell sort (best on big values).
 
 .. automodule:: sort.heap
    :members:
@@ -30,6 +37,7 @@ We compare the elements in a comparison-based sorting algorithm.
 
 .. automodule:: sort.quick
    :members:
+
 
 
 Non-Comparison Based Sort
