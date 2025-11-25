@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = ['selection_srot']
+__all__ = ['selection_sort']
 __version__ = '0.1'
 __author__ = 'Aina'
 
@@ -12,11 +12,10 @@ from typing import Union, Optional
 # Define ElementType.
 ElementType = Union[int]
 
-def selection_srot(arr: list[ElementType]) -> None:
-    """The Selection Sort Algorithm.
-    
-    Time complexity is :math:`O(n^2)`.  It is **not stable**.
-    """
+
+# Implementation of Selection Sort.
+def selection_sort(arr: list[ElementType]) -> None:
+    """Average Case: :math:`O(n^2)` and Not Stable."""
     length = len(arr)
     for i in range(length-1):
         
@@ -35,7 +34,7 @@ def main() -> None:
     print(arr)
 
     # Sort array.
-    selection_srot(arr)
+    selection_sort(arr)
     print(arr)
 
     # Assertion test.

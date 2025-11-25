@@ -13,13 +13,13 @@ API List
    graph.adjlist.LGraph
    graph.adjmat.MGraph
    graph.toposort
-   sort.bubble
-   sort.insertion
-   sort.selection
-   sort.shell
-   sort.heap
-   sort.merge
-   sort.quick
+   sort.bubble.bubble_sort
+   sort.insertion.insertion_sort
+   sort.selection.selection_sort
+   sort.shell.shell_sort
+   sort.heap.heap_sort
+   sort.merge.merge_sort
+   sort.quick.quick_sort
    sort.bucket
    sort.counting
    sort.radix

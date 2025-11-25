@@ -13,10 +13,10 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
+# Implementation of Merge Sort.
 def merge_sort(arr: list[ElementType]) -> None:
-    r"""The Merge Sort Algorithm.
-    
-    Time complexity is :math:`O(n \log n)`.  It's is stable.
+    r"""Average Case: :math:`O(n \log n)` and Stable.  Space complexity
+    is :math:`O(n)`.
     """
     length = len(arr)
     temp = [0] * length
@@ -64,6 +64,7 @@ def _merge_conquer(arr: list[ElementType], temp: list[ElementType],
         arr[i] = temp[i]
 
 
+# Entry point with simple testing.
 def main() -> None:
     # Create random list.
     arr = [random.randint(-9,99) for _ in range(random.randint(1,20))]

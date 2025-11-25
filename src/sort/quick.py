@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = []
+__all__ = ['quick_sort']
 __version__ = '0.1'
 __author__ = 'Aina'
 
@@ -13,10 +13,10 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
+# Implementation of Quick Sort.
 def quick_sort(arr: list[ElementType]) -> None:
-    r"""The Quick Sort Algorithm.
-    
-    Time complexity is :maht:`O(n \log n)`.  It is **not stable**.
+    r"""Average Case: :math:`O(n \log n)` and Not Stable.  Space
+    complexity is :math:`O(\log n)`.  Worst case: :math:`O(n^2)`.  
     """
     length = len(arr)
     _partition(arr, 0, length)

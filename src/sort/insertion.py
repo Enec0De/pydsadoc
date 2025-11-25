@@ -13,10 +13,9 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
+# Implementation of Insertion Sort.
 def insertion_sort(arr: list[ElementType]) -> None:
-    """The Selection Sort Algorithm.
-    
-    Time complexity is :math:`O(n^2)`.  It is **stable**.
+    """Average Case: :math:`O(n^2)` and Stable.  Best Case: :math:`O(n)`.
     """
     length = len(arr)
     for i in range(1, length):
@@ -31,6 +30,7 @@ def insertion_sort(arr: list[ElementType]) -> None:
             arr[i-j+1] = temp
 
 
+# Entry point with simple testing.
 def main() -> None:
     # Create random list.
     arr = [random.randint(-9,99) for _ in range(random.randint(1,10))]

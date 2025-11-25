@@ -13,10 +13,9 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
+# Implementation of Bubble Sort.
 def bubble_sort(arr: list[ElementType]) -> None:
-    """The Bubble Sort Algorithm.
-    
-    Time complexity is :math:`O(n^2)`.  It is **stable**.
+    """Average Case: :math:`O(n^2)` and Stable.  Best Case: :math:`O(n)`.
     """
     length = len(arr)
     for j in range(length-1, 0, -1):
@@ -30,6 +29,8 @@ def bubble_sort(arr: list[ElementType]) -> None:
         if not swapped:
             break
 
+
+# Entry point with simple testing.
 def main() -> None:
     # Create random list.
     arr = [random.randint(-9, 99) for _ in range(random.randint(1,10))]

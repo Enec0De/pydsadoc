@@ -13,11 +13,9 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
+# Implementation of Heap Sort.
 def heap_sort(arr: list[ElementType]) -> None:
-    r"""The Heap Sort Algorithm.
-    
-    Time complexity is :math:`O(n \log n)`.  It is **not stable**.
-    """
+    r"""Average Case: :math:`O(n \log n)` and Not Stable."""
     length = len(arr) - 1
     _heapify(arr)
     arr[0], arr[length] = arr[length], arr[0]
@@ -48,6 +46,7 @@ def heap_sort(arr: list[ElementType]) -> None:
         arr[0], arr[length] = arr[length], arr[0]
 
 
+# Make a maximum heap from a given list.
 def _heapify(arr: list[ElementType]) -> None:
     length = len(arr)
 
@@ -77,6 +76,7 @@ def _heapify(arr: list[ElementType]) -> None:
         root -= 1
 
 
+# Entry point with simple testing.
 def main() -> None:
 
     # Test heapify.
