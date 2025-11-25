@@ -16,15 +16,15 @@ ElementType = Union[int]
 def merge_sort(arr: list[ElementType]) -> None:
     r"""The Merge Sort Algorithm.
     
-    Time complexity is :math:`O(n \log n)`.
+    Time complexity is :math:`O(n \log n)`.  It's is stable.
     """
     length = len(arr)
     temp = [0] * length
-    _merge(arr, temp, 0, length)
+    _merge_divide(arr, temp, 0, length)
 
 
 # Divide the array into two parts and merge them.
-def _merge(arr: list[ElementType], temp: list[ElementType],
+def _merge_divide(arr: list[ElementType], temp: list[ElementType],
            start: int, end: int) -> None:
     length = end - start
 
@@ -32,8 +32,8 @@ def _merge(arr: list[ElementType], temp: list[ElementType],
     # The array whose length less than or equal 1 is sorted well.
     if length > 1:
         mid = start + length//2
-        _merge(arr, temp, start, mid)
-        _merge(arr, temp, mid, end)
+        _merge_divide(arr, temp, start, mid)
+        _merge_divide(arr, temp, mid, end)
         _merge_conquer(arr, temp, start, mid, end)
 
 
