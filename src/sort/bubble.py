@@ -16,7 +16,7 @@ ElementType = Union[int]
 def bubble_sort(arr: list[ElementType]) -> None:
     """The Bubble Sort Algorithm.
     
-    Time complexity is :math:`O(n^2)`.
+    Time complexity is :math:`O(n^2)`.  It is **stable**.
     """
     length = len(arr)
     for j in range(length-1, 0, -1):

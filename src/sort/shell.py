@@ -43,10 +43,11 @@ def _sedgewick_sequence(length: int) -> list[int]:
 
 
 def shell_sort(arr: list[ElementType]) -> None:
-    """The Shell Sort Algorithm.  An optimization of Insertion Sort.
+    """The Shell Sort Algorithm.  
     
     Time complexity is between :math:`O(n^{1.25})` and :math:`O(n^{1.5})`,
-    depending on the chosen gap sequence.
+    depending on the chosen gap sequence.  It is an optimization of Insertion
+    Sort, which is **not stable**.
     """
     length = len(arr)
     gap_sequence = _sedgewick_sequence(length)

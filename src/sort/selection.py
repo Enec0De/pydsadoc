@@ -15,7 +15,7 @@ ElementType = Union[int]
 def selection_srot(arr: list[ElementType]) -> None:
     """The Selection Sort Algorithm.
     
-    Time complexity is :math:`O(n^2)`.
+    Time complexity is :math:`O(n^2)`.  It is **not stable**.
     """
     length = len(arr)
     for i in range(length-1):

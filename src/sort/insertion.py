@@ -16,7 +16,7 @@ ElementType = Union[int]
 def insertion_sort(arr: list[ElementType]) -> None:
     """The Selection Sort Algorithm.
     
-    Time complexity is :math:`O(n^2)`.
+    Time complexity is :math:`O(n^2)`.  It is **stable**.
     """
     length = len(arr)
     for i in range(1, length):
