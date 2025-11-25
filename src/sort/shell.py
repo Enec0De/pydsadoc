@@ -44,8 +44,10 @@ def _sedgewick_sequence(length: int) -> list[int]:
 
 # Implementation of Shell Sort.
 def shell_sort(arr: list[ElementType]) -> None:
-    r"""Average Case: :math:`O(n^{4/3})` and Not Stable.  Best Case:
-    :math:`O(n \log n)`.
+    r"""Sort a list of numbers in ascending order.
+    
+    Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
+    :math:`O(n^{4/3})`.  Worst Case: :math:`O(n^{3/2})`.
 
     Time complexity is between :math:`O(n^{1.25})` and
     :math:`O(n^{1.5})`, depending on the chosen gap sequence.  It is an

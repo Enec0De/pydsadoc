@@ -15,7 +15,11 @@ ElementType = Union[int]
 
 # Implementation of Selection Sort.
 def selection_sort(arr: list[ElementType]) -> None:
-    """Average Case: :math:`O(n^2)` and Not Stable."""
+    """Sort a list of numbers in ascending order.
+    
+    Not Stable.  Best Case: :math:`O(n^2)`.  Average Case:
+    :math:`O(n^2)`.  Worse Case: :math:`O(n^2)`.
+    """
     length = len(arr)
     for i in range(length-1):
         

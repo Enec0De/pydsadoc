@@ -10,33 +10,22 @@ We compare the elements in a comparison-based sorting algorithm.
 
 .. rubric:: Basics Sorting Algorithms
 
-.. automodule:: sort.bubble
-   :members:
-
-.. automodule:: sort.insertion
-   :members:
-
-.. automodule:: sort.selection
-   :members:
+.. autofunction:: sort.bubble_sort
+.. autofunction:: sort.insertion_sort
+.. autofunction:: sort.selection_sort
 
 .. rubric:: Advanced Sorting Algorithms
 
-.. automodule:: sort.shell
-   :members:
+.. autofunction:: sort.shell_sort
 
 .. seealso::
 
    The `Sedgewick sequence <https://oeis.org/A033622>`__ of increments for
    Shell sort (best on big values).
 
-.. automodule:: sort.heap
-   :members:
-
-.. automodule:: sort.merge
-   :members:
-
-.. automodule:: sort.quick
-   :members:
+.. autofunction:: sort.heap_sort
+.. autofunction:: sort.merge_sort
+.. autofunction:: sort.quick_sort
 
 
 

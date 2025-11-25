@@ -1,6 +1,6 @@
 Sort Algorithms
 ===============
 
-.. automodule:: sort
-   :members:
-   :exclude-members: main
+.. .. automodule:: sort
+      :members:
+      :exclude-members: main

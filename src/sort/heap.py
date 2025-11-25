@@ -15,7 +15,11 @@ ElementType = Union[int]
 
 # Implementation of Heap Sort.
 def heap_sort(arr: list[ElementType]) -> None:
-    r"""Average Case: :math:`O(n \log n)` and Not Stable."""
+    r"""Sort a list of numbers in ascending order.
+    
+    Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
+    :math:`O(n \log n)`.  Worst Case: :math:`O(n \log n)`.
+    """
     length = len(arr) - 1
     _heapify(arr)
     arr[0], arr[length] = arr[length], arr[0]

@@ -15,8 +15,12 @@ ElementType = Union[int]
 
 # Implementation of Merge Sort.
 def merge_sort(arr: list[ElementType]) -> None:
-    r"""Average Case: :math:`O(n \log n)` and Stable.  Space complexity
-    is :math:`O(n)`.
+    r"""Sort a list of numbers in ascending order.
+        
+    Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
+    :math:`O(n \log n)`.  Worst Case: :math:`O(n \log n)`.
+    
+    Space complexity is :math:`O(n)`.
     """
     length = len(arr)
     temp = [0] * length

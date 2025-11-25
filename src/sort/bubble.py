@@ -15,7 +15,10 @@ ElementType = Union[int]
 
 # Implementation of Bubble Sort.
 def bubble_sort(arr: list[ElementType]) -> None:
-    """Average Case: :math:`O(n^2)` and Stable.  Best Case: :math:`O(n)`.
+    """Sort a list of numbers in ascending order.
+    
+    Stable.  Best Case: :math:`O(n)`.  Average Case: :math:`O(n^2)`.
+    Worst Case: :math:`O(n^2)`.
     """
     length = len(arr)
     for j in range(length-1, 0, -1):

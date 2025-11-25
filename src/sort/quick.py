@@ -15,8 +15,12 @@ ElementType = Union[int]
 
 # Implementation of Quick Sort.
 def quick_sort(arr: list[ElementType]) -> None:
-    r"""Average Case: :math:`O(n \log n)` and Not Stable.  Space
-    complexity is :math:`O(\log n)`.  Worst case: :math:`O(n^2)`.  
+    r"""Sort a list of numbers in ascending order.
+    
+    Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
+    :math:`O(n \log n)`.  Worst Case: :math:`O(n^2)`.
+    
+    Space complexity is :math:`O(\log n)`.
     """
     length = len(arr)
     _partition(arr, 0, length)
