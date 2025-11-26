@@ -20,6 +20,6 @@ API List
    sort.heap_sort
    sort.merge_sort
    sort.quick_sort
-   sort.bucket
-   sort.counting
-   sort.radix
+   sort.bucket_sort
+   sort.counting_sort
+   sort.radix_sort

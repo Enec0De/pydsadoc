@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/urs/bin/env python
 
 from __future__ import annotations
 
-__all__ = ['radix_sort']
+__all__ = ['tim_sort']
 __version__ = '0.1'
 __author__ = 'Aina'
 
@@ -13,6 +13,5 @@ from typing import Union, Optional
 ElementType = Union[int]
 
 
-def radix_sort(arr: list[ElementType]) -> None:
+def tim_sort(arr: list[int]) -> None:
     """Sort a list of numbers in ascending order(TBD)."""
-    ...

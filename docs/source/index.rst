@@ -14,22 +14,11 @@ Full table of Contents
 .. toctree::
    :maxdepth: 3
 
-   chapter-1/index
-   chapter-2/index
-   chapter-3/index
-   chapter-4/index
-   chapter-5/index
-   chapter-6/index
-   chapter-7-ex/index
-   chapter-7/index
-   chapter-8/index
-   chapter-9-sort/index
    chapter-10/index
    linear/index
    tree/index
    graph/index
    sort/index
    search/index
-   miscellaneous
    apilist
 

@@ -1,11 +1,7 @@
-Topology Sort (TBD)
-===================
+Topological Sorting (TBD)
+=========================
 
 .. automodule:: graph.toposort
     :members:
 
-Activity on Vertex
-------------------
-
-Activity on Edge
-----------------
+The comtent of AoV (Activity on Vertex) and AoE (Activity on Edge) ...

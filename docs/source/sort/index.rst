@@ -26,6 +26,7 @@ We compare the elements in a comparison-based sorting algorithm.
 .. autofunction:: sort.heap_sort
 .. autofunction:: sort.merge_sort
 .. autofunction:: sort.quick_sort
+.. autofunction:: sort.tim_sort
 
 
 
@@ -34,11 +35,6 @@ Non-Comparison Based Sort
 
 We do not compare the elements in a non-comparison-based sorting algorithm.
 
-.. automodule:: sort.bucket
-   :members:
-
-.. automodule:: sort.counting
-   :members:
-
-.. automodule:: sort.radix
-   :members:
+.. autofunction:: sort.bucket_sort
+.. autofunction:: sort.counting_sort
+.. autofunction:: sort.radix_sort
