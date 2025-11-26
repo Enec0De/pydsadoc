@@ -14,7 +14,6 @@ Full table of Contents
 .. toctree::
    :maxdepth: 3
 
-   chapter-10/index
    linear/index
    tree/index
    graph/index

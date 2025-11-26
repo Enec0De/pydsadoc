@@ -4,10 +4,7 @@ import sys
 from pathlib import Path
 
 # Define list stores the paths to add.
-paths_to_add= [
-    'chapter_10',
-    '',
-]
+paths_to_add= ['']
 
 # Define new root of source files.  And process the insertion of the paths.
 src_root = Path(__file__).resolve().parents[2] / 'src'
