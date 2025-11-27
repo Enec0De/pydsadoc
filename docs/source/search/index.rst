@@ -6,5 +6,6 @@ Searching Algorithms(TBD)
 .. toctree::
    :maxdepth: 5
 
-   hash-table
+   binary
+   hash
    kmp
