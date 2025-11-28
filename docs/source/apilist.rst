@@ -6,10 +6,10 @@ API List
 
    linear.SeqList
    linear.LinkedList
-   tree.avl.AVL
-   tree.huffman.Huffman
-   tree.huffman.MinHeap
-   tree.dsu.UnionFind
+   tree.AVL
+   tree.Huffman
+   tree.MinHeap
+   tree.UnionFind
    graph.adjlist.LGraph
    graph.adjmat.MGraph
    graph.toposort

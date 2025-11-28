@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""The AVL tree data structure."""
 
 __all__ = ['AVLNode', 'AVL']
 __version__ = '0.1'

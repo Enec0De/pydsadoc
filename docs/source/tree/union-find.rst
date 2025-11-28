@@ -1,11 +1,13 @@
 Disjoint Set Union
 ==================
 
-.. automodule:: tree.dsu
+.. autoclass:: tree.UnionFind
    :members:
    :special-members: __str__
 
 .. rubric:: The Amortized Time
+
+.. py:currentmodule:: tree
 
 In this case, The Inverse `Ackermann Function`_ :math:`\alpha(n)` is in fact
 treated as a constant. So the amortized time complexity of the two operations

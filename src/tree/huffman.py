@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""The huffman tree data structure."""
 
 __all__ = ['MinHeap', 'HNode', 'Huffman']
 __version__ = '0.1'

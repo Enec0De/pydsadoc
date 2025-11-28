@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""The Union-Find data structure."""
 
 __all__ = ['UnionFind']
 __version__ = '0.1'

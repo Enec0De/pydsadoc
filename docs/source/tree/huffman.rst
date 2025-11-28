@@ -1,10 +1,17 @@
 Huffman Tree
 ============
 
-.. automodule:: tree.huffman
+.. autoclass:: tree.MinHeap
+   :members:
+
+.. autoclass:: tree.HNode
+
+.. autoclass:: tree.Huffman
    :members:
 
 .. rubric:: The Priority Queue
+
+.. py:currentmodule:: tree
 
 The Huffman Tree can be built in an optimal way by using priority queue.
 The priority queue is implemented with minimum heap here, namely the class
