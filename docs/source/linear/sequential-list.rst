@@ -1,14 +1,13 @@
 Sequential List
 ===============
 
-.. automodule:: linear.seque
+.. autoclass:: linear.SeqList
    :members:
    :special-members: __str__
-   :exclude-members: main, check_equal,
-                     test_append, test_index,
-                     test_insert_remove, test_pop
 
 .. rubric:: Stack
+
+.. py:currentmodule:: linear
 
 A stack can be implemented with a sequential list :py:class:`SeqList` and its
 methods :py:meth:`SeqList.append` and :py:meth:`SeqList.pop` as described

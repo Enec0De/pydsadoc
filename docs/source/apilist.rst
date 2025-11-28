@@ -4,8 +4,8 @@ API List
 .. autosummary::
    :nosignatures:
 
-   linear.seque.SeqList
-   linear.linked.LinkedList
+   linear.SeqList
+   linear.LinkedList
    tree.avl.AVL
    tree.huffman.Huffman
    tree.huffman.MinHeap

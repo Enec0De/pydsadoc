@@ -1,17 +1,17 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""Sequential list."""
 
 __all__ = ['SeqList']
 __version__ = '0.1'
 __author__ = 'Aina'
 
+import sys
 import random
 from typing import Union
 
 # Define the constant
 ElementType = Union[None, int]
-MAXSIZE = 2**63 - 1
+MAXSIZE = sys.maxsize
 
 
 class SeqList:

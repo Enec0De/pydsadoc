@@ -1,14 +1,14 @@
 Linked List
 ===========
 
-.. automodule:: linear.linked
+.. autoclass:: linear.Node
+.. autoclass:: linear.LinkedList
    :members:
    :special-members: __str__
-   :exclude-members: main, check_equal,
-                     test_append, test_index,
-                     test_insert_remove, test_pop
 
 .. rubric:: Stack
+
+.. py:currentmodule:: linear
 
 A stack can be implemented with a linked list :py:class:`LinkedList` and its
 methods :py:meth:`LinkedList.insert` and :py:meth:`LinkedList.pop` as described

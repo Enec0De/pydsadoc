@@ -1,17 +1,17 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""Linked list."""
 
 __all__ = ['Node', 'LinkedList']
 __version__ = '0.1'
 __author__ = 'Aina'
 
+import sys
 import random
 from typing import Union, Optional, cast
 
 # Define the constant
 ElementType = Union[int, None]
-MAXSIZE = 2**63 - 1
+MAXSIZE = sys.maxsize
 
 
 class Node:
