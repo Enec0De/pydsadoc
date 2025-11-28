@@ -10,9 +10,8 @@ API List
    tree.Huffman
    tree.MinHeap
    tree.UnionFind
-   graph.adjlist.LGraph
-   graph.adjmat.MGraph
-   graph.toposort
+   graph.LGraph
+   graph.MGraph
    sort.bubble_sort
    sort.insertion_sort
    sort.selection_sort

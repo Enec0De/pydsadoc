@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-from __future__ import annotations
+"""The Graph data structure."""
 
 __all__ = ['GNode', 'LGraph']
 __version__ = '0.1'

@@ -2,6 +2,7 @@ Linked List
 ===========
 
 .. autoclass:: linear.Node
+
 .. autoclass:: linear.LinkedList
    :members:
    :special-members: __str__

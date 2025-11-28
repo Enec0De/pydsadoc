@@ -1,7 +1,9 @@
 Adjacency List Graph
 ====================
 
-.. automodule:: graph.adjlist
+.. autoclass:: graph.GNode
+
+.. autoclass:: graph.LGraph
    :members:
 
 .. rubric:: Dijkstra's Algorithm

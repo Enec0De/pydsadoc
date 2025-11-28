@@ -1,7 +1,7 @@
 Adjacency Matrix Graph
 ======================
 
-.. automodule:: graph.adjmat
+.. autoclass:: graph.MGraph
    :members:
 
 .. rubric:: Floyd-Warshall Algorithm
