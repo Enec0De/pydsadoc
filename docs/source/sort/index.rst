@@ -3,6 +3,11 @@
 Sorting Algorithms
 ==================
 
+**Source code:** `src/sort/__init__.py <https://github.com/Enec0De/pydsadoc/blob/main/src/sort/__init__.py>`__
+
+A *Sorting Algorithm* is used to rearrange a given array or list of elements in
+an order. 
+
 Comparison Based Sort
 ---------------------
 
@@ -27,7 +32,6 @@ We compare the elements in a comparison-based sorting algorithm.
 .. autofunction:: sort.merge_sort
 .. autofunction:: sort.quick_sort
 .. autofunction:: sort.tim_sort
-
 
 
 Non-Comparison Based Sort(TBD)
