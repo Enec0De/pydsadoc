@@ -1,6 +1,8 @@
 Linked List
 ===========
 
+**Source code:** `src/linear/linked.py <https://github.com/Enec0De/pydsadoc/blob/main/src/linear/linked.py>`__
+
 .. autoclass:: linear.Node
 
 .. autoclass:: linear.LinkedList

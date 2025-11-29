@@ -44,6 +44,7 @@ templates_path = [
 
 exclude_patterns = []
 
+
 # -- Options for the Python domain -------------------------------------------
 add_module_names = False
 
@@ -84,7 +85,7 @@ html_theme_options = {
     ],
     "source_repository": "https://github.com/Enec0De/pydsadoc",
     "source_branch": "main",
-    "source_directory": "sphinx/pydsadoc/source",
+    "source_directory": "docs/source",
 }
 
 # html_logo = "_static/hammer.svg"

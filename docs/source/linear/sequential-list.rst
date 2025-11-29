@@ -1,6 +1,8 @@
 Sequential List
 ===============
 
+**Source code:** `src/linear/seque.py <https://github.com/Enec0De/pydsadoc/blob/main/src/linear/seque.py>`__
+
 .. autoclass:: linear.SeqList
    :members:
    :special-members: __str__
