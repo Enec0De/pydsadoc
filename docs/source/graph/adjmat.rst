@@ -1,6 +1,8 @@
 Adjacency Matrix Graph
 ======================
 
+**Source code:** `src/graph/adjmat.py <https://github.com/Enec0De/pydsadoc/blob/main/src/graph/adjmat.py>`__
+
 .. autoclass:: graph.MGraph
    :members:
 

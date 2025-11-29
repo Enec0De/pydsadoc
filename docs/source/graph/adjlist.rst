@@ -1,6 +1,8 @@
 Adjacency List Graph
 ====================
 
+**Source code:** `src/graph/adjlist.py <https://github.com/Enec0De/pydsadoc/blob/main/src/graph/adjlist.py>`__
+
 .. autoclass:: graph.GNode
 
 .. autoclass:: graph.LGraph
