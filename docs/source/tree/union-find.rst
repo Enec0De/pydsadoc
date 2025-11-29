@@ -1,6 +1,8 @@
 Disjoint Set Union
 ==================
 
+**Source code:** `src/tree/dsu.py <https://github.com/Enec0De/pydsadoc/blob/main/src/tree/dsu.py>`__
+
 .. autoclass:: tree.UnionFind
    :members:
    :special-members: __str__

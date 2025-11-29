@@ -1,6 +1,8 @@
 AVL Tree
 ========
 
+**Source code:** `src/tree/avl.py <https://github.com/Enec0De/pydsadoc/blob/main/src/tree/avl.py>`__
+
 .. autoclass:: tree.AVLNode
 .. autoclass:: tree.AVL
    :members: 

@@ -1,6 +1,8 @@
 Huffman Tree
 ============
 
+**Source code:** `src/tree/huffman.py <https://github.com/Enec0De/pydsadoc/blob/main/src/tree/huffman.py>`__
+
 .. autoclass:: tree.MinHeap
    :members:
 
