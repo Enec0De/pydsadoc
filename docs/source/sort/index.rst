@@ -8,6 +8,7 @@ Sorting Algorithms
 A *Sorting Algorithm* is used to rearrange a given array or list of elements in
 an order. 
 
+
 Comparison Based Sort
 ---------------------
 

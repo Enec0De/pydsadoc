@@ -8,11 +8,36 @@
 Aina's Test Field
 =================
 
+✨ Welcome to My *Absolute Terror Field*. ✨ ٩(◕‿◕｡)۶
+
+
+Conventions Followed
+--------------------
+
+The following are the conventions that I strive to adhere to.  I wuill do my
+utmost to comply with them, although full compliance may not be ensured in all
+situations.
+
+* Python Enhancement Proposals (PEPs):
+
+  * :pep:`8`: Style Guide for Python Code
+  * :pep:`12`: Sample reStructuredText PEP Template
+  * :pep:`257`: Docstring Conventions
+  * :pep:`484`: Type Hints
+
+* Other Relevant Conventions and Guidelines:
+
+  * `Google Style Guides <https://google.github.io/styleguide/>`__
+  * `NumPy Styel Guides <https://numpydoc.readthedocs.io/en/latest/format.html>`__
+  * `Conventional Commits <https://www.conventionalcommits.org/en/v1.0.0/>`__
+  * `Semantic Versioning <https://semver.org/>`__
+
+
 Full table of Contents
 ----------------------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    linear/index
    tree/index
