@@ -5,10 +5,8 @@ __all__ = ['MGraph']
 __version__ = '0.1'
 __author__ = 'Aina'
 
-import random
-from typing import Union, Optional
 from collections import deque
-from heapq import heappop, heappush, heapify
+from heapq import heappop, heappush
 
 
 class MGraph:
@@ -27,7 +25,7 @@ class MGraph:
 
         for i in range(num_vert):
             self.adjmat[i][i] = 0
-    
+
     def __str__(self, /) -> str:
         """Display the Adjacency Matrix Graph."""
         buffer: str = '[\\] '
@@ -65,7 +63,7 @@ class MGraph:
 
         # Return the result.
         return buffer
-    
+
     def dfs(self, start: int, /) -> list[int]:
         """The Depth First Search."""
         # Define the variables.
@@ -89,7 +87,7 @@ class MGraph:
 
     def floyd_warshall(self, /) -> tuple[list[list[float]], list[list[float]]]:
         r"""The Floyd-Warshall algorithm for finding shortest paths.
-        
+
         Time complexity is :math:`O(\vert V \vert ^3)`.
         """
         dist: list[list[float]] = self.adjmat.copy()
@@ -105,7 +103,7 @@ class MGraph:
                         path[i][j] = k
 
         return dist, path
-    
+
     def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:
         """Insert the edge that connect the node v and node w."""
         # Check wether the edge exsits.
@@ -119,14 +117,14 @@ class MGraph:
 
     def prim(self, start: int = 1, /) -> MGraph:
         r"""The Prim's algorithm that finds a minumum spanning tree.
-        
-        Time complexity is :math:`O(\vert V \vert ^2)`. 
+
+        Time complexity is :math:`O(\vert V \vert ^2)`.
         """
         result = MGraph(self.nv)
         vert_set = {i for i in range(self.nv)}
         # Special handling.
         vert_set -= {0}
-        
+
         # The minimun heap stores (dist, from, target).
         heap: list[tuple[float, int, int]] = [(0, start, start)]
         while vert_set:
@@ -158,18 +156,18 @@ def main() -> None:
     test = MGraph(7)
     for edge in data_list:
         test.insert_edge(*edge)
-    print(test) 
+    print(test)
     print(test.bfs(4))
     print(test.dfs(5))
 
     # Floyd Warshall
     print('# -- Floyd Warshall --')
     dist, path = test.floyd_warshall()
-    for line in dist: 
+    for line in dist:
         out = [item.rjust(3) for item in map(str, line)]
         print(out)
     print()
-    for line in path: 
+    for line in path:
         out = [item.rjust(2) for item in map(str, line)]
         print(out)
 
@@ -177,7 +175,7 @@ def main() -> None:
     print("# -- Prim's Algorithm --")
     prim = test.prim()
     print(prim)
-    
+
 
 if __name__ == '__main__':
     main()

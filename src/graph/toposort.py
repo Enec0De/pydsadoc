@@ -3,5 +3,3 @@
 __all__ = []
 __version__ = '0.1'
 __author__ = 'Aina'
-
-from typing import Union, Optional

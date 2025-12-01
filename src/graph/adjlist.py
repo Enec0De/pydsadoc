@@ -5,8 +5,7 @@ __all__ = ['GNode', 'LGraph']
 __version__ = '0.1'
 __author__ = 'Aina'
 
-import random
-from typing import Union, Optional
+from typing import Optional
 from collections import deque
 from heapq import heappop, heappush
 from functools import total_ordering
@@ -27,7 +26,7 @@ class GNode:
 
         # The pointer to the next vertex.
         self.next = next
-    
+
     def __eq__(self, other: GNode, /) -> bool:
         """Return self == other."""
         return self.data == other.data
@@ -50,7 +49,7 @@ class LGraph:
         self.adjlist: list[GNode] = [
             GNode(i, float('Nan')) for i in range(num_vert)
         ]
-    
+
     def __str__(self, /) -> str:
         """Display the Adjacency List Graph."""
         # Form each line one by one in loop.
@@ -68,8 +67,8 @@ class LGraph:
             # Conbination of the elements of the line.
             buffer += begin + body + '\n'
         return buffer
-    
-    def bfs(self, start:int , /) -> list[int]:
+
+    def bfs(self, start: int, /) -> list[int]:
         """The Breadth First Search."""
         # Define the variables.
         node = self.adjlist[start]
@@ -91,7 +90,7 @@ class LGraph:
                     visit[node.vertex] = True
                     queue.append(self.adjlist[node.vertex])
                     buffer.append(node.vertex)
-        
+
         return buffer
 
     def dfs(self, start: int, /) -> list[int]:
@@ -101,10 +100,9 @@ class LGraph:
         buffer: list[int] = []
         visit: list[bool] = [False] * self.nv
 
-
         # # Interesting.
         # stack: list[GNode] = []
-
+        #
         # current = node
         # while current or stack:
         #     while current:
@@ -114,7 +112,7 @@ class LGraph:
         #         buffer.append(current.vertex)
         #         while current and visit[current.vertex]:
         #             current = current.next
-
+        #
         #     current = stack.pop()
         #     temp = current
         #     while current and visit[current.vertex]:
@@ -122,15 +120,14 @@ class LGraph:
         #     if current is not None:
         #         stack.append(temp)
 
-
         # # Function stacks simulation.
         # stack: list[tuple[GNode, GNode]] = [(node, node)]
         # visit[node.vertex] = True
         # buffer.append(node.vertex)
-
+        #
         # while stack:
         #     current, ptr = stack.pop()
-
+        #
         #     while ptr.next:
         #         ptr = ptr.next
         #         if not visit[ptr.vertex]:
@@ -141,18 +138,17 @@ class LGraph:
         #                 (self.adjlist[ptr.vertex], self.adjlist[ptr.vertex])
         #             )
         #             break
-            
-        
+
         # Traverse children.
         stack: list[GNode] = [node]
-        stack_reverse : list[GNode] = []
+        stack_reverse: list[GNode] = []
 
         # Visit the node poped from the stack.
         while stack:
             current = stack.pop()
             if visit[current.vertex]:
                 continue
-            
+
             visit[current.vertex] = True
             buffer.append(current.vertex)
 
@@ -162,16 +158,16 @@ class LGraph:
                 if not visit[current.vertex]:
                     # Stores the neighbour and visit the neighber.
                     stack_reverse.append(self.adjlist[current.vertex])
-            
+
             # Reverse the element in the stack.
             for _ in range(len(stack_reverse)):
                 stack.append(stack_reverse.pop())
 
         return buffer
-    
+
     def dijkstra(self, start: int, /) -> list[list[float]]:
         r"""The Dijkstra's algorithm for finding the shortest paths.
-        
+
         Combining with the prioprity queue, the time complexity is
         :math:`O(\vert E \vert \log \vert V \vert)`.
         """
@@ -181,7 +177,7 @@ class LGraph:
         ]
 
         # The ste stores the mark of the node that is not visited.
-        vert_set: set[int] = {i for i in range (self.nv)}
+        vert_set: set[int] = {i for i in range(self.nv)}
 
         # Initialize the variables.
         result[start][1] = 0
@@ -193,7 +189,7 @@ class LGraph:
             node = heappop(heap)
             vert_set -= {node.vertex}
 
-            # Traverse the neighbour of the node and update the dist.  
+            # Traverse the neighbour of the node and update the dist.
             current = self.adjlist[node.vertex]
             while current.next:
                 current = current.next
@@ -208,7 +204,7 @@ class LGraph:
                         heappush(heap, temp)
 
         return result
-    
+
     def insert_edge(self, v: int, w: int, weight: float = 1, /) -> None:
         """Insert the edge connect v and w into the graph."""
         # Pointer to the current node.
@@ -230,13 +226,13 @@ class LGraph:
         temp = GNode(v, weight)
         temp.next = node.next
         node.next = temp
-        
+
         # Number of edges increases.
         self.ne += 1
-    
+
     def kruskal(self) -> LGraph:
         r"""The Kruskal's algorithm that finds a minumum spanning tree.
-        
+
         Time complexity is :math:`O(\vert E \vert \log \vert E \vert).`
         """
         # Create a sorted list stores the edges of the graph.
@@ -302,7 +298,7 @@ def main() -> None:
     edges_list = [
         # (1, 4), (1, 2), (2, 4), (2, 5), (3, 1), (3, 6),
         # (4, 3), (4, 5), (4, 6), (4, 7), (5, 7), (7, 6)
-        (4, 1), (4, 2), (4, 3), (4, 5), (4, 6), (4, 7), 
+        (4, 1), (4, 2), (4, 3), (4, 5), (4, 6), (4, 7),
     ]
 
     weighted_edges_list = [
@@ -332,6 +328,7 @@ def main() -> None:
     print('# -- Kruskal --')
     result = test_weighted.kruskal()
     print(result)
+
 
 if __name__ == '__main__':
     main()
