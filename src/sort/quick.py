@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType
 ElementType = Union[int]
@@ -16,10 +16,10 @@ ElementType = Union[int]
 # Implementation of Quick Sort.
 def quick_sort(arr: list[ElementType]) -> None:
     r"""Sort a list of numbers in ascending order.
-    
+
     Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
     :math:`O(n \log n)`.  Worst Case: :math:`O(n^2)`.
-    
+
     Space complexity is :math:`O(\log n)`.
     """
     length = len(arr)
@@ -74,7 +74,7 @@ def _partition(arr: list[ElementType], start: int, end: int) -> None:
                 low, high = low+1, high-1
             else:
                 break
-        
+
         # Process the sorting recursively.
         arr[low], arr[end-2] = arr[end-2], arr[low]
         _partition(arr, start, low)
@@ -87,8 +87,8 @@ def _partition(arr: list[ElementType], start: int, end: int) -> None:
 
 def main() -> None:
     # Create random list.
-    arr_2 = [random.randint(-9,99) for _ in range(2)]
-    arr_3 = [random.randint(-9,99) for _ in range(3)]
+    arr_2 = [random.randint(-9, 99) for _ in range(2)]
+    arr_3 = [random.randint(-9, 99) for _ in range(3)]
 
     # Test _median_of_three.
     _median_of_three(arr_2, 0, 2)
@@ -97,7 +97,7 @@ def main() -> None:
     assert arr_3[0] <= arr_3[1] <= arr_3[2]
 
     # Create random list.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,20))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 20))]
 
     # Quick Sort.
     quick_sort(arr)

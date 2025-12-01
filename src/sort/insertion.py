@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union
 
 # Define the ElementType
 ElementType = Union[int]
@@ -16,7 +16,7 @@ ElementType = Union[int]
 # Implementation of Insertion Sort.
 def insertion_sort(arr: list[ElementType]) -> None:
     """Sort a list of numbers in ascending order.
-    
+
     Stable.  Best Case: :math:`O(n)`.  Average Case: :math:`O(n^2)`.
     Worst Case: :math:`O(n^2)`.
     """
@@ -36,7 +36,7 @@ def insertion_sort(arr: list[ElementType]) -> None:
 # Entry point with simple testing.
 def main() -> None:
     # Create random list.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,10))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 10))]
     print(arr)
 
     # Sort array.

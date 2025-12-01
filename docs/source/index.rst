@@ -27,8 +27,8 @@ situations.
 
 * Other Relevant Conventions and Guidelines:
 
-  * `Google Style Guides <https://google.github.io/styleguide/>`__
   * `NumPy Styel Guides <https://numpydoc.readthedocs.io/en/latest/format.html>`__
+  * `Google Style Guides <https://google.github.io/styleguide/>`__
   * `Conventional Commits <https://www.conventionalcommits.org/en/v1.0.0/>`__
   * `Semantic Versioning <https://semver.org/>`__
 

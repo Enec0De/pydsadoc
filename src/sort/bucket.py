@@ -6,8 +6,7 @@ __all__ = ['bucket_sort']
 __version__ = '0.1'
 __author__ = 'Aina'
 
-import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType
 ElementType = Union[int]

@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType
 ElementType = Union[int]
@@ -20,10 +20,10 @@ def _sedgewick(n: int) -> int:
         raise ValueError('n must be an non-negative integer.')
 
     # Return the item of the sequence.
-    if n%2:
+    if n % 2:
         return 9*(2<<n) - 9*(2<<(n//2)) + 1
     else:
-        return 8*(2<<n) - 6*(2<<((n+1)//2)) + 1 
+        return 8*(2<<n) - 6*(2<<((n+1)//2)) + 1
 
 
 # Generate the full sedgewick sequence.
@@ -45,7 +45,7 @@ def _sedgewick_sequence(length: int) -> list[int]:
 # Implementation of Shell Sort.
 def shell_sort(arr: list[ElementType]) -> None:
     r"""Sort a list of numbers in ascending order.
-    
+
     Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
     :math:`O(n^{4/3})`.  Worst Case: :math:`O(n^{3/2})`.
 
@@ -56,7 +56,7 @@ def shell_sort(arr: list[ElementType]) -> None:
     length = len(arr)
     gap_sequence = _sedgewick_sequence(length)
     for gap in gap_sequence:
-        
+
         # Insertion sort.
         for i in range(gap, length):
             temp = arr[i]
@@ -66,11 +66,11 @@ def shell_sort(arr: list[ElementType]) -> None:
                 j += gap
             else:
                 arr[i-j+gap] = temp
-    
+
 
 def main() -> None:
     # Create random array.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,10))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 10))]
     print(arr)
 
     # Shell sort.

@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType.
 ElementType = Union[int]
@@ -16,7 +16,7 @@ ElementType = Union[int]
 # Implementation of Heap Sort.
 def heap_sort(arr: list[ElementType]) -> None:
     r"""Sort a list of numbers in ascending order.
-    
+
     Not Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
     :math:`O(n \log n)`.  Worst Case: :math:`O(n \log n)`.
     """
@@ -30,7 +30,7 @@ def heap_sort(arr: list[ElementType]) -> None:
         parent = 0
 
         # Heapify the sub sequence unsorted.
-        while (child := 2*parent+ 1) < length:
+        while (child := 2*parent + 1) < length:
 
             # Chose the large one.
             if child != length - 1 and arr[child] < arr[child+1]:
@@ -84,7 +84,7 @@ def _heapify(arr: list[ElementType]) -> None:
 def main() -> None:
 
     # Test heapify.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,20))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 20))]
     _heapify(arr)
     for i in range(len(arr)):
         if 2*i + 1 < len(arr):
@@ -93,11 +93,11 @@ def main() -> None:
             assert arr[i] >= arr[2*i+2]
 
     # Test heap_sort.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,20))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 20))]
     heap_sort(arr)
     for i in range(len(arr)-1):
         assert arr[i] <= arr[i+1]
-    
+
 
 if __name__ == '__main__':
     main()

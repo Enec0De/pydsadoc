@@ -6,8 +6,7 @@ __all__ = ['tim_sort']
 __version__ = '0.1'
 __author__ = 'Aina'
 
-import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType
 ElementType = Union[int]
@@ -15,3 +14,4 @@ ElementType = Union[int]
 
 def tim_sort(arr: list[int]) -> None:
     """Sort a list of numbers in ascending order(TBD)."""
+    ...

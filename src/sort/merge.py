@@ -7,7 +7,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional
+from typing import Union
 
 # Define ElementType
 ElementType = Union[int]
@@ -16,10 +16,10 @@ ElementType = Union[int]
 # Implementation of Merge Sort.
 def merge_sort(arr: list[ElementType]) -> None:
     r"""Sort a list of numbers in ascending order.
-        
+
     Stable.  Best Case: :math:`O(n \log n)`.  Average Case:
     :math:`O(n \log n)`.  Worst Case: :math:`O(n \log n)`.
-    
+
     Space complexity is :math:`O(n)`.
     """
     length = len(arr)
@@ -29,7 +29,7 @@ def merge_sort(arr: list[ElementType]) -> None:
 
 # Divide the array into two parts and merge them.
 def _merge_divide(arr: list[ElementType], temp: list[ElementType],
-           start: int, end: int) -> None:
+                  start: int, end: int) -> None:
     length = end - start
 
     # Divide the array if the list length large than 1.
@@ -71,7 +71,7 @@ def _merge_conquer(arr: list[ElementType], temp: list[ElementType],
 # Entry point with simple testing.
 def main() -> None:
     # Create random list.
-    arr = [random.randint(-9,99) for _ in range(random.randint(1,20))]
+    arr = [random.randint(-9, 99) for _ in range(random.randint(1, 20))]
     print(arr)
 
     # Merge Sort.
