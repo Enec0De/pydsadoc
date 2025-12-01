@@ -26,8 +26,8 @@ class MinHeap:
         return self.size
 
     def heapify(self, arr: list[ElementType], /) -> None:
-        """Make heap from list in a more efficient way. 
-        
+        """Make heap from list in a more efficient way.
+
         It's also called Floyd Algorithm, which is quicker than pushing
         items one by one.  Time complexity is :math:`O(n)`.
         """
@@ -36,22 +36,22 @@ class MinHeap:
         self.size = len(arr)
 
         # Compare within the subheap
-        current = (self.size-2) // 2       
+        current = (self.size-2) // 2
         while current >= 0:
             parent = current
             temp = self.obj[current]
             while (child := parent*2 + 1) <= self.size - 1:
                 # Choose the smaller element.
-                if (child != self.size -1 
+                if (child != self.size - 1
                     and self.obj[child] > self.obj[child+1]):
                     # child now point to the smaller one.
                     child += 1
-                
+
                 # child node is smaller than the parent node.
                 if self.obj[child] < temp:
                     self.obj[parent] = self.obj[child]
                     parent = child
-                
+
                 # parent is the palce where node should be.
                 else:
                     break
@@ -97,11 +97,10 @@ class MinHeap:
 
         # Return the first node.
         return retnode
-        
 
     def heappush(self, obj: ElementType, /) -> None:
         r"""Push object into the heap, maintaining the heap invariant.
-        
+
         Time complexity is :math:`O(\log n)`.
         """
         # Place object in the last position of the list.
@@ -116,7 +115,7 @@ class MinHeap:
             if obj < self.obj[parent]:
                 self.obj[current] = self.obj[parent]
                 current = parent
-            
+
             # current is the place where object should be.
             else:
                 break
@@ -124,7 +123,7 @@ class MinHeap:
         # Palce ojbect in the crrent.
         if current != self.size:
             self.obj[current] = obj
-        
+
         # Increase self size.
         self.size += 1
 
@@ -170,7 +169,7 @@ class Huffman:
             temp = HNode(left.weight+right.weight)
             temp.left, temp.right = left, right
             heap.heappush(temp)
-        
+
         # Returen the root node of the Huffman Tree.
         return heap.heappop()
 
@@ -182,15 +181,14 @@ class Huffman:
         # Define the function taht yield huffman code.
         def string_code(huffman: HNode, string: str, /) -> None:
             if huffman.char is not None:
-                nonlocal huffman_code
                 huffman_code[huffman.char] = string
             else:
                 string_code(cast(HNode, huffman.left), string+'0')
                 string_code(cast(HNode, huffman.right), string+'1')
 
         # Excute the recursion function.
-        string_code(self.head,'')
-            
+        string_code(self.head, '')
+
         # Return the rusult code map.
         return huffman_code
 
@@ -201,7 +199,7 @@ class Huffman:
         wpl = 0
 
         # Define function to calculate wpl recursively.
-        def calculate_wpl(huffman: HNode, depth:int, /) -> None:
+        def calculate_wpl(huffman: HNode, depth: int, /) -> None:
             nonlocal wpl
             depth += 1
             if huffman.char is not None:
@@ -217,7 +215,7 @@ class Huffman:
         return wpl
 
 
-# -- Test Module ------------------------------------------------------- 
+# -- Test Module ------------------------------------------------------
 #
 def test_heap() -> None:
     # Generate new random list.
@@ -235,7 +233,7 @@ def test_heap() -> None:
     heap_b = MinHeap()
     arr_node = [HNode(x) for x in arr]
     heap_b.heapify(arr_node)
-    
+
     # assert check
     assert heap_a.size == len(arr)
     assert heap_b.size == len(arr)
@@ -248,17 +246,18 @@ def test_heap() -> None:
         result_a.append(str(a.weight))
         result_b.append(str(b.weight))
         assert a.weight == b.weight
-        
+
     assert result_a == result_b
     # Print the result_a and result_b
     # print(', '.join(result_a))
     # print(', '.join(result_b))
 
+
 def test_huffman() -> None:
     # Creat a random frequence dictionary
     freq: dict[str, int] = {}
-    for _ in range(random.randint(2,10)):
-        freq[chr(random.randint(65,90))] = random.randint(1,20)
+    for _ in range(random.randint(2, 10)):
+        freq[chr(random.randint(65, 90))] = random.randint(1, 20)
     # print('Frequence dictionary: ', end='')
     # print(freq)
 
@@ -279,7 +278,7 @@ def test_huffman() -> None:
         wpl_manually += freq[key] * len(code_map[key])
 
     # wpl and wpl_sum should be the same value.
-    assert wpl_manually== wpl_calculate
+    assert wpl_manually == wpl_calculate
 
 
 def main() -> None:

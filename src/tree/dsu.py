@@ -10,7 +10,7 @@ import random
 
 class UnionFind:
     r"""Implementation of the DSU with a sequential list.
-    
+
     It's notably that the amortized time complexity of DSU is
     :math:`O(\alpha(n))`.
     """
@@ -22,7 +22,7 @@ class UnionFind:
     def __str__(self, /) -> str:
         """Implement built-in function ``print()``."""
         # Define variables.
-        string ='# -- Union Find: --\n'
+        string = '# -- Union Find: --\n'
         length = len(self.parent)
         count = [[] for _ in range(length)]
 
@@ -42,8 +42,8 @@ class UnionFind:
 
     def find(self, x: int, /) -> int:
         r"""The find operation with path compression.
-        
-        The worst-case time complexity is :math:`O(\log n)`. 
+
+        The worst-case time complexity is :math:`O(\log n)`.
         """
         # The boundary condition for recursion.
         if self.parent[x] < 0:
@@ -56,17 +56,17 @@ class UnionFind:
 
     def union(self, x: int, y: int, /) -> None:
         r"""The union operation by rank.
-        
+
         The worst-case time complexity is :math:`O(\log n)`.
         """
         # Find the root of the two nodes.
-        r_x = self.find(x) 
+        r_x = self.find(x)
         r_y = self.find(y)
 
         # Do nothing.
         if r_x == r_y:
             return
-        
+
         # Union by rank.
         if self.parent[r_x] <= self.parent[r_y]:
             self.parent[r_x] += self.parent[r_y]
@@ -74,6 +74,7 @@ class UnionFind:
         else:
             self.parent[r_y] += self.parent[r_x]
             self.parent[r_x] = r_y
+
 
 # -- Test module -------------------------------------------------------
 #
@@ -91,6 +92,7 @@ def main() -> None:
     # Print the result.
     print(dsu.parent)
     print(dsu)
+
 
 if __name__ == '__main__':
     main()
