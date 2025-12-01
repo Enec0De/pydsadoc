@@ -21,7 +21,7 @@ class Node:
                  *args, **kwargs) -> None:
         """Initialize self."""
         # Store the data of the node.
-        self.obj = obj 
+        self.obj = obj
 
         # Store the pointer to the next node.
         self.next: Optional[Node] = None
@@ -57,11 +57,11 @@ class LinkedList:
 
     def __len__(self, /) -> int:
         """Implement built-in function ``len()``."""
-        return self.size 
+        return self.size
 
     def __str__(self, /) -> str:
         """Implement built-in function ``print()``.
-        
+
         Treaverse the linked list.  The time complexity is :math:`O(n)`.
         """
         # Define the variables stores the data and pointer to the node.
@@ -70,7 +70,7 @@ class LinkedList:
 
         # Treaverse the linked list.
         while ptr is not None:
-            arr.append(ptr.obj) 
+            arr.append(ptr.obj)
             ptr = ptr.next
 
         # Format the output.
@@ -78,8 +78,8 @@ class LinkedList:
 
     def append(self, obj: ElementType, /) -> None:
         """Append object to the end of the list.
-        
-        Time complexity is :math:`O(n).` 
+
+        Time complexity is :math:`O(n).`
         """
         # Define the variables.
         temp = Node(obj)
@@ -93,13 +93,13 @@ class LinkedList:
         ptr.next = temp
         self.size += 1
 
-    def index(self, 
-              value: ElementType, 
-              start: int = 0, 
+    def index(self,
+              value: ElementType,
+              start: int = 0,
               stop: int = MAXSIZE, /) -> int:
         """Return first index of the value.
-        
-        At or after index start and before index stop.  Time complexity 
+
+        At or after index start and before index stop.  Time complexity
         is :math:`O(n)`.
         """
         # Define the variables.
@@ -118,7 +118,7 @@ class LinkedList:
 
     def insert(self, index: int, obj: ElementType, /) -> None:
         """Insert object before index.
-        
+
         Time complexity is :math:`O(n)`.
         """
         # Define the variables.
@@ -138,7 +138,7 @@ class LinkedList:
 
     def pop(self, index: int = -1, /) -> Node:
         """Remove and return node at index (default last).
-        
+
         Time complexity is :math:`O(n)`.
         """
         # Check the index range, and set default value of index.
@@ -146,7 +146,7 @@ class LinkedList:
             raise IndexError('index out of range.')
         elif index == -1:
             index += self.size
-        
+
         # Define variables.
         i: int = -1
         ptr: Optional[Node] = self.head
@@ -167,11 +167,10 @@ class LinkedList:
 
     def remove(self, value: ElementType, /) -> None:
         """Remove first occurrence of value.
-        
+
         Time complexity is :math:`O(n)`.
         """
         # Define the variables.
-        i: int = -1
         ptr = self.head
 
         # Finde the node have the value.
@@ -185,7 +184,7 @@ class LinkedList:
         # Nof found.
         raise IndexError('not found.')
 
-    
+
 # -- Test module -------------------------------------------------------
 #
 def check_equal(arr: list[int], other: LinkedList) -> None:
@@ -195,6 +194,7 @@ def check_equal(arr: list[int], other: LinkedList) -> None:
     # Check the element of the sequential list.
     for i in range(len(arr)):
         assert arr[i] == other[i], f'arr[{i}] != other[{i}]'
+
 
 def test_append(arr: list[int], other: LinkedList) -> None:
     # Fill the sequential list by using append method.
@@ -206,16 +206,18 @@ def test_append(arr: list[int], other: LinkedList) -> None:
     check_equal(arr, other)
     print('Append OK!')
 
+
 def test_index(arr: list[int], other: LinkedList) -> None:
     # Select a random element in arr.
     print('Begin Index ...')
     for _ in range(100):
-        random_item= random.choice(arr)
+        random_item = random.choice(arr)
         assert arr.index(random_item) == other.index(random_item), \
-               f'Index failed'
+               'Index failed'
 
     # Test OK!
     print('Index OK!')
+
 
 def test_pop(arr: list[int], other: LinkedList) -> None:
     # Pop some item from two list.
@@ -228,6 +230,7 @@ def test_pop(arr: list[int], other: LinkedList) -> None:
     # Check wether the two lists are equal.
     check_equal(arr, other)
     print('Pop OK!')
+
 
 def test_insert_remove(arr: list[int], other: LinkedList) -> None:
     print('Begin Insert and Remove ...')
@@ -246,6 +249,7 @@ def test_insert_remove(arr: list[int], other: LinkedList) -> None:
 
     # Check wether the two lists are equal.
     print('Insert and Remove OK!')
+
 
 # -- Main entry point of module ----------------------------------------
 #
@@ -266,13 +270,13 @@ def main() -> None:
     test_pop(sample, seqlist)
 
     # Test insert and remove method.
-    test_insert_remove(sample,seqlist)
+    test_insert_remove(sample, seqlist)
 
     # All test finish.
     print('All test OK!')
     output = f'sample: {sample}\nseqlist: {seqlist}'
     print(output)
 
+
 if __name__ == '__main__':
     main()
-
