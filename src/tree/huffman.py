@@ -139,11 +139,11 @@ class HNode:
         self.left: Optional[HNode] = None
         self.right: Optional[HNode] = None
 
-    def __eq__(self, other: HNode, /) -> bool:
+    def __eq__(self, other: 'HNode', /) -> bool:
         """Return self == other"""
         return self.weight == other.weight
 
-    def __lt__(self, other: HNode, /) -> bool:
+    def __lt__(self, other: 'HNode', /) -> bool:
         """Return self < other"""
         return self.weight < other.weight
 

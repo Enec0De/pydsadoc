@@ -115,7 +115,7 @@ class MGraph:
         self.adjmat[w][v] = weight
         self.ne += 1
 
-    def prim(self, start: int = 1, /) -> MGraph:
+    def prim(self, start: int = 1, /) -> 'MGraph':
         r"""The Prim's algorithm that finds a minumum spanning tree.
 
         Time complexity is :math:`O(\vert V \vert ^2)`.

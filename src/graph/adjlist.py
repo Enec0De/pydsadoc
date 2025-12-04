@@ -16,7 +16,7 @@ class GNode:
     """Atomic element of the adjacency list."""
 
     def __init__(self, vertex: int, data: float = 1,
-                 next: Optional[GNode] = None, /) -> None:
+                 next: Optional['GNode'] = None, /) -> None:
         """Initialize self."""
         # The index of the vertex.
         self.vertex = vertex
@@ -27,11 +27,11 @@ class GNode:
         # The pointer to the next vertex.
         self.next = next
 
-    def __eq__(self, other: GNode, /) -> bool:
+    def __eq__(self, other: 'GNode', /) -> bool:
         """Return self == other."""
         return self.data == other.data
 
-    def __lt__(self, other: GNode, /) -> bool:
+    def __lt__(self, other: 'GNode', /) -> bool:
         """Return self < other."""
         return self.data < other.data
 
@@ -230,7 +230,7 @@ class LGraph:
         # Number of edges increases.
         self.ne += 1
 
-    def kruskal(self) -> LGraph:
+    def kruskal(self) -> 'LGraph':
         r"""The Kruskal's algorithm that finds a minumum spanning tree.
 
         Time complexity is :math:`O(\vert E \vert \log \vert E \vert).`
