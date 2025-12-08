@@ -1,9 +1,8 @@
-# Created by Aina. 
-# Exclude the directories `build' that Sphinx builds.
-docs/build
+# Exclude the specified directories.
+.venv/
+.vscode/
+docs/_build/
+src/_pytemp/
 
-# Exclude the directories `__pycache__' that Python builds.
-__pycache__
-
-# Exclude the directory
-src/_test
+# Exclude all __pycache__ directories at any level.
+__pycache__/

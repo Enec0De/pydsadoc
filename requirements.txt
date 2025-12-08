@@ -3,13 +3,18 @@
 # Author: Aina.
 # Python version: 3.9.
 
-# Development Tool Dependencies 
-pylint~=3.3.9
+# Code Style Checker
 flake8~=7.3.0
+black~=25.11.0
+isort~=6.1.0
 
 # Testing Framework
 pytest~=8.4.2
 pytest-cov~=7.0.0
+
+# Requirements for CI/CD pipeline
+pylint~=3.3.9
+mypy~=1.19.0
 
 # Requirements for building with Sphinx
 Sphinx~=7.4.7

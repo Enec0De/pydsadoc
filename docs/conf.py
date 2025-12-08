@@ -1,16 +1,9 @@
-# Including specific path.
+# Add the extra specific path to the module searching path.
 
 import sys
 from pathlib import Path
 
-# Define list stores the paths to add.
-paths_to_add= ['']
-
-# Define new root of source files.  And process the insertion of the paths.
-src_root = Path(__file__).resolve().parents[2] / 'src'
-for paths in paths_to_add:
-    sys.path.insert(0, str(src_root/paths))
-
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -20,10 +13,9 @@ for paths in paths_to_add:
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Pydsadoc"
+project = "pydsadoc"
 copyright = '2025, Aina'
 author = 'Aina'
-
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -37,17 +29,12 @@ extensions = [
     'sphinx_inline_tabs',
 ]
 
-templates_path = [
-    '_templates', 
-    '_templates/furo',
-]
+templates_path = ['_templates']
 
-exclude_patterns = []
-
+exclude_patterns = ['_build']
 
 # -- Options for the Python domain -------------------------------------------
 add_module_names = False
-
 
 # -- Options for sphinx.ext.autodoc ------------------------------------------
 
@@ -56,13 +43,11 @@ autodoc_default_options = {
     'undoc-members': True,
 }
 
-
 # -- Options for sphinx.ext.intersphinx --------------------------------------
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
 }
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
