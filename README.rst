@@ -18,9 +18,34 @@ simple projects, such as the ``.pyi`` stub files.
 Getting started
 ---------------
 
-Create a Python virtual environment by executing the following command::
+Create a Python virtual environment by executing the following commands::
 
     git clone https://github.com/Enec0De/pydsadoc.git
     cd pydsadoc
     python -m venv .venv
-    python -m pip install -r requirements.txt
+
+then activate the virtual environment::
+
+    # Linux/macOS
+    source .venv/bin/activate
+
+    # or Windows
+    .venv\Scripts\activate 
+
+For the dependencies, you can simply execute the following command::
+
+    # With normal dependencies
+    python -m pip install -U pip
+    python -m pip install -e .[test]
+
+    # or with optional dependencies
+    python -m pip install -U pip
+    python -m pip install -e .[test]
+
+or you can use poetry (advanced Python packaging and dependency management)::
+
+    # With normal dependencies
+    poetry install
+
+    # or with optional dependencies
+    poetry install -E test

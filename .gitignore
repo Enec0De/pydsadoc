@@ -1,8 +1,5 @@
-# Exclude the specified directories.
+.mypy_cache/
 .venv/
-.vscode/
+temp/
 docs/_build/
-src/_pytemp/
-
-# Exclude all __pycache__ directories at any level.
 __pycache__/
