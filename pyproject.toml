@@ -46,6 +46,11 @@ build-backend = "poetry.core.masonry.api"
 packages = [{include = "pydsadoc", from = "src"}
 ]
 
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+priority = "primary"
+
 [tool.pytest]
 pythonpath = ["src"]
 testpaths = ["tests"]
