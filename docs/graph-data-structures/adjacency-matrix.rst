@@ -1,7 +1,7 @@
 Adjacency Matrix Graph
 ======================
 
-**Source code:** `src/pydsadoc/_graph/adjmat.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_graph/adjmat.py>`__
+**Source code:** `src/pydsadoc/_graph/adjacency_matrix.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_graph/adjacency_matrix.py>`__
 
 .. py:currentmodule:: pydsadoc
 

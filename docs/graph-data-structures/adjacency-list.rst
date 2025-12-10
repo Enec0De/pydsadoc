@@ -1,7 +1,7 @@
 Adjacency List Graph
 ====================
 
-**Source code:** `src/pydsadoc/_graph/adjlist.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_graph/adjlist.py>`__
+**Source code:** `src/pydsadoc/_graph/adjacency_list.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_graph/adjacency_list.py>`__
 
 .. py:currentmodule:: pydsadoc
 
