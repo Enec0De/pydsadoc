@@ -1,11 +1,8 @@
 #!/urs/bin/env python
 
 from typing import TypeVar
-from pydsadoc.sort._iscomparable import Comparable
+from pydsadoc.sorting._iscomparable import Comparable
 
-import sys
-
-print(sys.path)
 # Define the element type of the list to be sorted 
 # and the minimum run length.
 T = TypeVar("T", bound=Comparable)

@@ -1,15 +1,16 @@
 Sequential List
 ===============
 
-**Source code:** `src/linear/seque.py <https://github.com/Enec0De/pydsadoc/blob/main/src/linear/seque.py>`__
+**Source code:** `src/pydsadoc/_linear/seque.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_linear/seque.py>`__
 
-.. autoclass:: linear.SeqList
+.. py:currentmodule:: pydsadoc
+
+.. autoclass:: SeqList
    :members:
    :special-members: __str__
 
 .. rubric:: Stack
 
-.. py:currentmodule:: linear
 
 A stack can be implemented with a sequential list :py:class:`SeqList` and its
 methods :py:meth:`SeqList.append` and :py:meth:`SeqList.pop` as described

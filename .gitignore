@@ -1,5 +1,12 @@
+.DS_Store
+
+/temp/
+/docs/_build/
+
+.coverage
+.pytest_cache
 .mypy_cache/
-.venv/
-temp/
-docs/_build/
 __pycache__/
+
+.venv/
+/poetry.toml

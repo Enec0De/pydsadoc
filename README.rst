@@ -18,13 +18,16 @@ simple projects, such as the ``.pyi`` stub files.
 Getting started
 ---------------
 
+With Pip
+''''''''
+
 Create a Python virtual environment by executing the following commands::
 
     git clone https://github.com/Enec0De/pydsadoc.git
     cd pydsadoc
     python -m venv .venv
 
-then activate the virtual environment::
+then activate the virtual environment using one of the following commands::
 
     # Linux/macOS
     source .venv/bin/activate
@@ -32,20 +35,27 @@ then activate the virtual environment::
     # or Windows
     .venv\Scripts\activate 
 
-For the dependencies, you can simply execute the following command::
+For the specific dependencies, you can simply execute either of the following commands::
 
-    # With normal dependencies
+    # For normal main dependencies
+    python -m pip install -U pip
+    python -m pip install -e .
+
+    # For optional group dependencies
     python -m pip install -U pip
     python -m pip install -e .[test]
 
-    # or with optional dependencies
-    python -m pip install -U pip
-    python -m pip install -e .[test]
 
-or you can use poetry (advanced Python packaging and dependency management)::
+With Poetry
+'''''''''''
 
-    # With normal dependencies
+You can use poetry (advanced Python packaging and dependency management)::
+
+    git clone https://github.com/Enec0De/pydsadoc.git
+    cd pydsadoc
     poetry install
 
-    # or with optional dependencies
+For the specific group dependencies::
+
+    # Alternatively, for optional group dependencies
     poetry install -E test

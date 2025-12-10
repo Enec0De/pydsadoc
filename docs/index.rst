@@ -1,8 +1,3 @@
-.. Data Structures and Algorithms documentation master file, created by
-   sphinx-quickstart on Sun Oct 12 19:43:07 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 .. _main-index:
 
 Aina's Test Field
@@ -51,11 +46,20 @@ Full table of Contents
 
 .. toctree::
    :maxdepth: 2
+   :caption: Data Structures
 
-   linear/index
-   tree/index
-   graph/index
-   sort/index
-   search/index
+   linear-data-structures/index
+   tree-data-structures/index
+   graph-data-structures/index
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Algorithms
+
+   sorting-algorithms/index
+   searching-algorithms/index
+
+.. toctree::
+   :caption: Apilist
+
    apilist
-

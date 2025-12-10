@@ -1,11 +1,16 @@
 API List
 ========
 
+.. py:currentmodule:: pydsadoc
+
 .. autosummary::
    :nosignatures:
 
-   linear.SeqList
-   linear.LinkedList
+   SeqList
+   LinkedList
+
+
+..
    tree.AVL
    tree.Huffman
    tree.MinHeap

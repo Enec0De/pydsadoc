@@ -1,17 +1,16 @@
 Linked List
 ===========
 
-**Source code:** `src/linear/linked.py <https://github.com/Enec0De/pydsadoc/blob/main/src/linear/linked.py>`__
+**Source code:** `src/pydsadoc/_linear/linked.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_linear/linked.py>`__
 
-.. autoclass:: linear.Node
+.. py:currentmodule:: pydsadoc
 
-.. autoclass:: linear.LinkedList
+.. autoclass:: LinkedList
    :members:
    :special-members: __str__
 
 .. rubric:: Stack
 
-.. py:currentmodule:: linear
 
 A stack can be implemented with a linked list :py:class:`LinkedList` and its
 methods :py:meth:`LinkedList.insert` and :py:meth:`LinkedList.pop` as described

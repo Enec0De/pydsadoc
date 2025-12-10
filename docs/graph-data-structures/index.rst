@@ -6,6 +6,6 @@ Graph Data Structures
 .. toctree::
    :maxdepth: 5
 
-   adjlist
-   adjmat
-   toposort
+   adjacency-list
+   adjacency-matrix
+   topological-sorting

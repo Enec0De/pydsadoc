@@ -1,9 +1,11 @@
 Adjacency Matrix Graph
 ======================
 
-**Source code:** `src/graph/adjmat.py <https://github.com/Enec0De/pydsadoc/blob/main/src/graph/adjmat.py>`__
+**Source code:** `src/pydsadoc/_graph/adjmat.py <https://github.com/Enec0De/pydsadoc/blob/main/src/pydsadoc/_graph/adjmat.py>`__
 
-.. autoclass:: graph.MGraph
+.. py:currentmodule:: pydsadoc
+
+.. autoclass:: MGraph
    :members:
 
 .. rubric:: Floyd-Warshall Algorithm
@@ -15,7 +17,7 @@ graph represented by an adjacency matrix.
 .. rubric:: Prim's Algorithm
 
 The key to the optimization of the Prim's algorithm is the implementation of a
-priority queue, such as the :py:class:`~tree.huffman.MinHeap` in the 
+priority queue, such as the :py:class:`MinHeap` in the 
 :ref:`previous chapter <tree-chapter>`, or the :py:mod:`heapq` in the python
 standard library.
 
