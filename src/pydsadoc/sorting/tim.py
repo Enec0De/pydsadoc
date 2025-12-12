@@ -1,6 +1,5 @@
 #!/urs/bin/env python
 
-import sys
 from typing import TypeVar, Any
 from pydsadoc.sorting._iscomparable import Comparable
 
@@ -75,7 +74,7 @@ def _merge(arr: list[T], left: int, mid: int, right: int, temp: list[Any]):
         if arr[left_ptr] <= arr[right_ptr]:
             temp[temp_ptr] = arr[left_ptr]
             left_ptr += 1
-        elif arr[left_ptr] > arr[right_ptr]:
+        else:
             temp[temp_ptr] = arr[right_ptr]
             right_ptr += 1
         temp_ptr += 1
@@ -110,29 +109,29 @@ def _merge_collapse(arr: list[T], runs: list[tuple[int, ...]], temp: list[Any]) 
         # Do not meet the condition: X > Y + Z,
         # or the condition: W > X + Y.
         if condition_1 or condition_2:
-            _, y_left, y_right = runs[-2]
+            _, mid_l, mid_r = runs[-2]
 
             # For the case that length of X < length of Z.
             if runs[-3][0] < runs[-1][0]:
-                _, x_left, _ = runs[-3]
-                _merge(arr, x_left, y_left, y_right, temp)
-                runs[-3:-1] = [(y_right - x_left, x_left, y_right)]
+                start = runs[-3][1]
+                _merge(arr, start, mid_l, mid_r, temp)
+                runs[-3:-1] = [(mid_r - start, start, mid_r)]
             # For the case that length of X >= length of Z.
             else:
-                _, _, z_right = runs[-1]
-                _merge(arr, y_left, y_right, z_right, temp)
-                runs[-2:] = [(z_right - y_left, y_left, z_right)]
+                end = runs[-1][2]
+                _merge(arr, mid_l, mid_r, end, temp)
+                runs[-2:] = [(end - mid_l, mid_l, end)]
 
         # Do not meet the condition: Y > Z.
         elif runs[-2][0] <= runs[-1][0]:
-            _, _, z_right = runs[-1]
-            _, y_left, y_right = runs[-2]
-            _merge(arr, y_left, y_right, z_right, temp)
-            runs[-2:] = [(z_right - y_left, y_left, z_right)]
+            _, _, end= runs[-1]
+            _, start, mid= runs[-2]
+            _merge(arr, start, mid, end, temp)
+            runs[-2:] = [(end - start, start, end)]
 
         # All conditions is checked ok.
         else:
-            break
+            return
 
 
 def tim_sort(arr: list[T]) -> None:
