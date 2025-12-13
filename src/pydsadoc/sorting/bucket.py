@@ -8,10 +8,11 @@ T = TypeVar("T", bound=float)
 
 # Elements in arr should be a decimal that 0 < 1.
 def bucket_sort(arr: list[T]) -> None:
-    """Sort a list of numbers in ascending order.
+    """Sort a list of numbers in ascending order(TBD).
 
-    Worst Case Time Complexity: :math:`O(n^2)`.
-    Best Case Time Complexity : :math:`O(n + k)`.
+    Stable if using stable sorting algorithms for every bucket.  Worst
+    Case Time Complexity: :math:`O(n^2)`.  Best Case Time Complexity:
+    :math:`O(n + k)`.
 
     Auxiliary Space: :math:`O(n+k)`.
     """
@@ -20,12 +21,12 @@ def bucket_sort(arr: list[T]) -> None:
 
     # Put array elements in different bucket.
     for item in arr:
-        id = int(item * length)
-        buckets[id].append(item)
+        bucket_id = int(item * length)
+        buckets[bucket_id].append(item)
 
     # Sort every bucket.
-    for list in buckets:
-        list.sort()
+    for bucket in buckets:
+        bucket.sort()
 
     # Concatente all buckets into arr.
     index = 0

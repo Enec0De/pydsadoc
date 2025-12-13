@@ -8,15 +8,20 @@ T = TypeVar("T", bound=int)
 
 # Element in arr should large than 0.
 def count_sort(arr: list[T]) -> None:
-    """Sort a list of numbers in ascending order(TBD)."""
+    """Sort a list of numbers in ascending order(TBD).
+
+    Stable.  Time Complexity: :math:`O(N+M)`.
+
+    Auxiliary Space: :math:`O(N+M)`.
+    """
     arr_range = max(arr) + 1
     cntarr = [0 for _ in range(arr_range)]
 
     for item in arr:
         cntarr[item] += 1
 
-    for id in range(1, len(cntarr)):
-        cntarr[id] += cntarr[id - 1]
+    for cnt_id in range(1, len(cntarr)):
+        cntarr[cnt_id] += cntarr[cnt_id - 1]
 
     copy = arr.copy()
     for index in range(len(arr) - 1, -1, -1):
