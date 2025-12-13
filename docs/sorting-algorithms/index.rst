@@ -43,5 +43,5 @@ Non-Comparison Based Sort(TBD)
 We do not compare the elements in a non-comparison-based sorting algorithm.
 
 .. autofunction:: bucket_sort
-.. autofunction:: counting_sort
+.. autofunction:: count_sort
 .. autofunction:: radix_sort

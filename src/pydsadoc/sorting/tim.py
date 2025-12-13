@@ -124,8 +124,8 @@ def _merge_collapse(arr: list[T], runs: list[tuple[int, ...]], temp: list[Any]) 
 
         # Do not meet the condition: Y > Z.
         elif runs[-2][0] <= runs[-1][0]:
-            _, _, end= runs[-1]
-            _, start, mid= runs[-2]
+            _, _, end = runs[-1]
+            _, start, mid = runs[-2]
             _merge(arr, start, mid, end, temp)
             runs[-2:] = [(end - start, start, end)]
 
@@ -135,7 +135,13 @@ def _merge_collapse(arr: list[T], runs: list[tuple[int, ...]], temp: list[Any]) 
 
 
 def tim_sort(arr: list[T]) -> None:
-    """Sort a list of numbers in ascending order."""
+    r"""Sort a list of numbers in ascending order.
+
+    Stable.  Best Case: :math:`O(n)`.  Average Case:
+    :math:`O(n \log n)`.  Worst Case: :math:`O(n \log n)`.
+
+    Space complexity is :math:`O(n)`.
+    """
     length = len(arr)
     MINRUN = _calc_minrun(length)
     temp = [None] * length
