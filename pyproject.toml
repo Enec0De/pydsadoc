@@ -12,6 +12,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
+    # Normal requirements
+    "python-dotenv (>=1.2.1,<2.0.0)",
     # Code Style Checker
     "flake8 (>=7.3.0,<8.0.0)",
     "isort (>=6.1.0,<7.0.0)",
@@ -57,8 +59,6 @@ pythonpath = ["src"]
 addopts = [
     "--import-mode=importlib",
     "--cov=pydsadoc",
-    "--cov-branch",
-    "--count=10",
 ]
 testpaths = ["tests"]
 

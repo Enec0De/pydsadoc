@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 __all__ = [
-    "SeqList",
+    "SequenList",
     "LinkedList",
     "AVL",
     "Huffman",
@@ -19,7 +19,7 @@ __author__ = "Aina"
 from pydsadoc import sorting
 
 # The linear data structures.
-from pydsadoc._linear.seque import SeqList
+from pydsadoc._linear.contiguous import SequenList
 from pydsadoc._linear.linked import LinkedList
 
 # The tree data structres.

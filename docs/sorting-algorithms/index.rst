@@ -37,8 +37,8 @@ We compare the elements in a comparison-based sorting algorithm.
 .. autofunction:: tim_sort
 
 
-Non-Comparison Based Sort(TBD)
-------------------------------
+Non-Comparison Based Sort
+-------------------------
 
 We do not compare the elements in a non-comparison-based sorting algorithm.
 

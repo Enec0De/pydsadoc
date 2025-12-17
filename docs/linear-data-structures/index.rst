@@ -6,5 +6,5 @@ Linear Data Structures
 .. toctree::
    :maxdepth: 5
 
-   sequential-list
+   sequence-list
    linked-list
