@@ -6,7 +6,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional, cast
+from typing import Any, Union, Optional, cast
 from functools import total_ordering
 
 # Define the constant
@@ -16,7 +16,7 @@ ElementType = Union['HNode']
 class MinHeap:
     """Implementation of the minimum heap with sequential list."""
 
-    def __init__(self, /, *args, **kwargs) -> None:
+    def __init__(self, /, *args: Any, **kwargs: Any) -> None:
         """Initialize self."""
         self.obj: list[ElementType] = []
         self.size: int = 0
@@ -139,9 +139,12 @@ class HNode:
         self.left: Optional[HNode] = None
         self.right: Optional[HNode] = None
 
-    def __eq__(self, other: 'HNode', /) -> bool:
+    def __eq__(self, other: object, /) -> bool:
         """Return self == other"""
-        return self.weight == other.weight
+        if isinstance(other, HNode):
+            return self.weight == other.weight
+        else:
+            return NotImplemented
 
     def __lt__(self, other: 'HNode', /) -> bool:
         """Return self < other"""
@@ -176,7 +179,7 @@ class Huffman:
     def encode(self, /) -> dict[str, str]:
         """Encode the input freq."""
         # Creat empty dictionary stores the encode result.
-        huffman_code = {}
+        huffman_code: dict[str, str] = {}
 
         # Define the function taht yield huffman code.
         def string_code(huffman: HNode, string: str, /) -> None:

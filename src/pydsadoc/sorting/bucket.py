@@ -17,7 +17,7 @@ def bucket_sort(arr: list[T]) -> None:
     Auxiliary Space: :math:`O(n+k)`.
     """
     length = len(arr)
-    buckets = [[] for _ in range(length)]
+    buckets: list[list[T]] = [[] for _ in range(length)]
 
     # Put array elements in different bucket.
     for item in arr:

@@ -6,7 +6,8 @@ from enum import Enum, auto
 from functools import total_ordering
 from typing import Any, Generic, Optional, TypeVar, Union, cast
 
-from pydsadoc._abc_and_protocol import Comparable, Node_ABC
+from pydsadoc._abc_and_protocol import BaseNode as Node
+from pydsadoc._abc_and_protocol import ProtocolComparable as Comparable
 
 # Define the constant
 T = TypeVar("T", bound=Comparable)
@@ -21,7 +22,7 @@ class Sentinel(Enum):
 
 
 @total_ordering
-class Node(Node_ABC, Generic[T]):
+class LinkedNode(Node, Generic[T]):
     """The atomic element of the linked list."""
 
     def __init__(self, obj: Union[T, Sentinel], /, *args: Any, **kwargs: Any) -> None:
@@ -30,7 +31,7 @@ class Node(Node_ABC, Generic[T]):
         self._obj = obj
 
         # Store the pointer to the next node.
-        self.next: Optional[Node[T]] = None
+        self.next: Optional[LinkedNode[T]] = None
 
     def __eq__(self, other: object, /) -> bool:
         """Return the result of self.obj == other.obj."""
@@ -39,7 +40,7 @@ class Node(Node_ABC, Generic[T]):
         else:
             return NotImplemented
 
-    def __lt__(self, other: "Node[T]", /) -> bool:
+    def __lt__(self, other: "LinkedNode[T]", /) -> bool:
         """Return the result of self.obj < other.obj."""
         return self.obj < other.obj
 
@@ -58,7 +59,7 @@ class LinkedList(Generic[T]):
     def __init__(self, /, *args: Any, **kwargs: Any) -> None:
         """Initailize self."""
         # Initial a linked list with an sentinel node.
-        self.head: Node[T] = Node(Sentinel.node)
+        self.head: LinkedNode[T] = LinkedNode(Sentinel.node)
 
         # The number of element
         self.size = 0
@@ -73,7 +74,7 @@ class LinkedList(Generic[T]):
 
         # Define the variables for representing ptr[i]
         # Initialize the default value to the ptr[-1]
-        ptr: Optional[Node[T]] = self.head
+        ptr: Optional[LinkedNode[T]] = self.head
         i = -1
 
         # Move the variables ptr[i] point to the last node of the list.
@@ -115,7 +116,7 @@ class LinkedList(Generic[T]):
         Time complexity is :math:`O(n).`
         """
         # Define the variables.
-        temp = Node(obj)
+        temp = LinkedNode(obj)
         ptr = self.head
 
         # Treaverse to the end of the linked list.
@@ -134,7 +135,7 @@ class LinkedList(Generic[T]):
         """
         # Define the variables.
         i: int = -1
-        ptr: Optional[Node[T]] = self.head
+        ptr: Optional[LinkedNode[T]] = self.head
 
         # The variables represent the node ptr[i].
         while ptr is not None and i < stop:
@@ -153,8 +154,8 @@ class LinkedList(Generic[T]):
         """
         # Define the variables.
         i: int = -1
-        ptr: Optional[Node[T]] = self.head
-        temp = Node(obj)
+        ptr: Optional[LinkedNode[T]] = self.head
+        temp = LinkedNode(obj)
 
         # Treaverse to the node before the given index.
         while ptr.next is not None and i < index - 1:
@@ -166,7 +167,7 @@ class LinkedList(Generic[T]):
         ptr.next = temp
         self.size += 1
 
-    def pop(self, index: int = -1, /) -> Node[T]:
+    def pop(self, index: int = -1, /) -> LinkedNode[T]:
         """Remove and return node at index (default last).
 
         Time complexity is :math:`O(n)`.
@@ -178,7 +179,7 @@ class LinkedList(Generic[T]):
             index += self.size if index < 0 else 0
 
         # Define variables.
-        ptr: Optional[Node[T]] = self.head
+        ptr: Optional[LinkedNode[T]] = self.head
         i: int = -1
 
         # Treaverse to the node before the given index.
@@ -188,7 +189,7 @@ class LinkedList(Generic[T]):
             i += 1
 
         # Get the target node and remove it from the linked list.
-        temp = cast(Node[T], ptr.next)
+        temp = cast(LinkedNode[T], ptr.next)
         ptr.next = temp.next
         temp.next = None
         self.size -= 1

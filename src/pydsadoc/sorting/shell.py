@@ -16,7 +16,7 @@ ElementType = Union[int]
 # Generate the one item of the sedgewick sequence.
 def _sedgewick(n: int) -> int:
     # Check the input data n.
-    if not isinstance(n, int) or n < 0:
+    if n < 0:
         raise ValueError('n must be an non-negative integer.')
 
     # Return the item of the sequence.

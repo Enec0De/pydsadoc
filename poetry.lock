@@ -2057,4 +2057,4 @@ test = ["mypy", "pylint", "pytest", "pytest-cov", "pytest-repeat"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9"
-content-hash = "ab00500805e2b8e9ab474d092fa3777f3732bb35c068404a134620ba84ae728e"
+content-hash = "fbb480d9c7ac5c5d7ac6383f94f8a6b8708916444aa99be997502a944b96a82b"

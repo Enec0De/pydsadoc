@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """Sequence List."""
 
-import sys
 import random
-from typing import TypeVar, Any, Generic, Optional
+import sys
+from typing import Any, Generic, Optional, TypeVar
 
-from pydsadoc._abc_and_protocol import Comparable
+from pydsadoc._abc_and_protocol import ProtocolComparable as Comparable
 
 # Define the constant
 T = TypeVar("T", bound=Comparable)

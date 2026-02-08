@@ -5,6 +5,7 @@ __all__ = ['UnionFind']
 __version__ = '0.1'
 __author__ = 'Aina'
 
+from typing import Any
 import random
 
 
@@ -15,7 +16,7 @@ class UnionFind:
     :math:`O(\alpha(n))`.
     """
 
-    def __init__(self, num_vert: int, /, *args, **kwargs) -> None:
+    def __init__(self, num_vert: int, /, *args: Any, **kwargs: Any) -> None:
         """Initialize self."""
         self.parent: list[int] = [-1] * num_vert
 
@@ -24,7 +25,7 @@ class UnionFind:
         # Define variables.
         string = '# -- Union Find: --\n'
         length = len(self.parent)
-        count = [[] for _ in range(length)]
+        count: list[list[int]] = [[] for _ in range(length)]
 
         # Count the child of the root.
         for i in range(length):

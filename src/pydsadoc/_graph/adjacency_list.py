@@ -27,9 +27,12 @@ class GNode:
         # The pointer to the next vertex.
         self.next = next
 
-    def __eq__(self, other: 'GNode', /) -> bool:
+    def __eq__(self, other: object, /) -> bool:
         """Return self == other."""
-        return self.data == other.data
+        if isinstance(other, GNode):
+            return self.data == other.data
+        else:
+            return NotImplemented
 
     def __lt__(self, other: 'GNode', /) -> bool:
         """Return self < other."""

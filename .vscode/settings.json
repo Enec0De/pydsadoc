@@ -1,6 +1,6 @@
 {
     "editor.rulers": [88, 72],
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "strict",
     "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
     "terminal.integrated.commandsToSkipShell": [

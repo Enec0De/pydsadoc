@@ -1,7 +1,7 @@
 #!/urs/bin/env python
 
 from typing import TypeVar, Any
-from pydsadoc.sorting._iscomparable import Comparable
+from pydsadoc._abc_and_protocol import ProtocolComparable as Comparable
 
 # Define the element type of the list to be sorted
 # and the minimum run length.
@@ -106,27 +106,33 @@ def _merge_collapse(arr: list[T], runs: list[tuple[int, ...]], temp: list[Any]) 
 
         condition_1 = len(runs) > 2 and runs[-3][0] <= runs[-2][0] + runs[-1][0]
         condition_2 = len(runs) > 3 and runs[-4][0] <= runs[-3][0] + runs[-2][0]
-        # Do not meet the condition: X > Y + Z,
-        # or the condition: W > X + Y.
+        # Do not meet the condition_1: X > Y + Z,
+        # or the condition_2: W > X + Y.
         if condition_1 or condition_2:
-            _, mid_l, mid_r = runs[-2]
+            mid_l = runs[-2][1]
+            mid_r = runs[-2][2]
 
             # For the case that length of X < length of Z.
             if runs[-3][0] < runs[-1][0]:
                 start = runs[-3][1]
                 _merge(arr, start, mid_l, mid_r, temp)
+
                 runs[-3:-1] = [(mid_r - start, start, mid_r)]
+
             # For the case that length of X >= length of Z.
             else:
                 end = runs[-1][2]
                 _merge(arr, mid_l, mid_r, end, temp)
+
                 runs[-2:] = [(end - mid_l, mid_l, end)]
 
         # Do not meet the condition: Y > Z.
         elif runs[-2][0] <= runs[-1][0]:
-            _, _, end = runs[-1]
-            _, start, mid = runs[-2]
+            start = runs[-2][1]
+            mid = runs[-2][2]
+            end = runs[-1][2]
             _merge(arr, start, mid, end, temp)
+
             runs[-2:] = [(end - start, start, end)]
 
         # All conditions is checked ok.
@@ -145,7 +151,7 @@ def tim_sort(arr: list[T]) -> None:
     length = len(arr)
     MINRUN = _calc_minrun(length)
     temp = [None] * length
-    runs = []
+    runs: list[tuple[int, ...]] = []
 
     # Calculate the runs and push them into the stack.
     run_start = run_end = 0
@@ -165,7 +171,9 @@ def tim_sort(arr: list[T]) -> None:
 
     # The final merge of the sorting.
     while len(runs) > 1:
-        _, left, _ = runs[-2]
-        _, mid, right = runs[-1]
+        left = runs[-2][1]
+        mid = runs[-1][1]
+        right = runs[-1][2]
         _merge(arr, left, mid, right, temp)
+
         runs[-2:] = [(right - left, left, right)]

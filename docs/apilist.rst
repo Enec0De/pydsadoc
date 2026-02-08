@@ -6,7 +6,7 @@ API List
 .. autosummary::
    :nosignatures:
 
-   SeqList
+   SequenList
    LinkedList
 
 

@@ -6,7 +6,7 @@ __version__ = '0.1'
 __author__ = 'Aina'
 
 import random
-from typing import Union, Optional, cast
+from typing import Union, Optional, Any, cast
 from collections import deque
 from collections.abc import Iterator
 
@@ -17,7 +17,7 @@ ElementType = Union[int]
 class AVLNode:
     """The atomic element of the AVL tree."""
 
-    def __init__(self, data: ElementType, /, *args, **kwargs) -> None:
+    def __init__(self, data: ElementType, /, *args: Any, **kwargs: Any) -> None:
         # The data of the node.
         self.data = data
 
@@ -32,7 +32,7 @@ class AVLNode:
 class AVL:
     """The AVL tree impelemented with linked list."""
 
-    def __init__(self, /, *args, **kwargs) -> None:
+    def __init__(self, /, *args: Any, **kwargs: Any) -> None:
         """Initialize self."""
         self.root: Optional[AVLNode] = None
 
